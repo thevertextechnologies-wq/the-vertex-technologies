@@ -115,7 +115,7 @@ export default function Navbar() {
               <ChevronDown className={`h-3.5 w-3.5 transition-transform ${open === "industries" ? "rotate-180" : ""}`} />
             </button>
           </div>
-          <Link to="/case-studies" className={navItem} onMouseEnter={() => setOpen(null)}>
+          <Link to="/portfolio" className={navItem} onMouseEnter={() => setOpen(null)}>
             Portfolio
           </Link>
           <div onMouseEnter={() => { setOpen("why"); setHoverIdx(0); }}>
@@ -408,7 +408,7 @@ export default function Navbar() {
               {[
                 { label: "Home", to: "/" },
                 { label: "About", to: "/about" },
-                { label: "Portfolio", to: "/case-studies" },
+                { label: "Portfolio", to: "/portfolio" },
                 { label: "Resources", to: "/resources" },
                 { label: "Contact", to: "/contact" },
               ].map((l) => (

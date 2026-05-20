@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as MarketingSystemsRouteImport } from './routes/marketing-systems'
 import { Route as GrowthConsultingRouteImport } from './routes/growth-consulting'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -28,6 +29,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const ResourcesRoute = ResourcesRouteImport.update({
   id: '/resources',
   path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioRoute = PortfolioRouteImport.update({
+  id: '/portfolio',
+  path: '/portfolio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MarketingSystemsRoute = MarketingSystemsRouteImport.update({
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/growth-consulting': typeof GrowthConsultingRoute
   '/marketing-systems': typeof MarketingSystemsRoute
+  '/portfolio': typeof PortfolioRoute
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
 }
@@ -92,6 +99,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/growth-consulting': typeof GrowthConsultingRoute
   '/marketing-systems': typeof MarketingSystemsRoute
+  '/portfolio': typeof PortfolioRoute
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
 }
@@ -105,6 +113,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/growth-consulting': typeof GrowthConsultingRoute
   '/marketing-systems': typeof MarketingSystemsRoute
+  '/portfolio': typeof PortfolioRoute
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
 }
@@ -119,6 +128,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/growth-consulting'
     | '/marketing-systems'
+    | '/portfolio'
     | '/resources'
     | '/services'
   fileRoutesByTo: FileRoutesByTo
@@ -131,6 +141,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/growth-consulting'
     | '/marketing-systems'
+    | '/portfolio'
     | '/resources'
     | '/services'
   id:
@@ -143,6 +154,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/growth-consulting'
     | '/marketing-systems'
+    | '/portfolio'
     | '/resources'
     | '/services'
   fileRoutesById: FileRoutesById
@@ -156,6 +168,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   GrowthConsultingRoute: typeof GrowthConsultingRoute
   MarketingSystemsRoute: typeof MarketingSystemsRoute
+  PortfolioRoute: typeof PortfolioRoute
   ResourcesRoute: typeof ResourcesRoute
   ServicesRoute: typeof ServicesRoute
 }
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/resources'
       fullPath: '/resources'
       preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio': {
+      id: '/portfolio'
+      path: '/portfolio'
+      fullPath: '/portfolio'
+      preLoaderRoute: typeof PortfolioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/marketing-systems': {
@@ -244,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   GrowthConsultingRoute: GrowthConsultingRoute,
   MarketingSystemsRoute: MarketingSystemsRoute,
+  PortfolioRoute: PortfolioRoute,
   ResourcesRoute: ResourcesRoute,
   ServicesRoute: ServicesRoute,
 }
