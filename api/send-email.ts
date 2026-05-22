@@ -1,12 +1,128 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import nodemailer from "nodemailer";
-import { google } from "googleapis";
 
 const ALLOWED_FORM_TYPES = ["business", "institute", "contact"] as const;
 type FormType = (typeof ALLOWED_FORM_TYPES)[number];
 
 function env(name: string): string {
   return (process.env[name] ?? "").trim();
+}
+
+const OUTBOUND_TIMEOUT_MS = 12000;
+
+async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs = OUTBOUND_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") {
+      const timeoutError = new Error("Mail provider request timed out") as Error & { code?: string };
+      timeoutError.code = "ETIMEDOUT";
+      throw timeoutError;
+    }
+    throw error;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function base64UrlEncode(value: string): string {
+  return Buffer.from(value, "utf-8")
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+}
+
+async function fetchGmailAccessToken(config: {
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+}) {
+  const body = new URLSearchParams({
+    client_id: config.clientId,
+    client_secret: config.clientSecret,
+    refresh_token: config.refreshToken,
+    grant_type: "refresh_token",
+  });
+
+  const response = await fetchWithTimeout("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: body.toString(),
+  });
+
+  const payload = (await response.json().catch(() => null)) as
+    | { access_token?: string; error?: string; error_description?: string }
+    | null;
+
+  if (!response.ok || !payload?.access_token) {
+    const reason = payload?.error_description || payload?.error || "Token request failed";
+    const err = new Error(reason) as Error & { code?: string; responseCode?: number };
+    err.code = "EAUTH";
+    err.responseCode = response.status;
+    throw err;
+  }
+
+  return payload.access_token;
+}
+
+async function sendViaGmailApi({
+  sender,
+  receiver,
+  replyTo,
+  subject,
+  html,
+  clientId,
+  clientSecret,
+  refreshToken,
+}: {
+  sender: string;
+  receiver: string;
+  replyTo: string;
+  subject: string;
+  html: string;
+  clientId: string;
+  clientSecret: string;
+  refreshToken: string;
+}) {
+  const accessToken = await fetchGmailAccessToken({ clientId, clientSecret, refreshToken });
+
+  const mimeMessage = [
+    `From: The Vertex Technologies <${sender}>`,
+    `To: ${receiver}`,
+    `Reply-To: ${replyTo}`,
+    `Subject: ${subject}`,
+    "MIME-Version: 1.0",
+    "Content-Type: text/html; charset=UTF-8",
+    "",
+    html,
+  ].join("\r\n");
+
+  const raw = base64UrlEncode(mimeMessage);
+
+  const response = await fetchWithTimeout("https://gmail.googleapis.com/gmail/v1/users/me/messages/send", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ raw }),
+  });
+
+  if (!response.ok) {
+    const payload = (await response.json().catch(() => null)) as
+      | { error?: { message?: string; status?: string } }
+      | null;
+    const reason = payload?.error?.message || "Gmail API send failed";
+    const err = new Error(reason) as Error & { code?: string; responseCode?: number };
+    err.code = "EGMAIL_SEND";
+    err.responseCode = response.status;
+    throw err;
+  }
 }
 
 /** Strip HTML entities to prevent injection in email body */
@@ -129,8 +245,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const GMAIL_CLIENT_ID = env("GMAIL_CLIENT_ID");
   const GMAIL_CLIENT_SECRET = env("GMAIL_CLIENT_SECRET");
   const GMAIL_REFRESH_TOKEN = env("GMAIL_REFRESH_TOKEN");
-  const GMAIL_SENDER = env("GMAIL_SENDER") || env("GMAIL_SENDER_EMAIL");
-  const GMAIL_RECEIVER = env("GMAIL_RECEIVER") || env("FORM_RECEIVER_EMAIL");
+  const GMAIL_SENDER = env("GMAIL_SENDER") || env("GMAIL_SENDER_EMAIL") || env("GMAIL_USER");
+  const GMAIL_RECEIVER = env("GMAIL_RECEIVER") || env("FORM_RECEIVER_EMAIL") || env("CONTACT_TO_EMAIL");
 
   if (
     !GMAIL_CLIENT_ID ||
@@ -153,42 +269,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const oauth2Client = new google.auth.OAuth2(
-      GMAIL_CLIENT_ID,
-      GMAIL_CLIENT_SECRET,
-      "https://developers.google.com/oauthplayground"
-    );
-    oauth2Client.setCredentials({ refresh_token: GMAIL_REFRESH_TOKEN });
-
-    const { token: accessToken } = await oauth2Client.getAccessToken();
-    if (!accessToken) {
-      console.error("OAuth access token was empty");
-      return res.status(500).json({
-        error: "OAuth token generation failed",
-        code: "oauth_access_token_empty",
-      });
-    }
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        type: "OAuth2",
-        user: GMAIL_SENDER,
-        clientId: GMAIL_CLIENT_ID,
-        clientSecret: GMAIL_CLIENT_SECRET,
-        refreshToken: GMAIL_REFRESH_TOKEN,
-        accessToken,
-      },
-    });
-
     const { subject, html } = buildEmail(formType, data);
 
-    await transporter.sendMail({
-      from: `"The Vertex Technologies" <${GMAIL_SENDER}>`,
-      to: GMAIL_RECEIVER,
+    await sendViaGmailApi({
+      sender: GMAIL_SENDER,
+      receiver: GMAIL_RECEIVER,
       replyTo: data.email,
       subject,
       html,
+      clientId: GMAIL_CLIENT_ID,
+      clientSecret: GMAIL_CLIENT_SECRET,
+      refreshToken: GMAIL_REFRESH_TOKEN,
     });
 
     return res.status(200).json({ ok: true });
@@ -245,8 +336,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       raw.includes("eauth")
     ) {
       return res.status(500).json({
-        error: "Gmail rejected SMTP authentication",
-        code: "smtp_auth_rejected",
+        error: "Gmail authentication failed",
+        code: "gmail_auth_rejected",
+      });
+    }
+
+    if (raw.includes("failedprecondition") || raw.includes("precondition")) {
+      return res.status(500).json({
+        error: "Gmail account is not ready for API sending",
+        code: "gmail_precondition_failed",
       });
     }
 
@@ -254,6 +352,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(500).json({
         error: "Gmail sending quota or rate limit reached",
         code: "gmail_quota_limited",
+      });
+    }
+
+    if (raw.includes("insufficientpermissions") || raw.includes("insufficient permission") || raw.includes("scope")) {
+      return res.status(500).json({
+        error: "Gmail OAuth scope is insufficient",
+        code: "oauth_scope_invalid",
       });
     }
 
