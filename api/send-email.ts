@@ -165,7 +165,7 @@ function buildEmail(
 
   if (type === "business") {
     return {
-      subject: `New Business Inquiry — ${sanitize(data.name)}`,
+      subject: `New Business Inquiry - ${sanitize(data.name)}`,
       html: wrap(
         "New Business Inquiry",
         "Business",
@@ -180,7 +180,7 @@ function buildEmail(
 
   if (type === "institute") {
     return {
-      subject: `New Institute Enrollment — ${sanitize(data.name)}`,
+      subject: `New Institute Enrollment - ${sanitize(data.name)}`,
       html: wrap(
         "New Vertex Institute Enrollment",
         "Institute",
@@ -196,7 +196,7 @@ function buildEmail(
 
   // contact (homepage section)
   return {
-    subject: `New Contact Message — ${sanitize(data.name)}`,
+    subject: `New Contact Message - ${sanitize(data.name)}`,
     html: wrap(
       "New Contact Message",
       "Contact",
