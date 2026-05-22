@@ -122,13 +122,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Verify env vars are present
-  const {
-    GMAIL_CLIENT_ID,
-    GMAIL_CLIENT_SECRET,
-    GMAIL_REFRESH_TOKEN,
-    GMAIL_SENDER,
-    GMAIL_RECEIVER,
-  } = process.env;
+  const GMAIL_CLIENT_ID = process.env.GMAIL_CLIENT_ID;
+  const GMAIL_CLIENT_SECRET = process.env.GMAIL_CLIENT_SECRET;
+  const GMAIL_REFRESH_TOKEN = process.env.GMAIL_REFRESH_TOKEN;
+  const GMAIL_SENDER = process.env.GMAIL_SENDER ?? process.env.GMAIL_SENDER_EMAIL;
+  const GMAIL_RECEIVER = process.env.GMAIL_RECEIVER ?? process.env.FORM_RECEIVER_EMAIL;
 
   if (
     !GMAIL_CLIENT_ID ||
@@ -137,7 +135,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     !GMAIL_SENDER ||
     !GMAIL_RECEIVER
   ) {
-    console.error("Missing Gmail environment variables");
+    console.error("Missing Gmail environment variables", {
+      hasClientId: Boolean(GMAIL_CLIENT_ID),
+      hasClientSecret: Boolean(GMAIL_CLIENT_SECRET),
+      hasRefreshToken: Boolean(GMAIL_REFRESH_TOKEN),
+      hasSender: Boolean(GMAIL_SENDER),
+      hasReceiver: Boolean(GMAIL_RECEIVER),
+    });
     return res.status(500).json({ error: "Server configuration error" });
   }
 
