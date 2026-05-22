@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, ChevronDown, ArrowUpRight, Bot, LineChart, Compass, Workflow, Sparkles, MessageSquare } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowUpRight, Bot, LineChart, Compass, Workflow, Sparkles, MessageSquare, Moon, Sun } from "lucide-react";
 import logo from "@/assets/vertex-logo.png";
 import svcAi from "@/assets/svc-ai.jpg";
 import svcMarketing from "@/assets/svc-marketing.jpg";
@@ -64,12 +64,17 @@ const whyUs = [
 ];
 
 type MegaKey = "services" | "industries" | "why";
+type Theme = "light" | "dark";
+
+const THEME_STORAGE_KEY = "vertex-theme";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [open, setOpen] = useState<MegaKey | null>(null);
   const [hoverIdx, setHoverIdx] = useState(0);
+  const [theme, setTheme] = useState<Theme>("light");
+  const [themeReady, setThemeReady] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -81,6 +86,42 @@ export default function Navbar() {
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+    const hasSavedTheme = savedTheme === "light" || savedTheme === "dark";
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const initialTheme: Theme = hasSavedTheme
+      ? (savedTheme as Theme)
+      : mediaQuery.matches
+        ? "dark"
+        : "light";
+
+    setTheme(initialTheme);
+    setThemeReady(true);
+
+    if (hasSavedTheme) return;
+
+    const handleSystemThemeChange = (event: MediaQueryListEvent) => {
+      setTheme(event.matches ? "dark" : "light");
+    };
+
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener("change", handleSystemThemeChange);
+  }, []);
+
+  useEffect(() => {
+    if (!themeReady) return;
+
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme, themeReady]);
+
+  const toggleTheme = () => {
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
+  };
 
   const navItem =
     "relative inline-flex items-center gap-1 py-2 text-[15px] font-semibold text-foreground/85 hover:text-[var(--brand-red)] transition-colors";
@@ -130,6 +171,15 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="inline-flex items-center justify-center rounded-full border border-border bg-background p-2.5 text-foreground transition hover:bg-muted"
+          >
+            {theme === "dark" ? <Sun className="h-4.5 w-4.5" /> : <Moon className="h-4.5 w-4.5" />}
+          </button>
           <Link
             to="/contact"
             className="inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-[15px] font-bold text-white transition-all hover:opacity-95 hover:-translate-y-0.5"
@@ -139,6 +189,15 @@ export default function Navbar() {
             Contact Us
           </Link>
         </div>
+
+        <button
+          type="button"
+          className="lg:hidden rounded-full border border-border p-2 absolute left-4"
+          onClick={toggleTheme}
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+        </button>
 
         <button
           className="lg:hidden rounded-full border border-border p-2 absolute right-4"
@@ -396,13 +455,23 @@ export default function Navbar() {
               <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
                 <img src={logo} alt="The Vertex Technologies" className="h-9 w-auto" />
               </Link>
-              <button
-                className="rounded-full border border-border p-2"
-                onClick={() => setMobileOpen(false)}
-                aria-label="Close menu"
-              >
-                <X className="h-5 w-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  className="rounded-full border border-border p-2"
+                  onClick={toggleTheme}
+                  aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+                >
+                  {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                </button>
+                <button
+                  className="rounded-full border border-border p-2"
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
             </div>
             <div className="container-x py-6 space-y-1 overflow-y-auto h-[calc(100dvh-72px)]">
               {[
