@@ -95,20 +95,20 @@ function buildEmail(
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Only allow POST
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ error: "Method not allowed", code: "method_not_allowed" });
   }
 
   // Validate Content-Type
   const ct = req.headers["content-type"] || "";
   if (!ct.includes("application/json")) {
-    return res.status(415).json({ error: "Expected application/json" });
+    return res.status(415).json({ error: "Expected application/json", code: "unsupported_content_type" });
   }
 
   const body = req.body as Record<string, unknown>;
 
   const formType = sanitize(body?.formType) as FormType;
   if (!ALLOWED_FORM_TYPES.includes(formType)) {
-    return res.status(400).json({ error: "Invalid form type" });
+    return res.status(400).json({ error: "Invalid form type", code: "invalid_form_type" });
   }
 
   // Sanitize every field
@@ -119,10 +119,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   // Basic server-side validation at API boundary
   if (!data.name || data.name.length < 1) {
-    return res.status(400).json({ error: "Name is required" });
+    return res.status(400).json({ error: "Name is required", code: "name_required" });
   }
   if (!data.email || !data.email.includes("@")) {
-    return res.status(400).json({ error: "Valid email is required" });
+    return res.status(400).json({ error: "Valid email is required", code: "email_required" });
   }
 
   // Verify env vars are present
@@ -146,7 +146,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       hasSender: Boolean(GMAIL_SENDER),
       hasReceiver: Boolean(GMAIL_RECEIVER),
     });
-    return res.status(500).json({ error: "Server configuration error" });
+    return res.status(500).json({
+      error: "Server configuration error",
+      code: "missing_env_vars",
+    });
   }
 
   try {
@@ -192,7 +195,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Unknown error";
     const stack = err instanceof Error ? err.stack : undefined;
-    const raw = String(message || "").toLowerCase();
+    const nestedData =
+      typeof err === "object" && err && "response" in err
+        ? JSON.stringify((err as { response?: { data?: unknown } }).response?.data ?? "")
+        : "";
+    const raw = `${String(message || "")} ${nestedData}`.toLowerCase();
 
     console.error("Email send error:", { message, stack });
 
