@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { CheckCircle2, Mail, Phone, MapPin } from "lucide-react";
+import { CheckCircle2, Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import { Reveal } from "@/components/Reveal";
 
@@ -264,22 +264,26 @@ function Field({
   textarea?: boolean; select?: boolean; options?: string[]; error?: string; className?: string;
 }) {
   const cls = "mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent transition-all";
+  const selectCls = "w-full appearance-none rounded-xl border border-border bg-background px-4 pr-11 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent transition-all";
   return (
     <label className={`block ${className}`}>
       <span className="text-sm font-semibold">{label}</span>
       {textarea ? (
         <textarea name={name} placeholder={placeholder} rows={5} className={cls} />
       ) : select ? (
-        <select name={name} defaultValue="" className={cls}>
-          <option value="" disabled>
-            {placeholder || "Select an option"}
-          </option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
+        <div className="relative mt-1.5">
+          <select name={name} defaultValue="" className={selectCls}>
+            <option value="" disabled>
+              {placeholder || "Select an option"}
             </option>
-          ))}
-        </select>
+            {options.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        </div>
       ) : (
         <input type={type} name={name} placeholder={placeholder} className={cls} />
       )}

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TheVertexInstituteRouteImport } from './routes/the-vertex-institute'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
@@ -21,6 +22,11 @@ import { Route as AiSolutionsRouteImport } from './routes/ai-solutions'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TheVertexInstituteRoute = TheVertexInstituteRouteImport.update({
+  id: '/the-vertex-institute',
+  path: '/the-vertex-institute',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/portfolio': typeof PortfolioRoute
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
+  '/the-vertex-institute': typeof TheVertexInstituteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/portfolio': typeof PortfolioRoute
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
+  '/the-vertex-institute': typeof TheVertexInstituteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/portfolio': typeof PortfolioRoute
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
+  '/the-vertex-institute': typeof TheVertexInstituteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/resources'
     | '/services'
+    | '/the-vertex-institute'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/resources'
     | '/services'
+    | '/the-vertex-institute'
   id:
     | '__root__'
     | '/'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/portfolio'
     | '/resources'
     | '/services'
+    | '/the-vertex-institute'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,10 +183,18 @@ export interface RootRouteChildren {
   PortfolioRoute: typeof PortfolioRoute
   ResourcesRoute: typeof ResourcesRoute
   ServicesRoute: typeof ServicesRoute
+  TheVertexInstituteRoute: typeof TheVertexInstituteRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/the-vertex-institute': {
+      id: '/the-vertex-institute'
+      path: '/the-vertex-institute'
+      fullPath: '/the-vertex-institute'
+      preLoaderRoute: typeof TheVertexInstituteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services': {
       id: '/services'
       path: '/services'
@@ -267,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   PortfolioRoute: PortfolioRoute,
   ResourcesRoute: ResourcesRoute,
   ServicesRoute: ServicesRoute,
+  TheVertexInstituteRoute: TheVertexInstituteRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
