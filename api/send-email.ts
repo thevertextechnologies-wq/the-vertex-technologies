@@ -195,11 +195,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Unknown error";
     const stack = err instanceof Error ? err.stack : undefined;
+    const responseCode =
+      typeof err === "object" && err && "responseCode" in err
+        ? String((err as { responseCode?: number | string }).responseCode ?? "")
+        : "";
+    const responseText =
+      typeof err === "object" && err && "response" in err
+        ? String((err as { response?: string }).response ?? "")
+        : "";
     const nestedData =
       typeof err === "object" && err && "response" in err
         ? JSON.stringify((err as { response?: { data?: unknown } }).response?.data ?? "")
         : "";
-    const raw = `${String(message || "")} ${nestedData}`.toLowerCase();
+    const raw = `${String(message || "")} ${responseCode} ${responseText} ${nestedData}`.toLowerCase();
 
     console.error("Email send error:", { message, stack });
 
@@ -214,6 +222,38 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(500).json({
         error: "OAuth client ID/secret mismatch",
         code: "oauth_client_mismatch",
+      });
+    }
+
+    if (
+      raw.includes("insufficient authentication scopes") ||
+      raw.includes("insufficient permissions") ||
+      raw.includes("scope")
+    ) {
+      return res.status(500).json({
+        error: "OAuth scope is insufficient for Nodemailer SMTP",
+        code: "oauth_scope_invalid",
+      });
+    }
+
+    if (
+      raw.includes("invalid login") ||
+      raw.includes("badcredentials") ||
+      raw.includes("username and password not accepted") ||
+      raw.includes("535") ||
+      raw.includes("534") ||
+      raw.includes("eauth")
+    ) {
+      return res.status(500).json({
+        error: "Gmail rejected SMTP authentication",
+        code: "smtp_auth_rejected",
+      });
+    }
+
+    if (raw.includes("quota") || raw.includes("rate limit") || raw.includes("too many")) {
+      return res.status(500).json({
+        error: "Gmail sending quota or rate limit reached",
+        code: "gmail_quota_limited",
       });
     }
 
