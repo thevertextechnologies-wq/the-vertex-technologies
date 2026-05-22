@@ -9,7 +9,7 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-const schema = z.object({
+const businessSchema = z.object({
   name: z.string().trim().min(1, "Name required").max(100),
   email: z.string().trim().email("Invalid email").max(200),
   company: z.string().trim().min(1, "Company required").max(150),
@@ -17,14 +17,33 @@ const schema = z.object({
   goal: z.string().trim().min(10, "Tell us a little more").max(2000),
 });
 
+const instituteSchema = z.object({
+  name: z.string().trim().min(1, "Name required").max(100),
+  email: z.string().trim().email("Invalid email").max(200),
+  phone: z.string().trim().min(7, "Phone number required").max(25),
+  trainingMode: z.enum(["Online Training", "Physical Training"], {
+    errorMap: () => ({ message: "Select training type" }),
+  }),
+  course: z.enum(["Digital Marketing", "E-Commerce", "Agentic Ai Automations"], {
+    errorMap: () => ({ message: "Select a course" }),
+  }),
+  message: z.string().trim().min(10, "Tell us a little more").max(2000),
+});
+
+type FormMode = "business" | "institute";
+
 function ContactPage() {
+  const [mode, setMode] = useState<FormMode>("business");
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setSubmitted(false);
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
-    const parsed = schema.safeParse(data);
+    const parsed = mode === "institute"
+      ? instituteSchema.safeParse(data)
+      : businessSchema.safeParse(data);
     if (!parsed.success) {
       const errs: Record<string, string> = {};
       parsed.error.issues.forEach((i) => {
@@ -78,27 +97,102 @@ function ContactPage() {
                   </div>
                 ) : (
                   <>
-                    <h2 className="text-display text-3xl font-bold">Tell us about your project</h2>
-                    <p className="mt-2 text-muted-foreground">We typically respond within one business day.</p>
+                    <h2 className="text-display text-3xl font-bold">
+                      {mode === "institute" ? "The Vertex Institute Enrollment" : "Tell us about your project"}
+                    </h2>
+                    <p className="mt-2 text-muted-foreground">
+                      {mode === "institute"
+                        ? "Apply for The Vertex Institute training programs."
+                        : "We typically respond within one business day."}
+                    </p>
 
-                    <div className="mt-8 grid sm:grid-cols-2 gap-5">
-                      <Field label="Name" name="name" placeholder="Jane Doe" error={errors.name} />
-                      <Field label="Email" name="email" type="email" placeholder="jane@company.com" error={errors.email} />
-                      <Field label="Company" name="company" placeholder="Acme Inc." error={errors.company} />
-                      <Field label="Website (optional)" name="website" placeholder="acme.com" error={errors.website} />
-                      <Field
-                        label="Your Goal"
-                        name="goal"
-                        textarea
-                        placeholder="What outcome would make this engagement a success?"
-                        error={errors.goal}
-                        className="sm:col-span-2"
-                      />
+                    <div className="mt-6 inline-flex rounded-full border border-border bg-muted p-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMode("business");
+                          setErrors({});
+                          setSubmitted(false);
+                        }}
+                        className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                          mode === "business"
+                            ? "bg-[var(--brand-red)] text-white shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        Business Inquiry
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setMode("institute");
+                          setErrors({});
+                          setSubmitted(false);
+                        }}
+                        className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                          mode === "institute"
+                            ? "bg-[var(--brand-red)] text-white shadow-sm"
+                            : "text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        The Vertex Institute
+                      </button>
                     </div>
 
+                    {mode === "business" ? (
+                      <div className="mt-8 grid sm:grid-cols-2 gap-5">
+                        <Field label="Name" name="name" placeholder="Jane Doe" error={errors.name} />
+                        <Field label="Email" name="email" type="email" placeholder="jane@company.com" error={errors.email} />
+                        <Field label="Company" name="company" placeholder="Acme Inc." error={errors.company} />
+                        <Field label="Website (optional)" name="website" placeholder="acme.com" error={errors.website} />
+                        <Field
+                          label="Your Goal"
+                          name="goal"
+                          textarea
+                          placeholder="What outcome would make this engagement a success?"
+                          error={errors.goal}
+                          className="sm:col-span-2"
+                        />
+                      </div>
+                    ) : (
+                      <div className="mt-8 grid sm:grid-cols-2 gap-5">
+                        <Field label="Name" name="name" placeholder="Jane Doe" error={errors.name} />
+                        <Field label="Email" name="email" type="email" placeholder="jane@example.com" error={errors.email} />
+                        <Field label="Phone Number" name="phone" type="tel" placeholder="+92 300 1234567" error={errors.phone} />
+                        <Field
+                          label="Training Type"
+                          name="trainingMode"
+                          select
+                          options={["Online Training", "Physical Training"]}
+                          placeholder="Select training type"
+                          error={errors.trainingMode}
+                        />
+                        <Field
+                          label="Course"
+                          name="course"
+                          select
+                          options={["Digital Marketing", "E-Commerce", "Agentic Ai Automations"]}
+                          placeholder="Select a course"
+                          error={errors.course}
+                        />
+                        <Field
+                          label="Message"
+                          name="message"
+                          textarea
+                          placeholder="Tell us about your background and what you want to achieve."
+                          error={errors.message}
+                          className="sm:col-span-2"
+                        />
+                      </div>
+                    )}
+
                     <div className="mt-8 flex flex-wrap gap-3">
-                      <button type="submit" className="btn-primary">Send Your Message →</button>
-                      <Link to="/book-a-call" className="btn-outline">Book a Strategy Call</Link>
+                      <button type="submit" className="btn-primary">
+                        {mode === "institute" ? "Submit Institute Form →" : "Send Your Message →"}
+                      </button>
+                      {mode === "business" && (
+                        <Link to="/book-a-call" className="btn-outline">Book a Strategy Call</Link>
+                      )}
                     </div>
                   </>
                 )}
@@ -164,10 +258,10 @@ function Item({ icon, label }: { icon: React.ReactNode; label: string }) {
 }
 
 function Field({
-  label, name, placeholder, type = "text", textarea, error, className = "",
+  label, name, placeholder, type = "text", textarea, select, options = [], error, className = "",
 }: {
   label: string; name: string; placeholder?: string; type?: string;
-  textarea?: boolean; error?: string; className?: string;
+  textarea?: boolean; select?: boolean; options?: string[]; error?: string; className?: string;
 }) {
   const cls = "mt-1.5 w-full rounded-xl border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent transition-all";
   return (
@@ -175,6 +269,17 @@ function Field({
       <span className="text-sm font-semibold">{label}</span>
       {textarea ? (
         <textarea name={name} placeholder={placeholder} rows={5} className={cls} />
+      ) : select ? (
+        <select name={name} defaultValue="" className={cls}>
+          <option value="" disabled>
+            {placeholder || "Select an option"}
+          </option>
+          {options.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
       ) : (
         <input type={type} name={name} placeholder={placeholder} className={cls} />
       )}
