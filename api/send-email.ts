@@ -5,6 +5,10 @@ import { google } from "googleapis";
 const ALLOWED_FORM_TYPES = ["business", "institute", "contact"] as const;
 type FormType = (typeof ALLOWED_FORM_TYPES)[number];
 
+function env(name: string): string {
+  return (process.env[name] ?? "").trim();
+}
+
 /** Strip HTML entities to prevent injection in email body */
 function esc(str: string): string {
   return str
@@ -122,11 +126,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   // Verify env vars are present
-  const GMAIL_CLIENT_ID = process.env.GMAIL_CLIENT_ID;
-  const GMAIL_CLIENT_SECRET = process.env.GMAIL_CLIENT_SECRET;
-  const GMAIL_REFRESH_TOKEN = process.env.GMAIL_REFRESH_TOKEN;
-  const GMAIL_SENDER = process.env.GMAIL_SENDER ?? process.env.GMAIL_SENDER_EMAIL;
-  const GMAIL_RECEIVER = process.env.GMAIL_RECEIVER ?? process.env.FORM_RECEIVER_EMAIL;
+  const GMAIL_CLIENT_ID = env("GMAIL_CLIENT_ID");
+  const GMAIL_CLIENT_SECRET = env("GMAIL_CLIENT_SECRET");
+  const GMAIL_REFRESH_TOKEN = env("GMAIL_REFRESH_TOKEN");
+  const GMAIL_SENDER = env("GMAIL_SENDER") || env("GMAIL_SENDER_EMAIL");
+  const GMAIL_RECEIVER = env("GMAIL_RECEIVER") || env("FORM_RECEIVER_EMAIL");
 
   if (
     !GMAIL_CLIENT_ID ||
@@ -154,6 +158,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     oauth2Client.setCredentials({ refresh_token: GMAIL_REFRESH_TOKEN });
 
     const { token: accessToken } = await oauth2Client.getAccessToken();
+    if (!accessToken) {
+      console.error("OAuth access token was empty");
+      return res.status(500).json({
+        error: "OAuth token generation failed",
+        code: "oauth_access_token_empty",
+      });
+    }
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -163,7 +174,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         clientId: GMAIL_CLIENT_ID,
         clientSecret: GMAIL_CLIENT_SECRET,
         refreshToken: GMAIL_REFRESH_TOKEN,
-        accessToken: accessToken ?? undefined,
+        accessToken,
       },
     });
 
@@ -178,8 +189,37 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     return res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error("Email send error:", err);
-    return res.status(500).json({ error: "Failed to send email. Please try again." });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    const stack = err instanceof Error ? err.stack : undefined;
+    const raw = String(message || "").toLowerCase();
+
+    console.error("Email send error:", { message, stack });
+
+    if (raw.includes("invalid_grant") || raw.includes("unauthorized_client")) {
+      return res.status(500).json({
+        error: "Gmail OAuth credentials are invalid or expired",
+        code: "oauth_invalid_grant",
+      });
+    }
+
+    if (raw.includes("invalid_client") || raw.includes("client_secret")) {
+      return res.status(500).json({
+        error: "OAuth client ID/secret mismatch",
+        code: "oauth_client_mismatch",
+      });
+    }
+
+    if (raw.includes("envelope") || raw.includes("from") || raw.includes("sender")) {
+      return res.status(500).json({
+        error: "Invalid sender/receiver email configuration",
+        code: "mailbox_config_error",
+      });
+    }
+
+    return res.status(500).json({
+      error: "Failed to send email. Please try again.",
+      code: "mail_send_failed",
+    });
   }
 }
