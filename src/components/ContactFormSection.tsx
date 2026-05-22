@@ -35,11 +35,23 @@ export default function ContactFormSection() {
     }
     setErrors({});
     setSubmitting(true);
-    // Simulate send (no backend wired)
-    await new Promise((r) => setTimeout(r, 700));
-    setSubmitting(false);
-    setSent(true);
-    (e.target as HTMLFormElement).reset();
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "contact", ...data }),
+      });
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        throw new Error(json.error || "Failed to send");
+      }
+      setSent(true);
+      (e.target as HTMLFormElement).reset();
+    } catch (err) {
+      setErrors({ message: err instanceof Error ? err.message : "Something went wrong. Please try again." });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

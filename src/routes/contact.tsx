@@ -35,11 +35,14 @@ type FormMode = "business" | "institute";
 function ContactPage() {
   const [mode, setMode] = useState<FormMode>("business");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitted(false);
+    setServerError("");
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     const parsed = mode === "institute"
       ? instituteSchema.safeParse(data)
@@ -53,7 +56,23 @@ function ContactPage() {
       return;
     }
     setErrors({});
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: mode, ...Object.fromEntries(Object.entries(data).map(([k, v]) => [k, String(v)])) }),
+      });
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        throw new Error(json.error || "Failed to send");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setServerError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -186,9 +205,13 @@ function ContactPage() {
                       </div>
                     )}
 
+                    {serverError && (
+                      <p className="mt-6 text-sm text-[var(--brand-red)] font-medium">{serverError}</p>
+                    )}
+
                     <div className="mt-8 flex flex-wrap gap-3">
-                      <button type="submit" className="btn-primary">
-                        {mode === "institute" ? "Submit Institute Form →" : "Send Your Message →"}
+                      <button type="submit" disabled={loading} className="btn-primary disabled:opacity-60">
+                        {loading ? "Sending…" : mode === "institute" ? "Submit Institute Form →" : "Send Your Message →"}
                       </button>
                       {mode === "business" && (
                         <Link to="/book-a-call" className="btn-outline">Book a Strategy Call</Link>

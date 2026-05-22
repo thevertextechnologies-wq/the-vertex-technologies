@@ -38,11 +38,14 @@ const instituteSchema = z.object({
 
 function TheVertexInstitutePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitted(false);
+    setServerError("");
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     const parsed = instituteSchema.safeParse(data);
 
@@ -56,8 +59,24 @@ function TheVertexInstitutePage() {
     }
 
     setErrors({});
-    setSubmitted(true);
-    e.currentTarget.reset();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "institute", ...Object.fromEntries(Object.entries(data).map(([k, v]) => [k, String(v)])) }),
+      });
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        throw new Error(json.error || "Failed to send");
+      }
+      setSubmitted(true);
+      (e.target as HTMLFormElement).reset();
+    } catch (err) {
+      setServerError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -203,13 +222,18 @@ function TheVertexInstitutePage() {
                       />
                     </div>
 
+                    {serverError && (
+                      <p className="mt-6 text-sm text-[var(--brand-red)] font-medium">{serverError}</p>
+                    )}
+
                     <div className="mt-8">
                       <button
                         type="submit"
-                        className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-bold text-white transition-all hover:-translate-y-0.5"
+                        disabled={loading}
+                        className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-bold text-white transition-all hover:-translate-y-0.5 disabled:opacity-60"
                         style={{ background: "var(--brand-red)", boxShadow: "0 14px 32px -12px rgba(218,72,56,0.55)" }}
                       >
-                        Submit Institute Form →
+                        {loading ? "Sending…" : "Submit Institute Form →"}
                       </button>
                     </div>
                   </>
