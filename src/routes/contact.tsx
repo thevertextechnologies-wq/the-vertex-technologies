@@ -65,7 +65,8 @@ function ContactPage() {
       });
       if (!res.ok) {
         const json = await res.json().catch(() => ({}));
-        throw new Error(json.error || "Failed to send");
+        const reason = json.code ? `${json.error || "Failed to send"} (${json.code})` : (json.error || "Failed to send");
+        throw new Error(reason);
       }
       setSubmitted(true);
     } catch (err) {
