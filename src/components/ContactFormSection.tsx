@@ -56,23 +56,24 @@ export default function ContactFormSection() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-[var(--surface)]">
-      <div className="container-x grid lg:grid-cols-12 gap-12 items-start">
-        <div className="lg:col-span-5">
+    <div className="max-w-6xl mx-auto px-2 md:px-0 rounded-3xl bg-[var(--brand-red)]">
+      <section id="contact" className="py-16 md:py-24 text-white">
+        <div className="grid lg:grid-cols-12 gap-12 items-start px-4 md:px-12">
+        <div className="lg:col-span-5 text-white">
           <Reveal>
-            <span className="pill">
-              <span className="h-1.5 w-1.5 rounded-full" style={{ background: "var(--brand-red)" }} />
+            <span className="pill text-[var(--brand-red)] font-semibold">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-red)] inline-block" />
               Let's build together
             </span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="text-display text-4xl md:text-6xl mt-5 text-balance">
+            <h2 className="text-display text-4xl md:text-6xl mt-5 text-balance text-white">
               Got a project? <br />
-              <span style={{ color: "var(--brand-red)" }}>Let's talk.</span>
+              <span className="text-white">Let's talk.</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-md">
+            <p className="mt-6 text-lg leading-relaxed max-w-md text-white/90">
               Tell us about your business goals. We'll respond within 24 hours with a tailored
               roadmap to help you scale with AI and automation.
             </p>
@@ -90,7 +91,7 @@ export default function ContactFormSection() {
           <Reveal delay={0.05}>
             <form
               onSubmit={onSubmit}
-              className="rounded-3xl bg-card border border-border p-6 md:p-10 shadow-[0_40px_80px_-50px_rgba(0,0,0,0.25)]"
+              className="rounded-3xl bg-black text-white border-none p-6 md:p-10 shadow-[0_40px_80px_-50px_rgba(0,0,0,0.25)]"
               noValidate
             >
               <div className="grid sm:grid-cols-2 gap-5">
@@ -101,18 +102,14 @@ export default function ContactFormSection() {
                 <Field label="Company (optional)" name="company" placeholder="Acme Inc." error={errors.company} />
               </div>
               <div className="mt-5">
-                <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
-                  Project details
-                </label>
-                <textarea
-                  name="message"
-                  rows={5}
-                  placeholder="Tell us about your goals, current systems, and what you're trying to solve..."
-                  className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-red)]/30 focus:border-[var(--brand-red)] transition"
+                <Field 
+                  label="Project details" 
+                  name="message" 
+                  textarea 
+                  placeholder="Tell us about your goals, current systems, and what you're trying to solve..." 
+                  error={errors.message} 
+                  className="mt-0" 
                 />
-                {errors.message && (
-                  <p className="text-xs mt-1.5 text-[var(--brand-red)]">{errors.message}</p>
-                )}
               </div>
 
               <div className="mt-7 flex items-center justify-between gap-4 flex-wrap">
@@ -137,28 +134,49 @@ export default function ContactFormSection() {
             </form>
           </Reveal>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }
 
 function Field({
-  label, name, type = "text", placeholder, error,
+  label, name, placeholder, type = "text", textarea, select, options = [], error, className = "",
 }: {
-  label: string; name: string; type?: string; placeholder?: string; error?: string;
+  label: string;
+  name: string;
+  placeholder?: string;
+  type?: string;
+  textarea?: boolean;
+  select?: boolean;
+  options?: string[];
+  error?: string;
+  className?: string;
 }) {
+  const cls = "mt-1.5 w-full rounded-xl border border-[#333] bg-[#232323] px-4 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent transition-all";
+  const selectCls = "w-full appearance-none rounded-xl border border-white/25 bg-white/10 px-4 pr-11 py-3 text-sm text-white focus:outline-none focus:ring-2 focus:ring-[var(--brand-blue)] focus:border-transparent transition-all";
   return (
-    <div>
-      <label className="block text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2">
-        {label}
-      </label>
-      <input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-        className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-red)]/30 focus:border-[var(--brand-red)] transition"
-      />
-      {error && <p className="text-xs mt-1.5 text-[var(--brand-red)]">{error}</p>}
-    </div>
+    <label className={`block ${className}`}>
+      <span className="text-sm font-semibold text-white">{label}</span>
+      {textarea ? (
+        <textarea name={name} placeholder={placeholder} rows={5} className={cls} />
+      ) : select ? (
+        <div className="relative mt-1.5">
+          <select name={name} defaultValue="" className={selectCls}>
+            <option value="" disabled className="bg-[var(--ink)] text-white">
+              {placeholder || "Select an option"}
+            </option>
+            {options.map((option) => (
+              <option key={option} value={option} className="bg-[var(--ink)] text-white">
+                {option}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : (
+        <input type={type} name={name} placeholder={placeholder} className={cls} />
+      )}
+      {error && <span className="text-xs text-[var(--brand-red)] mt-1 block">{error}</span>}
+    </label>
   );
 }

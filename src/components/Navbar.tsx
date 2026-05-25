@@ -16,6 +16,7 @@ import indFin from "@/assets/ind-fin.jpg";
 import whyAbout from "@/assets/why-about.jpg";
 import whyCases from "@/assets/why-cases.jpg";
 import whyProcess from "@/assets/why-process.jpg";
+import blackLogo from "@/assets/blacklogo.png";
 
 const services = [
   {
@@ -139,7 +140,11 @@ export default function Navbar() {
         {/* Mobile: logo centered */}
         <div className="flex-1 lg:flex-none flex justify-center lg:justify-start">
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img src={logo} alt="The Vertex Technologies" className="h-9 md:h-10 w-auto" />
+            <img
+              src={theme === "dark" ? blackLogo : logo}
+              alt="The Vertex Technologies"
+              className="h-9 md:h-10 w-auto"
+            />
           </Link>
         </div>
 
@@ -453,7 +458,7 @@ export default function Navbar() {
           >
             <div className="container-x flex h-[72px] items-center justify-between">
               <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
-                <img src={logo} alt="The Vertex Technologies" className="h-9 w-auto" />
+                <img src={theme === "dark" ? blackLogo : logo} alt="The Vertex Technologies" className="h-9 w-auto" />
               </Link>
               <div className="flex items-center gap-2">
                 <button

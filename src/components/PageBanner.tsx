@@ -20,7 +20,7 @@ export default function PageBanner({
 }: PageBannerProps) {
   return (
     <section className="relative overflow-hidden">
-      <div className="relative h-[340px] md:h-[420px] lg:h-[480px] w-full">
+      <div className="relative h-[280px] sm:h-[340px] md:h-[420px] lg:h-[480px] w-full">
         <img
           src={image}
           alt=""
@@ -37,14 +37,14 @@ export default function PageBanner({
           />
         )}
         <div className="absolute inset-0 flex items-end">
-          <div className="container-x w-full pb-10 md:pb-14 lg:pb-16">
+          <div className="container-x w-full pb-6 sm:pb-10 md:pb-14 lg:pb-16">
             <div
               className={`max-w-3xl ${align === "center" ? "mx-auto text-center" : ""}`}
             >
               {eyebrow && (
                 <Reveal>
                   <p
-                    className={`text-[11px] md:text-xs uppercase tracking-[0.22em] mb-4 ${
+                    className={`text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.18em] sm:tracking-[0.22em] mb-2 sm:mb-4 ${
                       dark ? "text-white/80" : "text-muted-foreground"
                     }`}
                   >
@@ -57,7 +57,7 @@ export default function PageBanner({
                   className={`font-display font-extrabold text-balance leading-[1.05] tracking-tight ${
                     dark ? "text-white" : "text-foreground"
                   }`}
-                  style={{ fontSize: "clamp(2rem, 4.6vw, 4.5rem)" }}
+                  style={{ fontSize: "clamp(1.5rem, 6.8vw, 4.5rem)" }}
                 >
                   {title}
                 </h1>
@@ -65,7 +65,7 @@ export default function PageBanner({
               {intro && (
                 <Reveal delay={0.2}>
                   <p
-                    className={`mt-5 text-base md:text-lg leading-relaxed max-w-2xl ${
+                    className={`hidden sm:block mt-3 sm:mt-5 text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl ${
                       align === "center" ? "mx-auto" : ""
                     } ${dark ? "text-white/85" : "text-muted-foreground"}`}
                   >
