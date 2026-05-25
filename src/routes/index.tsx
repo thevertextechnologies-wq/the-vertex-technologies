@@ -521,34 +521,38 @@ function HomePage() {
         <div className="container-x">
           <Reveal>
             <div
-              className="rounded-3xl p-8 md:p-14 relative overflow-hidden"
+              className="rounded-3xl p-8 md:p-14 relative overflow-hidden text-white"
               style={{
                 background:
-                  "linear-gradient(135deg, color-mix(in oklab, var(--brand-orange) 22%, var(--cream)) 0%, color-mix(in oklab, var(--brand-red) 18%, var(--cream)) 100%)",
+                  "linear-gradient(135deg, #181c1f 0%, #23272b 100%)",
               }}
             >
               <div className="grid lg:grid-cols-12 gap-10 items-center relative">
                 <div className="lg:col-span-7">
-                  <span className="pill !bg-white/70">
+                  <span className="pill !bg-white/10 !text-white !border-white/15">
                     <span
                       className="h-1.5 w-1.5 rounded-full"
-                      style={{ background: "var(--brand-red)" }}
+                      style={{ background: "var(--brand-orange)" }}
                     />
                     AI Readiness Assessment
                   </span>
                   <h2 className="text-display text-4xl md:text-6xl mt-5 text-balance">
                     How ready is your business for AI?
                   </h2>
-                  <p className="mt-5 text-lg text-foreground/75 max-w-xl">
+                  <p className="mt-5 text-lg text-white/80 max-w-xl">
                     In just a few minutes, discover your AI readiness score, automation
                     opportunities, growth bottlenecks and strategic recommendations for
                     implementation.
                   </p>
                   <div className="mt-8 flex flex-wrap gap-4">
-                    <Link to="/contact" className="btn-primary">
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-bold text-white transition-all hover:-translate-y-0.5"
+                      style={{ background: "var(--brand-red)", boxShadow: "0 14px 32px -12px rgba(218,72,56,0.55)" }}
+                    >
                       Get Your AI Readiness Score →
                     </Link>
-                    <Link to="/ai-solutions" className="btn-outline">
+                    <Link to="/ai-solutions" className="btn-outline !border-white/40 !text-white hover:!bg-white hover:!text-[var(--ink)]">
                       Explore AI Solutions
                     </Link>
                   </div>
@@ -563,13 +567,12 @@ function HomePage() {
                     ].map((t) => (
                       <StaggerItem
                         key={t}
-                        className="flex items-center gap-3 bg-white/80 backdrop-blur rounded-2xl px-4 py-3.5 border border-white/60"
+                        className="flex items-center gap-3 bg-white/10 backdrop-blur rounded-2xl px-4 py-3.5 border border-white/20"
                       >
                         <CheckCircle2
-                          className="h-5 w-5 shrink-0"
-                          style={{ color: "var(--brand-green)" }}
+                          className="h-5 w-5 shrink-0 text-white"
                         />
-                        <span className="text-sm font-medium">{t}</span>
+                        <span className="text-sm font-medium text-white">{t}</span>
                       </StaggerItem>
                     ))}
                   </Stagger>

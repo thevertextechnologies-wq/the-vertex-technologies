@@ -80,9 +80,9 @@ export default function ContactFormSection() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-8 space-y-3 text-sm">
-              <p className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[var(--brand-green)]" /> Free 30‑min strategy session</p>
-              <p className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[var(--brand-green)]" /> Custom growth roadmap</p>
-              <p className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-[var(--brand-green)]" /> No obligation, no spam</p>
+              <p className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-white" /> Free 30‑min strategy session</p>
+              <p className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-white" /> Custom growth roadmap</p>
+              <p className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-white" /> No obligation, no spam</p>
             </div>
           </Reveal>
         </div>

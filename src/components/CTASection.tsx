@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "./Reveal";
+import scaleBusinessImg from "@/assets/scalebusinesswiththevertextechnologies.jpg";
 
 export default function CTASection({
   eyebrow = "Start your transformation",
@@ -21,41 +22,33 @@ export default function CTASection({
         }}
       />
       <div className="container-x relative">
-        <div className="max-w-4xl">
-          <Reveal>
-            <span className="pill !bg-white/10 !text-white !border-white/15">
-              <span
-                className="h-1.5 w-1.5 rounded-full"
-                style={{ background: "var(--brand-orange)" }}
-              />
-              {eyebrow}
-            </span>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="text-display text-5xl md:text-7xl mt-6 text-balance">
-              {title}
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-6 text-lg md:text-xl text-white/70 max-w-2xl">{body}</p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-bold text-white transition-all hover:-translate-y-0.5"
-                style={{ background: "var(--brand-red)", boxShadow: "0 14px 32px -12px rgba(218,72,56,0.55)" }}
-              >
-                Contact Us →
-              </Link>
-              <Link
-                to="/contact"
-                className="btn-outline !border-white/40 !text-white hover:!bg-white hover:!text-[var(--ink)]"
-              >
-                Get a Custom Growth Plan
-              </Link>
-            </div>
-          </Reveal>
+        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16">
+          <div className="w-full lg:w-1/2 max-w-4xl">
+            <Reveal>
+              <span className="pill !bg-white/10 !text-white !border-white/15">
+                <span
+                  className="h-1.5 w-1.5 rounded-full"
+                  style={{ background: "var(--brand-orange)" }}
+                />
+                {eyebrow}
+              </span>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="text-display text-5xl md:text-7xl mt-6 text-balance">
+                {title}
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-6 text-lg md:text-xl text-white/70 max-w-2xl">{body}</p>
+            </Reveal>
+          </div>
+          <div className="w-full lg:w-1/2 flex justify-center lg:justify-end mt-12 lg:mt-0">
+            <img
+              src={scaleBusinessImg}
+              alt="Scale your business with The Vertex Technologies"
+              className="max-w-sm w-full h-auto rounded-2xl shadow-lg"
+            />
+          </div>
         </div>
       </div>
     </section>
