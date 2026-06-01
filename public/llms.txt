@@ -1,0 +1,25 @@
+# The Vertex Technologies
+
+> An AI-driven growth and transformation company helping businesses scale faster through intelligent automation, data-driven marketing systems, and strategic consulting frameworks.
+
+The Vertex Technologies builds and deploys enterprise-grade solutions across technology, strategy, and growth for modern businesses. The company focuses on ROI-driven results and performance-based growth through a combination of AI implementation and strategic consulting.
+
+## Services
+
+- [AI Automation & Agents](https://www.thevertextechnologies.com/ai-solutions): Custom AI agents for sales, support, and operations that work continuously and intelligently.
+- [Digital Marketing Systems](https://www.thevertextechnologies.com/marketing-systems): Performance-focused marketing ecosystems that attract, nurture, and convert qualified leads.
+- [Business Growth Consulting](https://www.thevertextechnologies.com/growth-consulting): Scalable systems, SOPs, and revenue optimization for sustainable expansion.
+- [Entrepreneurship Consulting](https://www.thevertextechnologies.com/growth-consulting): Frameworks for founders to launch, validate, and scale with focus and speed.
+- [The Vertex Institute](https://www.thevertextechnologies.com/the-vertex-institute): Education and training programs for business and technology transformation.
+
+## Company
+
+- [About](https://www.thevertextechnologies.com/about): Mission, vision, and approach — engineering intelligent growth for modern businesses.
+- [Portfolio](https://www.thevertextechnologies.com/portfolio): Past work and client projects.
+- [Case Studies](https://www.thevertextechnologies.com/case-studies): In-depth results and outcomes from client engagements.
+- [Resources](https://www.thevertextechnologies.com/resources): Guides, articles, and tools for business growth.
+
+## Contact
+
+- [Book a Call](https://www.thevertextechnologies.com/book-a-call): Schedule a strategy session.
+- [Contact](https://www.thevertextechnologies.com/contact): General enquiries.
