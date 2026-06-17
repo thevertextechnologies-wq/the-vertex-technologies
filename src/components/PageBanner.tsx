@@ -18,9 +18,11 @@ export default function PageBanner({
   align = "left",
   dark = true,
 }: PageBannerProps) {
+  const hasContent = eyebrow || title || intro;
+
   return (
     <section className="relative overflow-hidden">
-      <div className="relative h-[220px] sm:h-[400px] md:h-[420px] lg:h-[480px] w-full">
+      <div className="relative h-[240px] sm:h-[400px] md:h-[420px] lg:h-[480px] w-full">
         <img
           src={image}
           alt=""
@@ -37,8 +39,16 @@ export default function PageBanner({
           }}
         />
 
-        <div className="absolute inset-0 flex items-end pb-2">
-          <div className="container-x w-full px-4 sm:px-6 pb-4 sm:pb-10 md:pb-14 lg:pb-16">
+        <div
+          className={`absolute inset-0 ${
+            hasContent ? "flex items-end pb-2" : ""
+          }`}
+        >
+          <div
+            className={`container-x w-full px-4 sm:px-6 ${
+              hasContent ? "pb-4 sm:pb-10 md:pb-14 lg:pb-16" : ""
+            }`}
+          >
             <div
               className={`max-w-[340px] sm:max-w-3xl ${
                 align === "center" ? "mx-auto text-center" : ""
@@ -52,15 +62,17 @@ export default function PageBanner({
                 </Reveal>
               )}
 
-              <Reveal delay={0.1}>
-                <h1
-                  className={`font-display font-extrabold leading-[1] tracking-tight text-[1.75rem] sm:text-5xl md:text-6xl lg:text-7xl ${
-                    dark ? "text-white" : "text-foreground"
-                  }`}
-                >
-                  {title}
-                </h1>
-              </Reveal>
+              {title && (
+                <Reveal delay={0.1}>
+                  <h1
+                    className={`font-display font-extrabold leading-[1] tracking-tight text-[1.75rem] sm:text-5xl md:text-6xl lg:text-7xl ${
+                      dark ? "text-white" : "text-foreground"
+                    }`}
+                  >
+                    {title}
+                  </h1>
+                </Reveal>
+              )}
 
               {intro && (
                 <Reveal delay={0.2}>
