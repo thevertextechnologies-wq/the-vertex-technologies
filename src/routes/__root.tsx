@@ -24,14 +24,26 @@ function NotFoundComponent() {
 
 export const Route = createRootRoute({
   head: () => ({
+    title: "AI Automation & Growth Agency | The Vertex Technologies",
     meta: [
-      { title: "AI Automation & Growth Agency | The Vertex Technologies" },
       {
         name: "description",
         content:
           "The Vertex Technologies engineers AI agents, automation and marketing systems that remove bottlenecks and turn companies into scalable revenue engines.",
       },
+      {
+        property: "og:title",
+        content: "AI Automation & Growth Agency | The Vertex Technologies",
+      },
+      {
+        property: "og:description",
+        content:
+          "The Vertex Technologies engineers AI agents, automation and marketing systems that remove bottlenecks and turn companies into scalable revenue engines.",
+      },
+      { property: "og:url", content: "https://www.thevertextechnologies.com/" },
+      { property: "og:type", content: "website" },
     ],
+    links: [{ rel: "canonical", href: "https://www.thevertextechnologies.com/" }],
   }),
   component: () => (
     <>

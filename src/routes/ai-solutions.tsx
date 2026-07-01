@@ -9,8 +9,8 @@ import CTASection from "@/components/CTASection";
 
 export const Route = createFileRoute("/ai-solutions")({
   head: () => ({
+    title: "Custom AI Agents & Automation | The Vertex Technologies",
     meta: [
-      { title: "Custom AI Agents & Automation | The Vertex Technologies" },
       { name: "description", content: "The Vertex Technologies builds custom AI agents for sales, support and operations that run 24/7, cut manual workload and scale your business intelligently." },
       { property: "og:title", content: "Custom AI Agents & Automation | The Vertex Technologies" },
       { property: "og:description", content: "The Vertex Technologies builds custom AI agents for sales, support and operations that run 24/7, cut manual workload and scale your business intelligently." },
