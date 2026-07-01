@@ -24,6 +24,19 @@ import logoCitiHousingPk from "@/assets/projects/citi-housing-pk.jpeg";
 import logoCitiHousingUk from "@/assets/projects/citi-housing-uk.jpeg";
 
 export const Route = createFileRoute("/portfolio")({
+  head: () => ({
+    meta: [
+      { title: "AI & Automation Portfolio | The Vertex Technologies" },
+      { name: "description", content: "Explore The Vertex Technologies portfolio of AI, automation and marketing projects engineered to help ambitious companies scale and grow revenue faster." },
+      { property: "og:title", content: "AI & Automation Portfolio | The Vertex Technologies" },
+      { property: "og:description", content: "Explore The Vertex Technologies portfolio of AI, automation and marketing projects engineered to help ambitious companies scale and grow revenue faster." },
+      { property: "og:url", content: "https://www.thevertextechnologies.com/portfolio" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.thevertextechnologies.com/portfolio" },
+    ],
+  }),
   component: PortfolioPage,
 });
 

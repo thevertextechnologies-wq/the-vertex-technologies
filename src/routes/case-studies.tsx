@@ -8,6 +8,19 @@ import CTASection from "@/components/CTASection";
 import caseStudyWorkflow from "@/assets/Case studies/case-study-1.png";
 
 export const Route = createFileRoute("/case-studies")({
+  head: () => ({
+    meta: [
+      { title: "AI Automation Case Studies | The Vertex Technologies" },
+      { name: "description", content: "See how The Vertex Technologies uses AI agents, automation and marketing systems to cut manual work, grow pipeline and deliver measurable client results." },
+      { property: "og:title", content: "AI Automation Case Studies | The Vertex Technologies" },
+      { property: "og:description", content: "See how The Vertex Technologies uses AI agents, automation and marketing systems to cut manual work, grow pipeline and deliver measurable client results." },
+      { property: "og:url", content: "https://www.thevertextechnologies.com/case-studies" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.thevertextechnologies.com/case-studies" },
+    ],
+  }),
   component: CaseStudiesPage,
 });
 

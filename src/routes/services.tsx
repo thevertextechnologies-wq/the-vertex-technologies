@@ -8,6 +8,19 @@ import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
 
 export const Route = createFileRoute("/services")({
+  head: () => ({
+    meta: [
+      { title: "AI, Automation & Growth Services | The Vertex Technologies" },
+      { name: "description", content: "The Vertex Technologies delivers full-stack AI, automation, performance marketing and growth consulting to help companies scale operations and revenue." },
+      { property: "og:title", content: "AI, Automation & Growth Services | The Vertex Technologies" },
+      { property: "og:description", content: "The Vertex Technologies delivers full-stack AI, automation, performance marketing and growth consulting to help companies scale operations and revenue." },
+      { property: "og:url", content: "https://www.thevertextechnologies.com/services" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.thevertextechnologies.com/services" },
+    ],
+  }),
   component: ServicesPage,
 });
 

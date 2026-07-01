@@ -8,6 +8,19 @@ import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
 
 export const Route = createFileRoute("/marketing-systems")({
+  head: () => ({
+    meta: [
+      { title: "Performance Marketing Systems | The Vertex Technologies" },
+      { name: "description", content: "The Vertex Technologies engineers performance marketing systems that attract, nurture and convert qualified leads into predictable pipeline and revenue." },
+      { property: "og:title", content: "Performance Marketing Systems | The Vertex Technologies" },
+      { property: "og:description", content: "The Vertex Technologies engineers performance marketing systems that attract, nurture and convert qualified leads into predictable pipeline and revenue." },
+      { property: "og:url", content: "https://www.thevertextechnologies.com/marketing-systems" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.thevertextechnologies.com/marketing-systems" },
+    ],
+  }),
   component: MarketingPage,
 });
 

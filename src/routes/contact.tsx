@@ -6,6 +6,19 @@ import PageLayout from "@/components/PageLayout";
 import { Reveal } from "@/components/Reveal";
 
 export const Route = createFileRoute("/contact")({
+  head: () => ({
+    meta: [
+      { title: "Contact The Vertex Technologies | Get Your Roadmap" },
+      { name: "description", content: "Tell The Vertex Technologies your goals and get a tailored AI and automation roadmap within 24 hours. Partner with a team engineered for measurable growth." },
+      { property: "og:title", content: "Contact The Vertex Technologies | Get Your Roadmap" },
+      { property: "og:description", content: "Tell The Vertex Technologies your goals and get a tailored AI and automation roadmap within 24 hours. Partner with a team engineered for measurable growth." },
+      { property: "og:url", content: "https://www.thevertextechnologies.com/contact" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.thevertextechnologies.com/contact" },
+    ],
+  }),
   component: ContactPage,
 });
 

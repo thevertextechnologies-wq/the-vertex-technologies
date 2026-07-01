@@ -30,6 +30,19 @@ import problemBurnout from "@/assets/problem-burnout.jpg";
 import problemScale from "@/assets/problem-scale.jpg";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "AI Automation & Growth Agency | The Vertex Technologies" },
+      { name: "description", content: "The Vertex Technologies engineers AI agents, automation and marketing systems that remove bottlenecks and turn companies into scalable revenue engines." },
+      { property: "og:title", content: "AI Automation & Growth Agency | The Vertex Technologies" },
+      { property: "og:description", content: "The Vertex Technologies engineers AI agents, automation and marketing systems that remove bottlenecks and turn companies into scalable revenue engines." },
+      { property: "og:url", content: "https://www.thevertextechnologies.com/" },
+      { property: "og:type", content: "website" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://www.thevertextechnologies.com/" },
+    ],
+  }),
   component: HomePage,
 });
 

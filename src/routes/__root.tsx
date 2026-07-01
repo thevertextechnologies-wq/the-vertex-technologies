@@ -1,4 +1,4 @@
-import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -23,6 +23,21 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  component: () => <Outlet />,
+  head: () => ({
+    meta: [
+      { title: "AI Automation & Growth Agency | The Vertex Technologies" },
+      {
+        name: "description",
+        content:
+          "The Vertex Technologies engineers AI agents, automation and marketing systems that remove bottlenecks and turn companies into scalable revenue engines.",
+      },
+    ],
+  }),
+  component: () => (
+    <>
+      <HeadContent />
+      <Outlet />
+    </>
+  ),
   notFoundComponent: NotFoundComponent,
 });
