@@ -4,6 +4,7 @@ import { z } from "zod";
 import { CheckCircle2, Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import { Reveal } from "@/components/Reveal";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/contact")({
@@ -89,6 +90,9 @@ function ContactPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh opacity-60" aria-hidden />
         <div className="container-x relative pt-16 md:pt-24 pb-20">
+          <Reveal>
+            <Breadcrumbs tone="dark" className="mb-5" />
+          </Reveal>
           <Reveal>
             <span className="pill">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-orange)]" />

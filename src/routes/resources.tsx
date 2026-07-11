@@ -4,6 +4,7 @@ import PageLayout from "@/components/PageLayout";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/resources")({
@@ -73,6 +74,9 @@ function ResourcesPage() {
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 gradient-mesh opacity-60" aria-hidden />
         <div className="container-x relative pt-16 md:pt-24 pb-20">
+          <Reveal>
+            <Breadcrumbs tone="dark" className="mb-5" />
+          </Reveal>
           <Reveal>
             <span className="pill">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-blue)]" />

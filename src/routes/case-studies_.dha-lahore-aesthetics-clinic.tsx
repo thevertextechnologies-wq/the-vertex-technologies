@@ -15,6 +15,7 @@ import CTASection from "@/components/CTASection";
 import bannerCases from "@/assets/banner-cases.jpg";
 import caseStudyWorkflow from "@/assets/Case studies/case-study-1.png";
 import featuredWhatsappAi from "@/assets/Case Studies Featured Image/the-vertex-technologies-agentic-ai-whatsapp-automation.webp";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/case-studies_/dha-lahore-aesthetics-clinic")({
@@ -120,6 +121,15 @@ function CaseStudyDetailPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-[var(--ink)]" />
           <div className="container-x relative py-14 md:py-20">
+            <Breadcrumbs
+              tone="light"
+              className="mb-5"
+              items={[
+                { label: "Home", to: "/" },
+                { label: "Case Studies", to: "/case-studies" },
+                { label: "DHA Lahore Aesthetics Clinic" },
+              ]}
+            />
             <Link
               to="/case-studies"
               className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"

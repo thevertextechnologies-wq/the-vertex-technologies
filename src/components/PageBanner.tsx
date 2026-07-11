@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Reveal } from "./Reveal";
+import Breadcrumbs from "./Breadcrumbs";
 
 interface PageBannerProps {
   eyebrow?: string;
@@ -54,6 +55,13 @@ export default function PageBanner({
                 align === "center" ? "mx-auto text-center" : ""
               }`}
             >
+              <Reveal>
+                <Breadcrumbs
+                  tone="light"
+                  className={`mb-2 sm:mb-4 ${align === "center" ? "flex justify-center" : ""}`}
+                />
+              </Reveal>
+
               {eyebrow && (
                 <Reveal>
                   <p className="text-[10px] sm:text-[11px] md:text-xs uppercase tracking-[0.18em] sm:tracking-[0.22em] mb-1 sm:mb-4 text-white/80">

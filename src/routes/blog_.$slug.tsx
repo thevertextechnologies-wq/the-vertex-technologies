@@ -4,6 +4,7 @@ import PageLayout from "@/components/PageLayout";
 import { Reveal } from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import { blogPosts, getBlogPost, formatBlogDate } from "@/data/blog";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { buildSeoHead, SITE_URL, DEFAULT_OG_IMAGE } from "@/seo/metadata";
 
 export const Route = createFileRoute("/blog_/$slug")({
@@ -74,29 +75,14 @@ function BlogPostPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-[var(--ink)]" />
           <div className="container-x relative py-14 md:py-20">
-            <nav aria-label="Breadcrumb">
-              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/70">
-                <li>
-                  <Link to="/" className="transition-colors hover:text-white">
-                    Home
-                  </Link>
-                </li>
-                <li aria-hidden="true" className="text-white/40">
-                  /
-                </li>
-                <li>
-                  <Link to="/blog" className="transition-colors hover:text-white">
-                    Blog
-                  </Link>
-                </li>
-                <li aria-hidden="true" className="text-white/40">
-                  /
-                </li>
-                <li aria-current="page" className="line-clamp-1 max-w-[60vw] text-white/90">
-                  {post.title}
-                </li>
-              </ol>
-            </nav>
+            <Breadcrumbs
+              tone="light"
+              items={[
+                { label: "Home", to: "/" },
+                { label: "Blog", to: "/blog" },
+                { label: post.title },
+              ]}
+            />
 
             <Link
               to="/blog"
