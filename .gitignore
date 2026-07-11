@@ -30,3 +30,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Internal working notes / AI context (not for the repo)
+brain.md

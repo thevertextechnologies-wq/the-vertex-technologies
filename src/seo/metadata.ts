@@ -14,9 +14,9 @@ export const ROUTE_META: Record<string, SeoMeta> = {
     url: `${SITE_URL}/`,
   },
   "/about": {
-    title: "About The Vertex Technologies | Your Growth Partner",
+    title: "Meet the Team | The Vertex Technologies",
     description:
-      "The Vertex Technologies is a growth partner combining deep AI, automation, strategy and marketing expertise to help ambitious organizations scale sustainably.",
+      "Meet the team behind The Vertex Technologies — the people engineering AI agents, automation and growth systems for ambitious businesses.",
     url: `${SITE_URL}/about`,
   },
   "/ai-solutions": {
@@ -84,6 +84,12 @@ export const ROUTE_META: Record<string, SeoMeta> = {
     description:
       "Book a free strategy call with The Vertex Technologies and get a tailored AI and automation roadmap within 24 hours. Pick a time and start scaling today.",
     url: `${SITE_URL}/book-a-call`,
+  },
+  "/blog": {
+    title: "Blog | AI, Automation & Growth Insights | The Vertex Technologies",
+    description:
+      "Practical articles on AI agents, automation, marketing systems and business growth from The Vertex Technologies — actionable insights you can apply today.",
+    url: `${SITE_URL}/blog`,
   },
 };
 

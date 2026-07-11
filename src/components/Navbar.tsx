@@ -176,6 +176,9 @@ export default function Navbar() {
           <Link to="/resources" className={navItem} onMouseEnter={() => setOpen(null)}>
             Resources
           </Link>
+          <Link to="/blog" className={navItem} onMouseEnter={() => setOpen(null)}>
+            Blog
+          </Link>
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
@@ -488,6 +491,7 @@ export default function Navbar() {
                 { label: "Portfolio", to: "/portfolio" },
                 { label: "Case Studies", to: "/case-studies" },
                 { label: "Resources", to: "/resources" },
+                { label: "Blog", to: "/blog" },
                 { label: "Contact", to: "/contact" },
               ].map((l) => (
                 <Link

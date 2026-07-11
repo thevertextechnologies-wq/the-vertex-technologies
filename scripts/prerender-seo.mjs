@@ -17,9 +17,9 @@ const routes = [
   },
   {
     path: "/about",
-    title: "About The Vertex Technologies | Your Growth Partner",
+    title: "Meet the Team | The Vertex Technologies",
     description:
-      "The Vertex Technologies is a growth partner combining deep AI, automation, strategy and marketing expertise to help ambitious organizations scale sustainably.",
+      "Meet the team behind The Vertex Technologies — the people engineering AI agents, automation and growth systems for ambitious businesses.",
     url: "https://www.thevertextechnologies.com/about",
   },
   {
@@ -98,6 +98,55 @@ const routes = [
     description:
       "Book a free strategy call with The Vertex Technologies and get a tailored AI and automation roadmap within 24 hours. Pick a time and start scaling today.",
     url: "https://www.thevertextechnologies.com/book-a-call",
+  },
+  {
+    path: "/blog",
+    title: "Blog | AI, Automation & Growth Insights | The Vertex Technologies",
+    description:
+      "Practical articles on AI agents, automation, marketing systems and business growth from The Vertex Technologies — actionable insights you can apply today.",
+    url: "https://www.thevertextechnologies.com/blog",
+  },
+  {
+    path: "/blog/ai-agents-for-small-business",
+    title: "Why Every Small Business Needs an AI Agent in 2026 | The Vertex Technologies",
+    description:
+      "AI agents are no longer an enterprise luxury. Here is how small businesses use them to answer customers instantly, book more appointments and reclaim hours every week.",
+    url: "https://www.thevertextechnologies.com/blog/ai-agents-for-small-business",
+  },
+  {
+    path: "/blog/automation-workflows-that-save-hours",
+    title: "5 Automation Workflows That Save Teams 20+ Hours a Week | The Vertex Technologies",
+    description:
+      "Manual copy-paste work quietly drains your team. These five automation workflows remove the busywork so people can focus on what actually grows the business.",
+    url: "https://www.thevertextechnologies.com/blog/automation-workflows-that-save-hours",
+  },
+  {
+    path: "/blog/whatsapp-ai-agent-guide",
+    title: "The Complete Guide to WhatsApp AI Agents | The Vertex Technologies",
+    description:
+      "WhatsApp is where your customers already are. Learn how a WhatsApp AI Agent handles bookings, FAQs and follow-ups 24/7 — and what it takes to set one up.",
+    url: "https://www.thevertextechnologies.com/blog/whatsapp-ai-agent-guide",
+  },
+  {
+    path: "/blog/predictable-lead-generation-system",
+    title: "How to Build a Predictable Lead Generation System | The Vertex Technologies",
+    description:
+      "Relying on referrals and luck is not a strategy. Here is the framework we use to turn marketing from a gamble into a predictable, measurable pipeline.",
+    url: "https://www.thevertextechnologies.com/blog/predictable-lead-generation-system",
+  },
+  {
+    path: "/blog/scaling-without-burnout",
+    title: "Scaling Without Burnout: Systems Over Hustle | The Vertex Technologies",
+    description:
+      "Growth built on working harder eventually breaks. Learn how founders replace hustle with systems that scale revenue without scaling stress.",
+    url: "https://www.thevertextechnologies.com/blog/scaling-without-burnout",
+  },
+  {
+    path: "/blog/startup-idea-to-execution",
+    title: "From Idea to Execution: A Founder's First 90 Days | The Vertex Technologies",
+    description:
+      "A great idea is worth little without execution. Here is a 90-day framework to validate, position and launch — without wasting months building the wrong thing.",
+    url: "https://www.thevertextechnologies.com/blog/startup-idea-to-execution",
   },
 ];
 
