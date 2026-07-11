@@ -8,27 +8,16 @@ import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
 import { teamMembers } from "@/data/team";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    title: "Meet the Team | The Vertex Technologies",
-    meta: [
-      {
-        name: "description",
-        content:
-          "Meet the team behind The Vertex Technologies — the people engineering AI agents, automation and growth systems for ambitious businesses.",
-      },
-      { property: "og:title", content: "Meet the Team | The Vertex Technologies" },
-      {
-        property: "og:description",
-        content:
-          "Meet the team behind The Vertex Technologies — the people engineering AI agents, automation and growth systems for ambitious businesses.",
-      },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/about" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "canonical", href: "https://www.thevertextechnologies.com/about" }],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "Meet the Team | The Vertex Technologies",
+      description:
+        "Meet the team behind The Vertex Technologies — the people engineering AI agents, automation and growth systems for ambitious businesses.",
+      url: "https://www.thevertextechnologies.com/about",
+    }),
   component: MeetTheTeamPage,
 });
 

@@ -4,21 +4,16 @@ import { z } from "zod";
 import { CheckCircle2, Mail, Phone, MapPin, ChevronDown } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import { Reveal } from "@/components/Reveal";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    title: "Contact The Vertex Technologies | Get Your Roadmap",
-    meta: [
-      { name: "description", content: "Tell The Vertex Technologies your goals and get a tailored AI and automation roadmap within 24 hours. Partner with a team engineered for measurable growth." },
-      { property: "og:title", content: "Contact The Vertex Technologies | Get Your Roadmap" },
-      { property: "og:description", content: "Tell The Vertex Technologies your goals and get a tailored AI and automation roadmap within 24 hours. Partner with a team engineered for measurable growth." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/contact" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/contact" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "Contact The Vertex Technologies | Get Your Roadmap",
+      description:
+        "Tell The Vertex Technologies your goals and get a tailored AI and automation roadmap within 24 hours. Partner with a team engineered for measurable growth.",
+      url: "https://www.thevertextechnologies.com/contact",
+    }),
   component: ContactPage,
 });
 

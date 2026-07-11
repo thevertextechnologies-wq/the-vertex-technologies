@@ -7,6 +7,155 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
 const distDir = path.join(rootDir, "dist");
 
+const SITE = "https://www.thevertextechnologies.com";
+const OG_IMAGE = `${SITE}/og-image.jpg`;
+const PUBLISHER = {
+  "@type": "Organization",
+  name: "The Vertex Technologies",
+  logo: { "@type": "ImageObject", url: OG_IMAGE },
+};
+
+// ---------------------------------------------------------------------------
+// Structured data (JSON-LD) injected statically into prerendered HTML so that
+// crawlers get Article/BlogPosting + FAQPage + BreadcrumbList WITHOUT having to
+// execute JS. When a new blog post is added, add its schema block here too.
+// ---------------------------------------------------------------------------
+
+const blogPostUrl = `${SITE}/blog/ai-booking-automation-aesthetics-clinics-case-study`;
+
+const blogPostFaqs = [
+  [
+    "How long does it take to set up AI booking automation for an aesthetics clinic?",
+    "A focused build — AI messaging, calendar sync, and reminders — can go live in as little as 72 hours, as in this case study. More complex builds involving deposit collection or EMR integration typically take one to two weeks.",
+  ],
+  [
+    "Will an AI receptionist replace my front-desk staff?",
+    "No. It handles repetitive, after-hours, and overflow inquiries so staff can focus on in-clinic patients and anything requiring clinical judgment or a personal touch.",
+  ],
+  [
+    "Does this work with the booking software my clinic already uses?",
+    "Most systems connect through existing calendar and CRM integrations rather than replacing them, so the clinic keeps its current software while automation handles the busywork around it.",
+  ],
+  [
+    "What's the biggest driver of ROI — fewer no-shows or more after-hours bookings?",
+    "Both matter, but for most clinics the after-hours capture has the bigger immediate impact, since it turns previously lost leads into booked revenue rather than just protecting revenue that was already scheduled.",
+  ],
+  [
+    "How much does AI booking automation cost for a clinic?",
+    "Cost depends on the number of channels, the complexity of the booking rules, and whether you need extras like deposits or EMR integration. A focused single-location build is far more affordable than most clinics expect — and because it protects revenue that was previously lost after hours, it typically pays for itself well before the first quarter is over.",
+  ],
+  [
+    "Is patient data handled securely?",
+    "Yes. The system uses the official APIs of the messaging platforms and your calendar or CRM, and sensitive information is only stored where your existing tools already store it. We configure access controls and data-handling rules during setup, and we can align the build with the privacy requirements your clinic operates under.",
+  ],
+  [
+    "Can the AI handle WhatsApp, Instagram, and website chat at the same time?",
+    "Yes. Every channel feeds into one automation backbone, so a patient can start on Instagram, continue on WhatsApp, and still receive a single, consistent booking experience. Your team never has to jump between separate inboxes to piece a conversation together.",
+  ],
+  [
+    "What happens when the AI can't answer a question?",
+    "The agent is built to recognise when a query needs a human — anything involving clinical judgment, complex medical history, or a sensitive request. In those cases it collects the key details and hands the conversation off to your staff, so the patient is never left stuck and nothing important is missed.",
+  ],
+  [
+    "Can it collect deposits or payments at the time of booking?",
+    "Yes, though this is usually a phase-two addition. Deposit collection is one of the most effective ways to cut no-shows for high-ticket treatments, and it can be layered onto the booking flow once the core system is live and stable.",
+  ],
+  [
+    "Will the AI sound robotic to my patients?",
+    "No. A big part of the build is tuning the tone so it matches your clinic's voice — warm, professional, and on-brand. Most patients simply experience it as a fast, helpful reply, and complex or personal moments are handed to your team so the human touch is preserved where it matters.",
+  ],
+  [
+    "What languages can the AI receptionist handle?",
+    "The AI can understand and respond in multiple languages, which is especially useful in markets where patients switch between English and a local language mid-conversation. We configure the primary languages your clinic serves during setup.",
+  ],
+  [
+    "Do I need to change my current booking or calendar software?",
+    "In most cases, no. The automation connects to the calendar and CRM you already use rather than replacing them, so your staff keeps working in familiar tools while the system handles the repetitive scheduling work around them.",
+  ],
+  [
+    "How do we measure whether it's actually working?",
+    "We track a small set of metrics that map directly to revenue: response time, number of after-hours inquiries captured, bookings created by the agent, and no-show rate before versus after launch. These numbers make it easy to see the return rather than guess at it.",
+  ],
+  [
+    "Does this only work for large clinics or chains?",
+    "Not at all. Single-location clinics often see the fastest impact, because even one owner-operator can't personally answer messages at midnight. The system gives a small practice the same always-on responsiveness that used to require a large front-desk team.",
+  ],
+  [
+    "What do we need to provide to get started?",
+    "Very little to begin: access to your messaging channels and calendar, your treatment and pricing information, and answers to your most common patient questions. From there, we handle the mapping, building, testing, and launch.",
+  ],
+];
+
+const blogPostJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline:
+      "AI Booking Automation for Aesthetics Clinics: How One Clinic Got More Walk-Ins and Zero Missed Bookings in 72 Hours",
+    description:
+      "See how AI booking automation helped an aesthetics clinic capture after-hours leads, boost walk-ins, and hit zero missed bookings in just 72 hours.",
+    image: OG_IMAGE,
+    datePublished: "2026-07-11",
+    dateModified: "2026-07-11",
+    author: { "@type": "Organization", name: "The Vertex Technologies" },
+    publisher: PUBLISHER,
+    mainEntityOfPage: { "@type": "WebPage", "@id": blogPostUrl },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE}/blog` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "AI Booking Automation for Aesthetics Clinics",
+        item: blogPostUrl,
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: blogPostFaqs.map(([q, a]) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  },
+];
+
+const caseStudyUrl = `${SITE}/case-studies/dha-lahore-aesthetics-clinic`;
+
+const caseStudyJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "How a DHA Lahore Aesthetics Clinic Got More Walk-ins in 72 Hours",
+    description:
+      "Case study: how The Vertex Technologies deployed a WhatsApp AI Agent in 72 hours for a DHA Lahore aesthetics clinic — more walk-ins, zero after-hours missed bookings.",
+    image: OG_IMAGE,
+    author: { "@type": "Organization", name: "The Vertex Technologies" },
+    publisher: PUBLISHER,
+    mainEntityOfPage: { "@type": "WebPage", "@id": caseStudyUrl },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${SITE}/case-studies` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "DHA Lahore Aesthetics Clinic",
+        item: caseStudyUrl,
+      },
+    ],
+  },
+];
+
 const routes = [
   {
     path: "/",
@@ -63,6 +212,8 @@ const routes = [
     description:
       "Case study: how The Vertex Technologies deployed a WhatsApp AI Agent in 72 hours for a DHA Lahore aesthetics clinic — more walk-ins, zero after-hours missed bookings.",
     url: "https://www.thevertextechnologies.com/case-studies/dha-lahore-aesthetics-clinic",
+    type: "article",
+    jsonLd: caseStudyJsonLd,
   },
   {
     path: "/portfolio",
@@ -107,46 +258,13 @@ const routes = [
     url: "https://www.thevertextechnologies.com/blog",
   },
   {
-    path: "/blog/ai-agents-for-small-business",
-    title: "Why Every Small Business Needs an AI Agent in 2026 | The Vertex Technologies",
+    path: "/blog/ai-booking-automation-aesthetics-clinics-case-study",
+    title: "AI Booking Automation for Aesthetics Clinics | The Vertex Technologies",
     description:
-      "AI agents are no longer an enterprise luxury. Here is how small businesses use them to answer customers instantly, book more appointments and reclaim hours every week.",
-    url: "https://www.thevertextechnologies.com/blog/ai-agents-for-small-business",
-  },
-  {
-    path: "/blog/automation-workflows-that-save-hours",
-    title: "5 Automation Workflows That Save Teams 20+ Hours a Week | The Vertex Technologies",
-    description:
-      "Manual copy-paste work quietly drains your team. These five automation workflows remove the busywork so people can focus on what actually grows the business.",
-    url: "https://www.thevertextechnologies.com/blog/automation-workflows-that-save-hours",
-  },
-  {
-    path: "/blog/whatsapp-ai-agent-guide",
-    title: "The Complete Guide to WhatsApp AI Agents | The Vertex Technologies",
-    description:
-      "WhatsApp is where your customers already are. Learn how a WhatsApp AI Agent handles bookings, FAQs and follow-ups 24/7 — and what it takes to set one up.",
-    url: "https://www.thevertextechnologies.com/blog/whatsapp-ai-agent-guide",
-  },
-  {
-    path: "/blog/predictable-lead-generation-system",
-    title: "How to Build a Predictable Lead Generation System | The Vertex Technologies",
-    description:
-      "Relying on referrals and luck is not a strategy. Here is the framework we use to turn marketing from a gamble into a predictable, measurable pipeline.",
-    url: "https://www.thevertextechnologies.com/blog/predictable-lead-generation-system",
-  },
-  {
-    path: "/blog/scaling-without-burnout",
-    title: "Scaling Without Burnout: Systems Over Hustle | The Vertex Technologies",
-    description:
-      "Growth built on working harder eventually breaks. Learn how founders replace hustle with systems that scale revenue without scaling stress.",
-    url: "https://www.thevertextechnologies.com/blog/scaling-without-burnout",
-  },
-  {
-    path: "/blog/startup-idea-to-execution",
-    title: "From Idea to Execution: A Founder's First 90 Days | The Vertex Technologies",
-    description:
-      "A great idea is worth little without execution. Here is a 90-day framework to validate, position and launch — without wasting months building the wrong thing.",
-    url: "https://www.thevertextechnologies.com/blog/startup-idea-to-execution",
+      "See how AI booking automation helped an aesthetics clinic capture after-hours leads, boost walk-ins, and hit zero missed bookings in just 72 hours.",
+    url: "https://www.thevertextechnologies.com/blog/ai-booking-automation-aesthetics-clinics-case-study",
+    type: "article",
+    jsonLd: blogPostJsonLd,
   },
 ];
 
@@ -190,9 +308,34 @@ async function main() {
     );
     html = replaceOrAppend(
       html,
+      /<meta property="og:type" content="[^"]*"\s*\/?>/,
+      `<meta property="og:type" content="${route.type ?? "website"}" />`
+    );
+    html = replaceOrAppend(
+      html,
+      /<meta name="twitter:title" content="[^"]*"\s*\/?>/,
+      `<meta name="twitter:title" content="${route.title}" />`
+    );
+    html = replaceOrAppend(
+      html,
+      /<meta name="twitter:description" content="[^"]*"\s*\/?>/,
+      `<meta name="twitter:description" content="${route.description}" />`
+    );
+    html = replaceOrAppend(
+      html,
       /<link rel="canonical" href="[^"]*"\s*\/?>/,
       `<link rel="canonical" href="${route.url}" />`
     );
+
+    if (Array.isArray(route.jsonLd) && route.jsonLd.length > 0) {
+      const scripts = route.jsonLd
+        .map(
+          (obj) =>
+            `    <script type="application/ld+json">${JSON.stringify(obj)}</script>`
+        )
+        .join("\n");
+      html = html.replace("</head>", `${scripts}\n  </head>`);
+    }
 
     const outputPath = route.path === "/" ? templatePath : path.join(routeDir, "index.html");
     await writeFile(outputPath, html, "utf8");

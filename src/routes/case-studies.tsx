@@ -7,21 +7,16 @@ import featuredWhatsappAi from "@/assets/Case Studies Featured Image/the-vertex-
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/case-studies")({
-  head: () => ({
-    title: "AI Automation Case Studies | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "See how The Vertex Technologies uses AI agents, automation and marketing systems to cut manual work, grow pipeline and deliver measurable client results." },
-      { property: "og:title", content: "AI Automation Case Studies | The Vertex Technologies" },
-      { property: "og:description", content: "See how The Vertex Technologies uses AI agents, automation and marketing systems to cut manual work, grow pipeline and deliver measurable client results." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/case-studies" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/case-studies" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "AI Automation Case Studies | The Vertex Technologies",
+      description:
+        "See how The Vertex Technologies uses AI agents, automation and marketing systems to cut manual work, grow pipeline and deliver measurable client results.",
+      url: "https://www.thevertextechnologies.com/case-studies",
+    }),
   component: CaseStudiesPage,
 });
 

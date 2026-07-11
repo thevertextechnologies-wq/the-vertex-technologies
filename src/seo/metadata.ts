@@ -4,7 +4,70 @@ export type SeoMeta = {
   url: string;
 };
 
-const SITE_URL = "https://www.thevertextechnologies.com";
+export const SITE_URL = "https://www.thevertextechnologies.com";
+export const SITE_NAME = "The Vertex Technologies";
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+
+type MetaTag =
+  | { name: string; content: string }
+  | { property: string; content: string };
+
+export type SeoHeadInput = {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+};
+
+/**
+ * Single source of truth for a route's <head>. Guarantees every page ships a
+ * consistent, complete set of technical-SEO tags: description, robots,
+ * canonical, Open Graph and Twitter cards.
+ */
+export function buildSeoHead(input: SeoHeadInput) {
+  const {
+    title,
+    description,
+    url,
+    image = DEFAULT_OG_IMAGE,
+    type = "website",
+    publishedTime,
+    modifiedTime,
+    author,
+  } = input;
+
+  const meta: MetaTag[] = [
+    { name: "description", content: description },
+    { name: "robots", content: "index, follow" },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:url", content: url },
+    { property: "og:type", content: type },
+    { property: "og:site_name", content: SITE_NAME },
+    { property: "og:locale", content: "en_US" },
+    { property: "og:image", content: image },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: image },
+  ];
+
+  if (type === "article") {
+    if (publishedTime) meta.push({ property: "article:published_time", content: publishedTime });
+    if (modifiedTime) meta.push({ property: "article:modified_time", content: modifiedTime });
+    if (author) meta.push({ property: "article:author", content: author });
+  }
+
+  return {
+    title,
+    meta,
+    links: [{ rel: "canonical", href: url }],
+  };
+}
 
 export const ROUTE_META: Record<string, SeoMeta> = {
   "/": {

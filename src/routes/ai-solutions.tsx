@@ -6,21 +6,16 @@ import bannerAi from "@/assets/banner-ai.jpg";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/ai-solutions")({
-  head: () => ({
-    title: "Custom AI Agents & Automation | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "The Vertex Technologies builds custom AI agents for sales, support and operations that run 24/7, cut manual workload and scale your business intelligently." },
-      { property: "og:title", content: "Custom AI Agents & Automation | The Vertex Technologies" },
-      { property: "og:description", content: "The Vertex Technologies builds custom AI agents for sales, support and operations that run 24/7, cut manual workload and scale your business intelligently." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/ai-solutions" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/ai-solutions" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "Custom AI Agents & Automation | The Vertex Technologies",
+      description:
+        "The Vertex Technologies builds custom AI agents for sales, support and operations that run 24/7, cut manual workload and scale your business intelligently.",
+      url: "https://www.thevertextechnologies.com/ai-solutions",
+    }),
   component: AISolutionsPage,
 });
 

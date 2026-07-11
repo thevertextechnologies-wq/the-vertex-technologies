@@ -4,21 +4,16 @@ import PageLayout from "@/components/PageLayout";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/resources")({
-  head: () => ({
-    title: "AI & Automation Playbooks | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "Practical, expert-authored playbooks, guides and research from The Vertex Technologies to help you put AI, automation and growth systems to work." },
-      { property: "og:title", content: "AI & Automation Playbooks | The Vertex Technologies" },
-      { property: "og:description", content: "Practical, expert-authored playbooks, guides and research from The Vertex Technologies to help you put AI, automation and growth systems to work." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/resources" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/resources" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "AI & Automation Playbooks | The Vertex Technologies",
+      description:
+        "Practical, expert-authored playbooks, guides and research from The Vertex Technologies to help you put AI, automation and growth systems to work.",
+      url: "https://www.thevertextechnologies.com/resources",
+    }),
   component: ResourcesPage,
 });
 

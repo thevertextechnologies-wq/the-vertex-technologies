@@ -22,21 +22,16 @@ import logoEliteHorizon from "@/assets/projects/elitehorizontourism.jpeg";
 import logoTodsAndTeens from "@/assets/projects/todsandteens.jpeg";
 import logoCitiHousingPk from "@/assets/projects/citi-housing-pk.jpeg";
 import logoCitiHousingUk from "@/assets/projects/citi-housing-uk.jpeg";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/portfolio")({
-  head: () => ({
-    title: "AI & Automation Portfolio | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "Explore The Vertex Technologies portfolio of AI, automation and marketing projects engineered to help ambitious companies scale and grow revenue faster." },
-      { property: "og:title", content: "AI & Automation Portfolio | The Vertex Technologies" },
-      { property: "og:description", content: "Explore The Vertex Technologies portfolio of AI, automation and marketing projects engineered to help ambitious companies scale and grow revenue faster." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/portfolio" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/portfolio" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "AI & Automation Portfolio | The Vertex Technologies",
+      description:
+        "Explore The Vertex Technologies portfolio of AI, automation and marketing projects engineered to help ambitious companies scale and grow revenue faster.",
+      url: "https://www.thevertextechnologies.com/portfolio",
+    }),
   component: PortfolioPage,
 });
 

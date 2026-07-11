@@ -6,21 +6,16 @@ import bannerServices from "@/assets/banner-services.jpg";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    title: "AI, Automation & Growth Services | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "The Vertex Technologies delivers full-stack AI, automation, performance marketing and growth consulting to help companies scale operations and revenue." },
-      { property: "og:title", content: "AI, Automation & Growth Services | The Vertex Technologies" },
-      { property: "og:description", content: "The Vertex Technologies delivers full-stack AI, automation, performance marketing and growth consulting to help companies scale operations and revenue." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/services" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/services" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "AI, Automation & Growth Services | The Vertex Technologies",
+      description:
+        "The Vertex Technologies delivers full-stack AI, automation, performance marketing and growth consulting to help companies scale operations and revenue.",
+      url: "https://www.thevertextechnologies.com/services",
+    }),
   component: ServicesPage,
 });
 

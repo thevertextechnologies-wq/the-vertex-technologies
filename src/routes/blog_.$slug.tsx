@@ -4,8 +4,7 @@ import PageLayout from "@/components/PageLayout";
 import { Reveal } from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import { blogPosts, getBlogPost, formatBlogDate } from "@/data/blog";
-
-const SITE_URL = "https://www.thevertextechnologies.com";
+import { buildSeoHead, SITE_URL, DEFAULT_OG_IMAGE } from "@/seo/metadata";
 
 export const Route = createFileRoute("/blog_/$slug")({
   head: ({ params }) => {
@@ -14,17 +13,17 @@ export const Route = createFileRoute("/blog_/$slug")({
       return { title: "Article not found | The Vertex Technologies" };
     }
     const url = `${SITE_URL}/blog/${post.slug}`;
-    return {
-      title: `${post.title} | The Vertex Technologies`,
-      meta: [
-        { name: "description", content: post.excerpt },
-        { property: "og:title", content: post.title },
-        { property: "og:description", content: post.excerpt },
-        { property: "og:url", content: url },
-        { property: "og:type", content: "article" },
-      ],
-      links: [{ rel: "canonical", href: url }],
-    };
+    const metaTitle = post.metaTitle ?? post.title;
+    const metaDescription = post.metaDescription ?? post.excerpt;
+    return buildSeoHead({
+      title: `${metaTitle} | The Vertex Technologies`,
+      description: metaDescription,
+      url,
+      image: post.image ? `${SITE_URL}${post.image}` : DEFAULT_OG_IMAGE,
+      type: "article",
+      publishedTime: post.date,
+      author: post.author,
+    });
   },
   component: BlogPostPage,
 });
@@ -75,21 +74,47 @@ function BlogPostPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-[var(--ink)]" />
           <div className="container-x relative py-14 md:py-20">
+            <nav aria-label="Breadcrumb">
+              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/70">
+                <li>
+                  <Link to="/" className="transition-colors hover:text-white">
+                    Home
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="text-white/40">
+                  /
+                </li>
+                <li>
+                  <Link to="/blog" className="transition-colors hover:text-white">
+                    Blog
+                  </Link>
+                </li>
+                <li aria-hidden="true" className="text-white/40">
+                  /
+                </li>
+                <li aria-current="page" className="line-clamp-1 max-w-[60vw] text-white/90">
+                  {post.title}
+                </li>
+              </ol>
+            </nav>
+
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 text-sm text-white/80 transition-colors hover:text-white"
+              className="mt-5 flex w-fit items-center gap-2 text-sm text-white/80 transition-colors hover:text-white"
             >
               <ArrowLeft className="h-4 w-4" /> Back to blog
             </Link>
 
-            <span
-              className="mt-6 inline-block rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white"
-              style={{ background: "var(--brand-red)" }}
-            >
-              {post.category}
-            </span>
+            <div className="mt-6">
+              <span
+                className="inline-block rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white"
+                style={{ background: "var(--brand-red)" }}
+              >
+                {post.category}
+              </span>
+            </div>
 
-            <h1 className="mt-5 max-w-4xl font-display text-3xl font-extrabold leading-[1.08] tracking-tight md:text-5xl">
+            <h1 className="mt-5 max-w-4xl font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white md:text-5xl">
               {post.title}
             </h1>
 
@@ -110,11 +135,11 @@ function BlogPostPage() {
         {/* COVER IMAGE */}
         <section className="container-x -mt-8 md:-mt-12">
           <Reveal>
-            <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-border shadow-xl">
+            <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-border bg-[var(--ink)] shadow-xl">
               <img
                 src={post.image}
-                alt={post.title}
-                className="aspect-[16/9] w-full object-cover"
+                alt={post.imageAlt ?? post.title}
+                className="aspect-[16/9] w-full object-contain"
                 loading="eager"
               />
             </div>
@@ -132,11 +157,29 @@ function BlogPostPage() {
                 {post.content.map((block, i) => (
                   <Reveal key={i}>
                     <div>
-                      {block.heading && (
-                        <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
-                          {block.heading}
-                        </h2>
-                      )}
+                      {block.heading &&
+                        (block.level === 4 ? (
+                          <h4
+                            className="font-display text-lg font-bold tracking-tight md:text-xl"
+                            style={{ color: "var(--brand-orange)" }}
+                          >
+                            {block.heading}
+                          </h4>
+                        ) : block.level === 3 ? (
+                          <h3
+                            className="font-display text-xl font-bold tracking-tight md:text-2xl"
+                            style={{ color: "var(--brand-blue)" }}
+                          >
+                            {block.heading}
+                          </h3>
+                        ) : (
+                          <h2
+                            className="font-display text-2xl font-bold tracking-tight md:text-3xl"
+                            style={{ color: "var(--brand-green)" }}
+                          >
+                            {block.heading}
+                          </h2>
+                        ))}
                       {block.paras?.map((para, j) => (
                         <p
                           key={j}
@@ -154,6 +197,23 @@ function BlogPostPage() {
                             </li>
                           ))}
                         </ul>
+                      )}
+                      {block.image && (
+                        <figure className="mt-7">
+                          <div className="overflow-hidden rounded-2xl border border-border shadow-lg">
+                            <img
+                              src={block.image.src}
+                              alt={block.image.alt}
+                              className="w-full object-cover"
+                              loading="lazy"
+                            />
+                          </div>
+                          {block.image.caption && (
+                            <figcaption className="mt-3 text-center text-sm text-muted-foreground">
+                              {block.image.caption}
+                            </figcaption>
+                          )}
+                        </figure>
                       )}
                     </div>
                   </Reveal>
@@ -182,12 +242,16 @@ function BlogPostPage() {
         </section>
 
         {/* RELATED */}
-        {relatedPosts.length > 0 && (
-          <section className="border-t border-border py-14 md:py-20">
-            <div className="container-x">
-              <h2 className="font-display text-2xl font-bold tracking-tight md:text-3xl">
-                Keep reading
-              </h2>
+        <section className="border-t border-border py-14 md:py-20">
+          <div className="container-x">
+            <h2
+              className="font-display text-2xl font-bold tracking-tight md:text-3xl"
+              style={{ color: "var(--brand-green)" }}
+            >
+              Related posts
+            </h2>
+
+            {relatedPosts.length > 0 ? (
               <div className="mt-8 grid gap-6 sm:grid-cols-2">
                 {relatedPosts.map((p) => (
                   <Link
@@ -219,9 +283,23 @@ function BlogPostPage() {
                   </Link>
                 ))}
               </div>
-            </div>
-          </section>
-        )}
+            ) : (
+              <div className="mt-6 flex flex-col items-start gap-4 rounded-3xl border border-border bg-card p-7 sm:flex-row sm:items-center sm:justify-between md:p-9">
+                <p className="text-muted-foreground">
+                  More articles are on the way — new posts will appear here so you always have
+                  something related to read next.
+                </p>
+                <Link
+                  to="/blog"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border px-5 py-2.5 font-semibold transition hover:bg-muted"
+                >
+                  Browse all articles
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            )}
+          </div>
+        </section>
       </article>
 
       <CTASection />

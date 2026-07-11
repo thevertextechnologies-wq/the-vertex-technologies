@@ -2,21 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Calendar, CheckCircle2, Clock, Users, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/book-a-call")({
-  head: () => ({
-    title: "Book a Free AI Strategy Call | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "Book a free strategy call with The Vertex Technologies and get a tailored AI and automation roadmap within 24 hours. Pick a time and start scaling today." },
-      { property: "og:title", content: "Book a Free AI Strategy Call | The Vertex Technologies" },
-      { property: "og:description", content: "Book a free strategy call with The Vertex Technologies and get a tailored AI and automation roadmap within 24 hours. Pick a time and start scaling today." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/book-a-call" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/book-a-call" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "Book a Free AI Strategy Call | The Vertex Technologies",
+      description:
+        "Book a free strategy call with The Vertex Technologies and get a tailored AI and automation roadmap within 24 hours. Pick a time and start scaling today.",
+      url: "https://www.thevertextechnologies.com/book-a-call",
+    }),
   component: BookCallPage,
 });
 

@@ -18,6 +18,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
 import HeroVisual from "@/components/HeroVisual";
 import ContactFormSection from "@/components/ContactFormSection";
+import { buildSeoHead } from "@/seo/metadata";
 import svcAi from "@/assets/svc-ai.jpg";
 import svcMarketing from "@/assets/svc-marketing.jpg";
 import svcConsulting from "@/assets/svc-consulting.jpg";
@@ -30,19 +31,13 @@ import problemBurnout from "@/assets/problem-burnout.jpg";
 import problemScale from "@/assets/problem-scale.jpg";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    title: "AI Automation & Growth Agency | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "The Vertex Technologies engineers AI agents, automation and marketing systems that remove bottlenecks and turn companies into scalable revenue engines." },
-      { property: "og:title", content: "AI Automation & Growth Agency | The Vertex Technologies" },
-      { property: "og:description", content: "The Vertex Technologies engineers AI agents, automation and marketing systems that remove bottlenecks and turn companies into scalable revenue engines." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "AI Automation & Growth Agency | The Vertex Technologies",
+      description:
+        "The Vertex Technologies engineers AI agents, automation and marketing systems that remove bottlenecks and turn companies into scalable revenue engines.",
+      url: "https://www.thevertextechnologies.com/",
+    }),
   component: HomePage,
 });
 

@@ -7,27 +7,16 @@ import { Reveal } from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import bannerResources from "@/assets/banner-resources.jpg";
 import { blogPosts, formatBlogDate } from "@/data/blog";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/blog")({
-  head: () => ({
-    title: "Blog | AI, Automation & Growth Insights | The Vertex Technologies",
-    meta: [
-      {
-        name: "description",
-        content:
-          "Practical articles on AI agents, automation, marketing systems and business growth from The Vertex Technologies — actionable insights you can apply today.",
-      },
-      { property: "og:title", content: "Blog | The Vertex Technologies" },
-      {
-        property: "og:description",
-        content:
-          "Practical articles on AI agents, automation, marketing systems and business growth from The Vertex Technologies.",
-      },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/blog" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [{ rel: "canonical", href: "https://www.thevertextechnologies.com/blog" }],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "Blog | AI, Automation & Growth Insights | The Vertex Technologies",
+      description:
+        "Practical articles on AI agents, automation, marketing systems and business growth from The Vertex Technologies — actionable insights you can apply today.",
+      url: "https://www.thevertextechnologies.com/blog",
+    }),
   component: BlogPage,
 });
 
@@ -124,11 +113,11 @@ function BlogPage() {
                     className="group mb-12 block card-tile overflow-hidden bg-card"
                   >
                     <div className="grid lg:grid-cols-2">
-                      <div className="relative aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[360px]">
+                      <div className="relative flex items-center justify-center overflow-hidden bg-[var(--ink)]">
                         <img
                           src={featured.image}
                           alt={featured.title}
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="h-auto w-full object-contain"
                           loading="eager"
                         />
                         <span
@@ -155,10 +144,18 @@ function BlogPage() {
                         <p className="mt-4 leading-relaxed text-muted-foreground">
                           {featured.excerpt}
                         </p>
-                        <span className="mt-7 inline-flex items-center gap-2 font-bold text-[var(--brand-red)]">
-                          Read more
-                          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        </span>
+                        <div className="mt-8 pt-2">
+                          <span
+                            className="inline-flex items-center gap-2 rounded-full px-6 py-3 font-bold text-white transition-all group-hover:-translate-y-0.5"
+                            style={{
+                              background: "var(--brand-red)",
+                              boxShadow: "0 14px 32px -12px rgba(218,72,56,0.55)",
+                            }}
+                          >
+                            Read more
+                            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </Link>

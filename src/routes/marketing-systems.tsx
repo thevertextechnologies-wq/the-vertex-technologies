@@ -6,21 +6,16 @@ import bannerMarketing from "@/assets/banner-marketing.jpg";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import CTASection from "@/components/CTASection";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/marketing-systems")({
-  head: () => ({
-    title: "Performance Marketing Systems | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "The Vertex Technologies engineers performance marketing systems that attract, nurture and convert qualified leads into predictable pipeline and revenue." },
-      { property: "og:title", content: "Performance Marketing Systems | The Vertex Technologies" },
-      { property: "og:description", content: "The Vertex Technologies engineers performance marketing systems that attract, nurture and convert qualified leads into predictable pipeline and revenue." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/marketing-systems" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/marketing-systems" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "Performance Marketing Systems | The Vertex Technologies",
+      description:
+        "The Vertex Technologies engineers performance marketing systems that attract, nurture and convert qualified leads into predictable pipeline and revenue.",
+      url: "https://www.thevertextechnologies.com/marketing-systems",
+    }),
   component: MarketingPage,
 });
 

@@ -18,21 +18,16 @@ import PageLayout from "@/components/PageLayout";
 import PageBanner from "@/components/PageBanner";
 import { Reveal } from "@/components/Reveal";
 import tvtBanner from "@/assets/thevertexinstitute/tvtbanner.jpg";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/the-vertex-institute")({
-  head: () => ({
-    title: "AI & Automation Training | The Vertex Technologies",
-    meta: [
-      { name: "description", content: "The Vertex Institute, by The Vertex Technologies, equips founders and teams with expert AI, automation and growth training, frameworks and research." },
-      { property: "og:title", content: "AI & Automation Training | The Vertex Technologies" },
-      { property: "og:description", content: "The Vertex Institute, by The Vertex Technologies, equips founders and teams with expert AI, automation and growth training, frameworks and research." },
-      { property: "og:url", content: "https://www.thevertextechnologies.com/the-vertex-institute" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "canonical", href: "https://www.thevertextechnologies.com/the-vertex-institute" },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "AI & Automation Training | The Vertex Technologies",
+      description:
+        "The Vertex Institute, by The Vertex Technologies, equips founders and teams with expert AI, automation and growth training, frameworks and research.",
+      url: "https://www.thevertextechnologies.com/the-vertex-institute",
+    }),
   component: TheVertexInstitutePage,
 });
 

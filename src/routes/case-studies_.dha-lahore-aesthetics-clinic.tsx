@@ -15,38 +15,17 @@ import CTASection from "@/components/CTASection";
 import bannerCases from "@/assets/banner-cases.jpg";
 import caseStudyWorkflow from "@/assets/Case studies/case-study-1.png";
 import featuredWhatsappAi from "@/assets/Case Studies Featured Image/the-vertex-technologies-agentic-ai-whatsapp-automation.webp";
+import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/case-studies_/dha-lahore-aesthetics-clinic")({
-  head: () => ({
-    title: "DHA Lahore Aesthetics Clinic WhatsApp AI Agent | The Vertex Technologies",
-    meta: [
-      {
-        name: "description",
-        content:
-          "Case study: how The Vertex Technologies deployed a WhatsApp AI Agent in 72 hours for a DHA Lahore aesthetics clinic — more walk-ins, zero after-hours missed bookings.",
-      },
-      {
-        property: "og:title",
-        content: "DHA Lahore Aesthetics Clinic WhatsApp AI Agent | The Vertex Technologies",
-      },
-      {
-        property: "og:description",
-        content:
-          "How a WhatsApp AI Agent got a DHA Lahore aesthetics clinic more walk-ins and zero after-hours missed bookings in 72 hours.",
-      },
-      {
-        property: "og:url",
-        content: "https://www.thevertextechnologies.com/case-studies/dha-lahore-aesthetics-clinic",
-      },
-      { property: "og:type", content: "article" },
-    ],
-    links: [
-      {
-        rel: "canonical",
-        href: "https://www.thevertextechnologies.com/case-studies/dha-lahore-aesthetics-clinic",
-      },
-    ],
-  }),
+  head: () =>
+    buildSeoHead({
+      title: "DHA Lahore Aesthetics Clinic WhatsApp AI Agent | The Vertex Technologies",
+      description:
+        "Case study: how The Vertex Technologies deployed a WhatsApp AI Agent in 72 hours for a DHA Lahore aesthetics clinic — more walk-ins, zero after-hours missed bookings.",
+      url: "https://www.thevertextechnologies.com/case-studies/dha-lahore-aesthetics-clinic",
+      type: "article",
+    }),
   component: CaseStudyDetailPage,
 });
 
