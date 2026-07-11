@@ -172,9 +172,9 @@ function HomePage() {
     <PageLayout>
       {/* HERO — alternating infinite-scroll image columns */}
       <section className="relative overflow-hidden bg-background">
-        <div className="container-x relative pt-1 md:pt-2 lg:pt-3 pb-10 md:pb-14 lg:pb-16">
-          <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
-            <div className="lg:col-span-7 order-2 lg:order-1">
+        <div className="container-x relative pt-2 pb-10 md:pt-2 md:pb-14 lg:pt-3 lg:pb-16">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start lg:items-center">
+            <div className="lg:col-span-6 order-2 lg:order-1">
               <Reveal>
                 <h1
                   className="font-display text-foreground text-balance"
@@ -226,7 +226,7 @@ function HomePage() {
             </div>
 
             {/* Hero visual: infinite-scroll up/down columns */}
-            <div className="lg:col-span-5 order-1 lg:order-2 w-full max-w-md mx-auto lg:max-w-none">
+            <div className="lg:col-span-6 order-1 lg:order-2 w-full max-w-md mx-auto lg:max-w-none">
               <HeroVisual />
             </div>
           </div>

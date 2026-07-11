@@ -36,11 +36,7 @@ function ScrollColumn({
   const yKeyframes = direction === "up" ? ["0%", "-50%"] : ["-50%", "0%"];
 
   return (
-    <div className="relative overflow-hidden h-[520px] md:h-[600px] lg:h-[640px] rounded-[28px]">
-      {/* fade masks */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-16 z-10 bg-gradient-to-b from-background to-transparent" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 z-10 bg-gradient-to-t from-background to-transparent" />
-
+    <div className="relative overflow-hidden h-[520px] md:h-[600px] lg:h-[calc(100vh-12rem)] lg:max-h-[660px] lg:min-h-[480px] rounded-[28px]">
       <motion.div
         className="flex flex-col gap-4"
         animate={{ y: yKeyframes }}
@@ -78,9 +74,11 @@ function ScrollColumn({
 
 export default function HeroVisual() {
   return (
-    <div className="grid grid-cols-2 gap-3 md:gap-5 select-none">
+    <div className="grid grid-cols-2 gap-3 md:gap-5 select-none items-start">
       <ScrollColumn cards={colA} direction="up" duration={28} />
-      <ScrollColumn cards={colB} direction="down" duration={32} />
+      <div className="mt-8 md:mt-12 lg:mt-16">
+        <ScrollColumn cards={colB} direction="down" duration={32} />
+      </div>
     </div>
   );
 }

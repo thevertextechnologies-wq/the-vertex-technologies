@@ -21,6 +21,7 @@ import { Route as BookACallRouteImport } from './routes/book-a-call'
 import { Route as AiSolutionsRouteImport } from './routes/ai-solutions'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CaseStudiesDhaLahoreAestheticsClinicRouteImport } from './routes/case-studies_.dha-lahore-aesthetics-clinic'
 
 const TheVertexInstituteRoute = TheVertexInstituteRouteImport.update({
   id: '/the-vertex-institute',
@@ -82,6 +83,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseStudiesDhaLahoreAestheticsClinicRoute =
+  CaseStudiesDhaLahoreAestheticsClinicRouteImport.update({
+    id: '/case-studies_/dha-lahore-aesthetics-clinic',
+    path: '/case-studies/dha-lahore-aesthetics-clinic',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
   '/the-vertex-institute': typeof TheVertexInstituteRoute
+  '/case-studies/dha-lahore-aesthetics-clinic': typeof CaseStudiesDhaLahoreAestheticsClinicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,6 +118,7 @@ export interface FileRoutesByTo {
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
   '/the-vertex-institute': typeof TheVertexInstituteRoute
+  '/case-studies/dha-lahore-aesthetics-clinic': typeof CaseStudiesDhaLahoreAestheticsClinicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +134,7 @@ export interface FileRoutesById {
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
   '/the-vertex-institute': typeof TheVertexInstituteRoute
+  '/case-studies_/dha-lahore-aesthetics-clinic': typeof CaseStudiesDhaLahoreAestheticsClinicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/services'
     | '/the-vertex-institute'
+    | '/case-studies/dha-lahore-aesthetics-clinic'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/services'
     | '/the-vertex-institute'
+    | '/case-studies/dha-lahore-aesthetics-clinic'
   id:
     | '__root__'
     | '/'
@@ -169,6 +181,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/services'
     | '/the-vertex-institute'
+    | '/case-studies_/dha-lahore-aesthetics-clinic'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +197,7 @@ export interface RootRouteChildren {
   ResourcesRoute: typeof ResourcesRoute
   ServicesRoute: typeof ServicesRoute
   TheVertexInstituteRoute: typeof TheVertexInstituteRoute
+  CaseStudiesDhaLahoreAestheticsClinicRoute: typeof CaseStudiesDhaLahoreAestheticsClinicRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -272,6 +286,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies_/dha-lahore-aesthetics-clinic': {
+      id: '/case-studies_/dha-lahore-aesthetics-clinic'
+      path: '/case-studies/dha-lahore-aesthetics-clinic'
+      fullPath: '/case-studies/dha-lahore-aesthetics-clinic'
+      preLoaderRoute: typeof CaseStudiesDhaLahoreAestheticsClinicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -288,6 +309,8 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRoute: ResourcesRoute,
   ServicesRoute: ServicesRoute,
   TheVertexInstituteRoute: TheVertexInstituteRoute,
+  CaseStudiesDhaLahoreAestheticsClinicRoute:
+    CaseStudiesDhaLahoreAestheticsClinicRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -49,6 +49,12 @@ export const ROUTE_META: Record<string, SeoMeta> = {
       "See how The Vertex Technologies uses AI agents, automation and marketing systems to cut manual work, grow pipeline and deliver measurable client results.",
     url: `${SITE_URL}/case-studies`,
   },
+  "/case-studies/dha-lahore-aesthetics-clinic": {
+    title: "DHA Lahore Aesthetics Clinic WhatsApp AI Agent | The Vertex Technologies",
+    description:
+      "Case study: how The Vertex Technologies deployed a WhatsApp AI Agent in 72 hours for a DHA Lahore aesthetics clinic — more walk-ins, zero after-hours missed bookings.",
+    url: `${SITE_URL}/case-studies/dha-lahore-aesthetics-clinic`,
+  },
   "/portfolio": {
     title: "AI & Automation Portfolio | The Vertex Technologies",
     description:
