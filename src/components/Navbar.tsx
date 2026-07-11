@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, ChevronDown, ArrowUpRight, Bot, LineChart, Compass, Workflow, Sparkles, MessageSquare, Moon, Sun } from "lucide-react";
 import logo from "@/assets/vertex-logo.png";
@@ -73,6 +73,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [open, setOpen] = useState<MegaKey | null>(null);
+  const [mobileAccordion, setMobileAccordion] = useState<string | null>(null);
   const [hoverIdx, setHoverIdx] = useState(0);
   const [theme, setTheme] = useState<Theme>("light");
   const [themeReady, setThemeReady] = useState(false);
@@ -85,7 +86,19 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    const root = document.documentElement;
+    if (mobileOpen) {
+      root.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+    } else {
+      root.style.overflow = "";
+      document.body.style.overflow = "";
+      setMobileAccordion(null);
+    }
+    return () => {
+      root.style.overflow = "";
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   useEffect(() => {
@@ -460,9 +473,9 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background lg:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
           >
-            <div className="container-x flex h-[72px] items-center justify-between">
+            <div className="container-x flex h-[72px] shrink-0 items-center justify-between border-b border-border">
               <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
                 <img src={theme === "dark" ? blackLogo : logo} alt="The Vertex Technologies" className="h-9 w-auto" />
               </Link>
@@ -484,15 +497,13 @@ export default function Navbar() {
                 </button>
               </div>
             </div>
-            <div className="container-x py-6 space-y-1 overflow-y-auto h-[calc(100dvh-72px)]">
+            <div className="container-x flex-1 space-y-1 overflow-y-auto overscroll-contain pt-6 pb-28">
               {[
                 { label: "Home", to: "/" },
-                { label: "About", to: "/about" },
                 { label: "Portfolio", to: "/portfolio" },
                 { label: "Case Studies", to: "/case-studies" },
                 { label: "Resources", to: "/resources" },
                 { label: "Blog", to: "/blog" },
-                { label: "Contact", to: "/contact" },
               ].map((l) => (
                 <Link
                   key={l.to}
@@ -503,10 +514,14 @@ export default function Navbar() {
                   {l.label}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-border mt-4">
-                <p className="text-xs uppercase tracking-wider text-muted-foreground mb-3">
-                  Services
-                </p>
+
+              <MobileAccordion
+                title="Services"
+                isOpen={mobileAccordion === "services"}
+                onToggle={() =>
+                  setMobileAccordion((c) => (c === "services" ? null : "services"))
+                }
+              >
                 {services.map((s) => (
                   <Link
                     key={s.title}
@@ -518,19 +533,102 @@ export default function Navbar() {
                     <span className="text-base font-medium">{s.title}</span>
                   </Link>
                 ))}
-              </div>
+              </MobileAccordion>
+
+              <MobileAccordion
+                title="Industries"
+                isOpen={mobileAccordion === "industries"}
+                onToggle={() =>
+                  setMobileAccordion((c) => (c === "industries" ? null : "industries"))
+                }
+              >
+                {industries.map((i) => (
+                  <Link
+                    key={i.title}
+                    to="/case-studies"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3 py-2.5"
+                  >
+                    <i.icon className="h-5 w-5 text-[var(--brand-red)]" />
+                    <span className="text-base font-medium">{i.title}</span>
+                  </Link>
+                ))}
+              </MobileAccordion>
+
+              <MobileAccordion
+                title="Why Us"
+                isOpen={mobileAccordion === "why"}
+                onToggle={() => setMobileAccordion((c) => (c === "why" ? null : "why"))}
+              >
+                {whyUs.map((w) => (
+                  <Link
+                    key={w.title}
+                    to={w.to}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-3 py-2.5"
+                  >
+                    <w.icon className="h-5 w-5 text-[var(--brand-red)]" />
+                    <span className="text-base font-medium">{w.title}</span>
+                  </Link>
+                ))}
+              </MobileAccordion>
+
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-base font-semibold text-white mt-6"
+                className="mt-6 mb-2 inline-flex w-full items-center justify-center rounded-full px-6 py-3.5 text-base font-semibold text-white"
                 style={{ background: "var(--brand-red)" }}
               >
                 Contact Us
               </Link>
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>
     </header>
+  );
+}
+
+function MobileAccordion({
+  title,
+  isOpen,
+  onToggle,
+  children,
+}: {
+  title: string;
+  isOpen: boolean;
+  onToggle: () => void;
+  children: ReactNode;
+}) {
+  return (
+    <div className="mt-4 border-t border-border pt-4">
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="flex w-full items-center justify-between py-1"
+      >
+        <span className="text-xs uppercase tracking-wider text-muted-foreground">{title}</span>
+        <ChevronDown
+          className={`h-4 w-4 text-muted-foreground transition-transform ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="pt-1">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

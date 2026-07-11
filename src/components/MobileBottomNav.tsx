@@ -4,8 +4,8 @@ import { Home, Layers, Briefcase, Phone, BookOpen } from "lucide-react";
 const items = [
   { to: "/", label: "Home", icon: Home },
   { to: "/services", label: "Services", icon: Layers },
-  { to: "/case-studies", label: "Work", icon: Briefcase },
-  { to: "/resources", label: "Blog", icon: BookOpen },
+  { to: "/case-studies", label: "Case Studies", icon: Briefcase },
+  { to: "/blog", label: "Blog", icon: BookOpen },
   { to: "/contact", label: "Contact", icon: Phone },
 ] as const;
 
@@ -25,11 +25,11 @@ export default function MobileBottomNav() {
             <li key={it.to}>
               <Link
                 to={it.to}
-                className="flex flex-col items-center justify-center gap-1 py-2.5 transition-colors"
+                className="flex h-full flex-col items-center justify-start gap-1 px-1 py-2.5 transition-colors"
                 style={{ color: active ? "var(--brand-red)" : "var(--foreground)" }}
               >
-                <Icon className="h-5 w-5" strokeWidth={active ? 2.4 : 1.8} />
-                <span className="text-[10px] font-semibold tracking-wide uppercase">
+                <Icon className="h-5 w-5 shrink-0" strokeWidth={active ? 2.4 : 1.8} />
+                <span className="text-center text-[10px] font-semibold uppercase leading-tight tracking-wide">
                   {it.label}
                 </span>
               </Link>
