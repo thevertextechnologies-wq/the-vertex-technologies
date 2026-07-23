@@ -1,6 +1,13 @@
 import blogBookingFeatured from "@/assets/Blog Images/Blog Featured Images/Ai Booking automation blog.webp";
 import blogBookingImg1 from "@/assets/Blog Images/Ai booking automation system blog image 1.webp";
 import blogBookingImg2 from "@/assets/Blog Images/Ai booking automation blog image 2.webp";
+import blogVoiceFeatured from "@/assets/Blog Images/Blog Featured Images/ai voice agents for healthcare clinics featured image.webp";
+import { aiVoiceAgentsHealthcareContent } from "@/data/blog/ai-voice-agents-healthcare-clinics-content";
+
+export type BlogFaq = {
+  question: string;
+  answer: string;
+};
 
 export type BlogBlock = {
   heading?: string;
@@ -8,6 +15,7 @@ export type BlogBlock = {
   level?: 2 | 3 | 4;
   paras?: string[];
   bullets?: string[];
+  faqs?: BlogFaq[];
   image?: { src: string; alt: string; caption?: string };
 };
 
@@ -27,6 +35,23 @@ export type BlogPost = {
 };
 
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "ai-voice-agents-healthcare-clinics",
+    title: "AI Voice Agents for Healthcare Clinics: The Complete 2026 Implementation Guide",
+    excerpt:
+      "How US clinics deploy AI voice agents that book appointments and cut no-shows — with real costs, HIPAA and TCPA rules, ROI math, and the 90-day rollout plan.",
+    category: "AI Voice Agents",
+    date: "2026-07-23",
+    readTime: "42 min read",
+    author: "The Vertex Technologies",
+    image: blogVoiceFeatured,
+    imageAlt:
+      "Clinic front desk staff reviewing an AI voice agent call dashboard showing booked appointments and escalations",
+    metaTitle: "AI Voice Agents for Healthcare Clinics: 2026 Guide",
+    metaDescription:
+      "How US clinics deploy AI voice agents that book appointments and cut no-shows — with real costs, HIPAA and TCPA rules, ROI math, and the 90-day rollout plan.",
+    content: aiVoiceAgentsHealthcareContent,
+  },
   {
     slug: "ai-booking-automation-aesthetics-clinics-case-study",
     title:
@@ -174,110 +199,82 @@ export const blogPosts: BlogPost[] = [
       {
         heading: "Frequently Asked Questions",
         level: 2,
-      },
-      {
-        heading: "How long does it take to set up AI booking automation for an aesthetics clinic?",
-        level: 3,
-        paras: [
-          "A focused build — AI messaging, calendar sync, and reminders — can go live in as little as 72 hours, as in this case study. More complex builds involving deposit collection or EMR integration typically take one to two weeks.",
-        ],
-      },
-      {
-        heading: "Will an AI receptionist replace my front-desk staff?",
-        level: 3,
-        paras: [
-          "No. It handles repetitive, after-hours, and overflow inquiries so staff can focus on in-clinic patients and anything requiring clinical judgment or a personal touch.",
-        ],
-      },
-      {
-        heading: "Does this work with the booking software my clinic already uses?",
-        level: 3,
-        paras: [
-          "Most systems connect through existing calendar and CRM integrations rather than replacing them, so the clinic keeps its current software while automation handles the busywork around it.",
-        ],
-      },
-      {
-        heading: "What's the biggest driver of ROI — fewer no-shows or more after-hours bookings?",
-        level: 3,
-        paras: [
-          "Both matter, but for most clinics the after-hours capture has the bigger immediate impact, since it turns previously lost leads into booked revenue rather than just protecting revenue that was already scheduled.",
-        ],
-      },
-      {
-        heading: "How much does AI booking automation cost for a clinic?",
-        level: 3,
-        paras: [
-          "Cost depends on the number of channels, the complexity of the booking rules, and whether you need extras like deposits or EMR integration. A focused single-location build is far more affordable than most clinics expect — and because it protects revenue that was previously lost after hours, it typically pays for itself well before the first quarter is over.",
-        ],
-      },
-      {
-        heading: "Is patient data handled securely?",
-        level: 3,
-        paras: [
-          "Yes. The system uses the official APIs of the messaging platforms and your calendar or CRM, and sensitive information is only stored where your existing tools already store it. We configure access controls and data-handling rules during setup, and we can align the build with the privacy requirements your clinic operates under.",
-        ],
-      },
-      {
-        heading: "Can the AI handle WhatsApp, Instagram, and website chat at the same time?",
-        level: 3,
-        paras: [
-          "Yes. Every channel feeds into one automation backbone, so a patient can start on Instagram, continue on WhatsApp, and still receive a single, consistent booking experience. Your team never has to jump between separate inboxes to piece a conversation together.",
-        ],
-      },
-      {
-        heading: "What happens when the AI can't answer a question?",
-        level: 3,
-        paras: [
-          "The agent is built to recognise when a query needs a human — anything involving clinical judgment, complex medical history, or a sensitive request. In those cases it collects the key details and hands the conversation off to your staff, so the patient is never left stuck and nothing important is missed.",
-        ],
-      },
-      {
-        heading: "Can it collect deposits or payments at the time of booking?",
-        level: 3,
-        paras: [
-          "Yes, though this is usually a phase-two addition. Deposit collection is one of the most effective ways to cut no-shows for high-ticket treatments, and it can be layered onto the booking flow once the core system is live and stable.",
-        ],
-      },
-      {
-        heading: "Will the AI sound robotic to my patients?",
-        level: 3,
-        paras: [
-          "No. A big part of the build is tuning the tone so it matches your clinic's voice — warm, professional, and on-brand. Most patients simply experience it as a fast, helpful reply, and complex or personal moments are handed to your team so the human touch is preserved where it matters.",
-        ],
-      },
-      {
-        heading: "What languages can the AI receptionist handle?",
-        level: 3,
-        paras: [
-          "The AI can understand and respond in multiple languages, which is especially useful in markets where patients switch between English and a local language mid-conversation. We configure the primary languages your clinic serves during setup.",
-        ],
-      },
-      {
-        heading: "Do I need to change my current booking or calendar software?",
-        level: 3,
-        paras: [
-          "In most cases, no. The automation connects to the calendar and CRM you already use rather than replacing them, so your staff keeps working in familiar tools while the system handles the repetitive scheduling work around them.",
-        ],
-      },
-      {
-        heading: "How do we measure whether it's actually working?",
-        level: 3,
-        paras: [
-          "We track a small set of metrics that map directly to revenue: response time, number of after-hours inquiries captured, bookings created by the agent, and no-show rate before versus after launch. These numbers make it easy to see the return rather than guess at it.",
-        ],
-      },
-      {
-        heading: "Does this only work for large clinics or chains?",
-        level: 3,
-        paras: [
-          "Not at all. Single-location clinics often see the fastest impact, because even one owner-operator can't personally answer messages at midnight. The system gives a small practice the same always-on responsiveness that used to require a large front-desk team.",
-        ],
-      },
-      {
-        heading: "What do we need to provide to get started?",
-        level: 3,
-        paras: [
-          "Very little to begin: access to your messaging channels and calendar, your treatment and pricing information, and answers to your most common patient questions. From there, we handle the mapping, building, testing, and launch.",
+        faqs: [
+          {
+            question: "How long does it take to set up AI booking automation for an aesthetics clinic?",
+            answer:
+              "A focused build — AI messaging, calendar sync, and reminders — can go live in as little as 72 hours, as in this case study. More complex builds involving deposit collection or EMR integration typically take one to two weeks.",
+          },
+          {
+            question: "Will an AI receptionist replace my front-desk staff?",
+            answer:
+              "No. It handles repetitive, after-hours, and overflow inquiries so staff can focus on in-clinic patients and anything requiring clinical judgment or a personal touch.",
+          },
+          {
+            question: "Does this work with the booking software my clinic already uses?",
+            answer:
+              "Most systems connect through existing calendar and CRM integrations rather than replacing them, so the clinic keeps its current software while automation handles the busywork around it.",
+          },
+          {
+            question: "What's the biggest driver of ROI — fewer no-shows or more after-hours bookings?",
+            answer:
+              "Both matter, but for most clinics the after-hours capture has the bigger immediate impact, since it turns previously lost leads into booked revenue rather than just protecting revenue that was already scheduled.",
+          },
+          {
+            question: "How much does AI booking automation cost for a clinic?",
+            answer:
+              "Cost depends on the number of channels, the complexity of the booking rules, and whether you need extras like deposits or EMR integration. A focused single-location build is far more affordable than most clinics expect — and because it protects revenue that was previously lost after hours, it typically pays for itself well before the first quarter is over.",
+          },
+          {
+            question: "Is patient data handled securely?",
+            answer:
+              "Yes. The system uses the official APIs of the messaging platforms and your calendar or CRM, and sensitive information is only stored where your existing tools already store it. We configure access controls and data-handling rules during setup, and we can align the build with the privacy requirements your clinic operates under.",
+          },
+          {
+            question: "Can the AI handle WhatsApp, Instagram, and website chat at the same time?",
+            answer:
+              "Yes. Every channel feeds into one automation backbone, so a patient can start on Instagram, continue on WhatsApp, and still receive a single, consistent booking experience. Your team never has to jump between separate inboxes to piece a conversation together.",
+          },
+          {
+            question: "What happens when the AI can't answer a question?",
+            answer:
+              "The agent is built to recognise when a query needs a human — anything involving clinical judgment, complex medical history, or a sensitive request. In those cases it collects the key details and hands the conversation off to your staff, so the patient is never left stuck and nothing important is missed.",
+          },
+          {
+            question: "Can it collect deposits or payments at the time of booking?",
+            answer:
+              "Yes, though this is usually a phase-two addition. Deposit collection is one of the most effective ways to cut no-shows for high-ticket treatments, and it can be layered onto the booking flow once the core system is live and stable.",
+          },
+          {
+            question: "Will the AI sound robotic to my patients?",
+            answer:
+              "No. A big part of the build is tuning the tone so it matches your clinic's voice — warm, professional, and on-brand. Most patients simply experience it as a fast, helpful reply, and complex or personal moments are handed to your team so the human touch is preserved where it matters.",
+          },
+          {
+            question: "What languages can the AI receptionist handle?",
+            answer:
+              "The AI can understand and respond in multiple languages, which is especially useful in markets where patients switch between English and a local language mid-conversation. We configure the primary languages your clinic serves during setup.",
+          },
+          {
+            question: "Do I need to change my current booking or calendar software?",
+            answer:
+              "In most cases, no. The automation connects to the calendar and CRM you already use rather than replacing them, so your staff keeps working in familiar tools while the system handles the repetitive scheduling work around them.",
+          },
+          {
+            question: "How do we measure whether it's actually working?",
+            answer:
+              "We track a small set of metrics that map directly to revenue: response time, number of after-hours inquiries captured, bookings created by the agent, and no-show rate before versus after launch. These numbers make it easy to see the return rather than guess at it.",
+          },
+          {
+            question: "Does this only work for large clinics or chains?",
+            answer:
+              "Not at all. Single-location clinics often see the fastest impact, because even one owner-operator can't personally answer messages at midnight. The system gives a small practice the same always-on responsiveness that used to require a large front-desk team.",
+          },
+          {
+            question: "What do we need to provide to get started?",
+            answer:
+              "Very little to begin: access to your messaging channels and calendar, your treatment and pricing information, and answers to your most common patient questions. From there, we handle the mapping, building, testing, and launch.",
+          },
         ],
       },
       {

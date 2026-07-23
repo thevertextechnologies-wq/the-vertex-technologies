@@ -5,6 +5,7 @@ import { Reveal } from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
 import { blogPosts, getBlogPost, formatBlogDate } from "@/data/blog";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import BlogFaqAccordion from "@/components/BlogFaqAccordion";
 import { buildSeoHead, SITE_URL, DEFAULT_OG_IMAGE } from "@/seo/metadata";
 
 export const Route = createFileRoute("/blog_/$slug")({
@@ -119,13 +120,13 @@ function BlogPostPage() {
         </section>
 
         {/* COVER IMAGE */}
-        <section className="container-x -mt-8 md:-mt-12">
+        <section className="container-x relative z-10 mt-8 scroll-mt-28 md:mt-10">
           <Reveal>
-            <div className="mx-auto max-w-4xl overflow-hidden rounded-3xl border border-border bg-[var(--ink)] shadow-xl">
+            <div className="mx-auto max-w-4xl rounded-3xl border border-border bg-[var(--ink)] shadow-xl">
               <img
                 src={post.image}
                 alt={post.imageAlt ?? post.title}
-                className="aspect-[16/9] w-full object-contain"
+                className="block w-full h-auto rounded-3xl"
                 loading="eager"
               />
             </div>
@@ -184,13 +185,14 @@ function BlogPostPage() {
                           ))}
                         </ul>
                       )}
+                      {block.faqs && <BlogFaqAccordion faqs={block.faqs} />}
                       {block.image && (
                         <figure className="mt-7">
                           <div className="overflow-hidden rounded-2xl border border-border shadow-lg">
                             <img
                               src={block.image.src}
                               alt={block.image.alt}
-                              className="w-full object-cover"
+                              className="block w-full h-auto object-contain"
                               loading="lazy"
                             />
                           </div>
@@ -246,11 +248,11 @@ function BlogPostPage() {
                     params={{ slug: p.slug }}
                     className="group flex overflow-hidden card-tile bg-card"
                   >
-                    <div className="relative w-32 shrink-0 overflow-hidden sm:w-40">
+                    <div className="relative w-36 shrink-0 overflow-hidden bg-[var(--ink)] sm:w-44">
                       <img
                         src={p.image}
                         alt={p.title}
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="h-full w-full object-contain object-center"
                         loading="lazy"
                       />
                     </div>

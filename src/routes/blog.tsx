@@ -172,11 +172,11 @@ function BlogPage() {
                         params={{ slug: post.slug }}
                         className="group flex h-full flex-col overflow-hidden card-tile bg-card"
                       >
-                        <div className="relative aspect-[16/10] overflow-hidden">
+                        <div className="relative flex min-h-[180px] items-center justify-center overflow-hidden bg-[var(--ink)] sm:min-h-[200px]">
                           <img
                             src={post.image}
                             alt={post.title}
-                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="h-auto w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                             loading="lazy"
                           />
                           <span className="absolute left-3 top-3 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">

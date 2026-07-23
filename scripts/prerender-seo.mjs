@@ -23,6 +23,83 @@ const PUBLISHER = {
 
 const blogPostUrl = `${SITE}/blog/ai-booking-automation-aesthetics-clinics-case-study`;
 
+const voiceAgentsBlogPostUrl = `${SITE}/blog/ai-voice-agents-healthcare-clinics`;
+
+const voiceAgentsBlogPostFaqs = [
+  [
+    "Is an AI voice agent HIPAA compliant?",
+    "Not inherently. If the agent handles protected health information, the vendor is a business associate under HHS rules and a signed Business Associate Agreement is required, along with appropriate safeguards, breach notification, and flow-down obligations to subcontractors. Because a voice stack typically involves several vendors, the critical question is which subprocessors the BAA covers.",
+  ],
+  [
+    "How much does an AI voice agent cost for a clinic?",
+    "Raw production cost typically runs $0.07 to $0.30 per minute across telephony, speech processing, model inference, and orchestration. A single-location clinic handling around 1,200 inbound minutes per month usually lands between $300 and $900 monthly for a managed deployment, plus a one-time build and integration fee of roughly $1,500 to $8,000.",
+  ],
+  [
+    "Do I need patient consent to use an AI voice agent?",
+    "For inbound calls the patient initiated, standard practice notices generally apply. For outbound automated calls, the FCC's February 2024 declaratory ruling placed AI-generated voices within the TCPA's artificial or prerecorded voice rules, which carry prior express consent, identification, and opt-out obligations. Clinics running outbound reminders, recall, or marketing campaigns should have consent language reviewed by counsel.",
+  ],
+  [
+    "Does the AI have to tell patients it is an AI?",
+    "In several states, yes, for certain communication types. California's AB 3030 requires a disclaimer plus human-contact instructions when generative AI produces patient communications about clinical information, with the audio disclaimer delivered verbally at the start and end of the interaction. Utah's AI Policy Act imposes disclosure obligations for regulated occupations, and Texas's TRAIGA took effect January 1, 2026.",
+  ],
+  [
+    "Will an AI voice agent reduce patient no-shows?",
+    "It can, but the mechanism matters. One-way reminders have not solved no-shows industry-wide. The improvement comes from two-way outreach that reschedules the patient into a live open slot during the same interaction, rather than simply reminding them of an appointment they already know they cannot attend.",
+  ],
+  [
+    "Can an AI voice agent book directly into my practice management system?",
+    "Only if the practice management system exposes an API that supports writing appointments and respects provider-level scheduling rules. Modern cloud schedulers generally do; older server-based systems often do not, in which case the options are middleware, a synced intermediate calendar, or scoping the agent to capture-and-transfer only.",
+  ],
+  [
+    "What happens if someone calls with a medical emergency?",
+    "A properly designed agent detects emergency language and immediately instructs the caller to hang up and dial 911, then triggers alerts to on-call staff and logs the event. This branch should be built and tested before any other functionality and re-tested on every release.",
+  ],
+  [
+    "Will an AI voice agent replace my receptionist?",
+    "Usually not. It absorbs the repetitive majority of call volume such as booking, rescheduling, hours, directions, and insurance questions, which frees front-desk staff for in-person patient experience and complex cases. Most clinics use it to gain capacity without adding headcount rather than to reduce existing staff.",
+  ],
+];
+
+const voiceAgentsBlogPostJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline:
+      "AI Voice Agents for Healthcare Clinics: The Complete 2026 Implementation Guide",
+    description:
+      "How US clinics deploy AI voice agents that book appointments and cut no-shows — with real costs, HIPAA and TCPA compliance, ROI modeling, and a 90-day rollout plan.",
+    image: OG_IMAGE,
+    datePublished: "2026-07-23",
+    dateModified: "2026-07-23",
+    author: { "@type": "Organization", name: "The Vertex Technologies" },
+    publisher: PUBLISHER,
+    mainEntityOfPage: { "@type": "WebPage", "@id": voiceAgentsBlogPostUrl },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE}/blog` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "AI Voice Agents for Healthcare Clinics",
+        item: voiceAgentsBlogPostUrl,
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: voiceAgentsBlogPostFaqs.map(([q, a]) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  },
+];
+
 const blogPostFaqs = [
   [
     "How long does it take to set up AI booking automation for an aesthetics clinic?",
@@ -256,6 +333,15 @@ const routes = [
     description:
       "Practical articles on AI agents, automation, marketing systems and business growth from The Vertex Technologies — actionable insights you can apply today.",
     url: "https://www.thevertextechnologies.com/blog",
+  },
+  {
+    path: "/blog/ai-voice-agents-healthcare-clinics",
+    title: "AI Voice Agents for Healthcare Clinics: 2026 Guide | The Vertex Technologies",
+    description:
+      "How US clinics deploy AI voice agents that book appointments and cut no-shows — with real costs, HIPAA and TCPA rules, ROI math, and the 90-day rollout plan.",
+    url: "https://www.thevertextechnologies.com/blog/ai-voice-agents-healthcare-clinics",
+    type: "article",
+    jsonLd: voiceAgentsBlogPostJsonLd,
   },
   {
     path: "/blog/ai-booking-automation-aesthetics-clinics-case-study",

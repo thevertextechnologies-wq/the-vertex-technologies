@@ -50,8 +50,14 @@
   </url>
   <url>
     <loc>https://www.thevertextechnologies.com/blog</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.thevertextechnologies.com/blog/ai-voice-agents-healthcare-clinics</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
