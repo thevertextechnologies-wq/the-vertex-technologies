@@ -1,8 +1,10 @@
 import blogBookingFeatured from "@/assets/Blog Images/Blog Featured Images/Ai Booking automation blog.webp";
 import blogBookingImg1 from "@/assets/Blog Images/Ai booking automation system blog image 1.webp";
 import blogBookingImg2 from "@/assets/Blog Images/Ai booking automation blog image 2.webp";
-import blogVoiceFeatured from "@/assets/Blog Images/Blog Featured Images/ai voice agents for healthcare clinics featured image.webp";
+import blogVoiceFeatured from "@/assets/Blog Images/Blog Featured Images/ai voice agents for healthcare clinics featured image 1.webp";
 import { aiVoiceAgentsHealthcareContent } from "@/data/blog/ai-voice-agents-healthcare-clinics-content";
+import { whatIsAgenticAiContent } from "@/data/blog/what-is-agentic-ai-content";
+import blogAgenticFeatured from "@/assets/Case Studies Featured Image/the-vertex-technologies-agentic-ai-whatsapp-automation.webp";
 
 export type BlogFaq = {
   question: string;
@@ -51,6 +53,23 @@ export const blogPosts: BlogPost[] = [
     metaDescription:
       "How US clinics deploy AI voice agents that book appointments and cut no-shows — with real costs, HIPAA and TCPA rules, ROI math, and the 90-day rollout plan.",
     content: aiVoiceAgentsHealthcareContent,
+  },
+  {
+    slug: "what-is-agentic-ai",
+    title: "What Is Agentic AI? A Business Owner's Guide for 2026",
+    excerpt:
+      "Agentic AI explained for business owners: what \"agentic\" really means, where it makes money, why 40% of projects fail, and how to deploy one that works.",
+    category: "AI Automation",
+    date: "2026-07-23",
+    readTime: "28 min read",
+    author: "The Vertex Technologies",
+    image: blogAgenticFeatured,
+    imageAlt:
+      "Diagram-style illustration contrasting a chatbot that answers with an AI agent that completes a multi-step business task",
+    metaTitle: "What Is Agentic AI? A Business Owner's Guide 2026",
+    metaDescription:
+      "Agentic AI explained for business owners: what \"agentic\" really means, where it makes money, why 40% of projects fail, and how to deploy one that works.",
+    content: whatIsAgenticAiContent,
   },
   {
     slug: "ai-booking-automation-aesthetics-clinics-case-study",

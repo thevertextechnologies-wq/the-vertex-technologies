@@ -1,5 +1,6 @@
 import type { BlogBlock } from "../blog";
-import blogVoiceContent from "@/assets/Blog Images/ai voice agents for healthcare clinics content image.webp";
+import blogVoiceContent1 from "@/assets/Blog Images/ai voice agents for healthcare clinics content image 2blog 3.webp";
+import blogVoiceContent2 from "@/assets/Blog Images/ai voice agents for healthcare clinics content image 2 blog 3.webp";
 
 export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
   {
@@ -144,7 +145,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
       "Caller → Telephony (SIP / PSTN / WebRTC) → Speech-to-Text (streaming, partial transcripts) → Turn detection / endpointing → Orchestration layer (system prompt + guardrails, RAG over clinic knowledge, conversation state, LLM reasoning) → Tool calls out to practice management / scheduler, insurance eligibility API, CRM / lead record, SMS / payment link, human transfer → Text-to-Speech (streaming) → Caller.",
     ],
     image: {
-      src: blogVoiceContent,
+      src: blogVoiceContent1,
       alt: "Architecture diagram showing how an AI voice agent processes a clinic phone call from telephony through speech recognition, orchestration, and practice management system integration",
       caption: "The real-time loop: telephony → STT → orchestration (with PMS/CRM tool calls) → TTS → caller.",
     },
@@ -236,6 +237,11 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
     paras: [
       "This is the section most agency blogs omit, and it is the section that determines whether your deployment is an asset or a liability. None of what follows is legal advice — engage healthcare counsel before launch.",
     ],
+    image: {
+      src: blogVoiceContent2,
+      alt: "Layered diagram of HIPAA, TCPA, and state AI disclosure requirements for healthcare AI voice agents",
+      caption: "Compliance stack: HIPAA/BAA, TCPA outbound consent, and state AI disclosure (CA, UT, TX).",
+    },
   },
   {
     heading: "5.1 HIPAA and the BAA",

@@ -25,6 +25,74 @@ const blogPostUrl = `${SITE}/blog/ai-booking-automation-aesthetics-clinics-case-
 
 const voiceAgentsBlogPostUrl = `${SITE}/blog/ai-voice-agents-healthcare-clinics`;
 
+const agenticAiBlogPostUrl = `${SITE}/blog/what-is-agentic-ai`;
+
+const agenticAiBlogPostFaqs = [
+  [
+    "What is agentic AI in simple terms?",
+    "Agentic AI is software that pursues a goal on its own — it plans the steps, uses your business tools to carry them out, checks the result, and adjusts, instead of waiting for a person to instruct it at each step. A chatbot answers a question; an agent completes a task.",
+  ],
+  [
+    "What's the difference between agentic AI and a chatbot?",
+    "A chatbot responds to messages and takes no action in your systems. An agent pursues a goal across multiple steps and actually does things such as booking an appointment, updating the CRM, or sending an invoice. The defining difference is action.",
+  ],
+  [
+    "Why do so many agentic AI projects fail?",
+    "Gartner predicts more than 40% will be cancelled by the end of 2027 because of unclear business value, underestimated costs, and missing governance — not because the technology fails.",
+  ],
+  [
+    "What is agent washing?",
+    "Agent washing is vendors rebranding chatbots, RPA bots, and assistants as AI agents without the underlying capability. If a demo never shows the system taking a real action in a real system, it is likely washed.",
+  ],
+  [
+    "How much does agentic AI cost for a small business?",
+    "Cost has three layers: one-time build and integration, monthly subscription, and variable usage. Integration complexity drives most of the build cost.",
+  ],
+  [
+    "Do I still need humans if I use AI agents?",
+    "Yes, by design. Keep a human on the loop for routine work and in the loop for consequential work. Vendors promising no humans from day one are a red flag.",
+  ],
+];
+
+const agenticAiBlogPostJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: "What Is Agentic AI? A Business Owner's Guide for 2026",
+    description:
+      "Agentic AI explained for business owners: what it means, where it makes money, why 40% of projects fail, and how to deploy one that works.",
+    image: OG_IMAGE,
+    datePublished: "2026-07-23",
+    dateModified: "2026-07-23",
+    author: { "@type": "Organization", name: "The Vertex Technologies" },
+    publisher: PUBLISHER,
+    mainEntityOfPage: { "@type": "WebPage", "@id": agenticAiBlogPostUrl },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Blog", item: `${SITE}/blog` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "What Is Agentic AI?",
+        item: agenticAiBlogPostUrl,
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: agenticAiBlogPostFaqs.map(([q, a]) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  },
+];
+
 const voiceAgentsBlogPostFaqs = [
   [
     "Is an AI voice agent HIPAA compliant?",
@@ -342,6 +410,15 @@ const routes = [
     url: "https://www.thevertextechnologies.com/blog/ai-voice-agents-healthcare-clinics",
     type: "article",
     jsonLd: voiceAgentsBlogPostJsonLd,
+  },
+  {
+    path: "/blog/what-is-agentic-ai",
+    title: "What Is Agentic AI? A Business Owner's Guide 2026 | The Vertex Technologies",
+    description:
+      "Agentic AI explained for business owners: what \"agentic\" really means, where it makes money, why 40% of projects fail, and how to deploy one that works.",
+    url: "https://www.thevertextechnologies.com/blog/what-is-agentic-ai",
+    type: "article",
+    jsonLd: agenticAiBlogPostJsonLd,
   },
   {
     path: "/blog/ai-booking-automation-aesthetics-clinics-case-study",
