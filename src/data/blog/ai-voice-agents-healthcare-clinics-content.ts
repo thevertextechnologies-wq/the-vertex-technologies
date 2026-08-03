@@ -696,8 +696,17 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
     paras: [
       "The clinics that get value from AI voice agents in 2026 are not the ones with the best models. They are the ones that measured a baseline before they bought, scoped to three intents, got the integration and the BAA right, and put one named person in charge of reviewing transcripts.",
       "The Vertex Technologies builds and manages AI voice agents, AI chatbots, and connected automation systems for US clinics and service businesses — integrated with your practice management system, governed by a written escalation policy, and measured against a real baseline.",
-      "Book a call for a call-flow and integration assessment — we'll tell you honestly which build path fits, and whether your PMS can support booking at all. Start with the audit, not the agent. Pull your 90-day call data first.",
       "This article is operational and commercial guidance, not legal advice. HIPAA, TCPA, and state AI disclosure obligations are fact-specific and change frequently. Engage qualified healthcare counsel before deploying an AI voice agent that contacts patients.",
+    ],
+    relatedLinks: [
+      {
+        slug: "what-is-agentic-ai",
+        label: "What is agentic AI? (business owner's guide)",
+      },
+      {
+        slug: "ai-booking-automation-aesthetics-clinics-case-study",
+        label: "AI booking automation case study — 72-hour deploy",
+      },
     ],
   },
 ];

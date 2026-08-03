@@ -233,9 +233,19 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     heading: "15. Industry Scenarios: Clinic, E-commerce, Service Business",
     level: 2,
     paras: [
-      "Clinic — agent watches phone, web, and messaging; books into live calendar; escalates anything clinical. See also our guide on AI voice agents for healthcare clinics for HIPAA, TCPA, and disclosure depth.",
+      "Clinic — agent watches phone, web, and messaging; books into live calendar; escalates anything clinical. For HIPAA, TCPA, and voice-specific rollout, see our dedicated healthcare voice agents guide (linked below).",
       "E-commerce — support triage plus speed-to-lead on ad enquiries; keep store, CRM, and fulfilment in sync.",
       "Local services — instant after-hours response, quote follow-up, CRM hygiene — work that always slips when the team is busy.",
+    ],
+    relatedLinks: [
+      {
+        slug: "ai-voice-agents-healthcare-clinics",
+        label: "AI voice agents for healthcare clinics",
+      },
+      {
+        slug: "ai-booking-automation-aesthetics-clinics-case-study",
+        label: "AI booking automation for aesthetics clinics",
+      },
     ],
   },
   {
@@ -325,7 +335,16 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     bullets: [
       "Book a call for an automation assessment — we'll identify the highest, safest-return workflow and say honestly whether an agent or a simple rule fits.",
       "Start with the problem, not the tech — bring the workflow costing you the most time.",
-      "Explore: AI Automation · AI Voice Agents · AI Chatbots · AI Customer Support · CRM Integrations",
+    ],
+    relatedLinks: [
+      {
+        slug: "ai-voice-agents-healthcare-clinics",
+        label: "AI voice agents for healthcare clinics",
+      },
+      {
+        slug: "ai-booking-automation-aesthetics-clinics-case-study",
+        label: "AI booking automation case study",
+      },
     ],
   },
 ];

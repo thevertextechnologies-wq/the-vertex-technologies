@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight, Calendar, Clock } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import { Reveal } from "@/components/Reveal";
 import CTASection from "@/components/CTASection";
-import { blogPosts, getBlogPost, formatBlogDate } from "@/data/blog";
+import { getBlogPost, getRelatedBlogPosts, formatBlogDate } from "@/data/blog";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import BlogFaqAccordion from "@/components/BlogFaqAccordion";
 import { buildSeoHead, SITE_URL, DEFAULT_OG_IMAGE } from "@/seo/metadata";
@@ -57,11 +57,8 @@ function BlogPostPage() {
     );
   }
 
-  const related = blogPosts
-    .filter((p) => p.slug !== post.slug && p.category === post.category)
-    .slice(0, 2);
-  const fallbackRelated = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
-  const relatedPosts = related.length > 0 ? related : fallbackRelated;
+  const relatedPosts = getRelatedBlogPosts(post.slug);
+  const pageLinks = post.relatedPageLinks ?? [];
 
   return (
     <PageLayout>
@@ -186,6 +183,22 @@ function BlogPostPage() {
                         </ul>
                       )}
                       {block.faqs && <BlogFaqAccordion faqs={block.faqs} />}
+                      {block.relatedLinks && block.relatedLinks.length > 0 && (
+                        <ul className="mt-5 space-y-2 rounded-2xl border border-border bg-muted/40 p-5 md:p-6">
+                          {block.relatedLinks.map((link) => (
+                            <li key={link.slug}>
+                              <Link
+                                to="/blog/$slug"
+                                params={{ slug: link.slug }}
+                                className="inline-flex items-center gap-2 font-semibold text-[var(--brand-red)] underline-offset-2 hover:underline"
+                              >
+                                {link.label}
+                                <ArrowRight className="h-3.5 w-3.5" />
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                       {block.image && (
                         <figure className="mt-7">
                           <div className="overflow-hidden rounded-2xl border border-border shadow-lg">
@@ -207,6 +220,58 @@ function BlogPostPage() {
                   </Reveal>
                 ))}
               </div>
+
+              {(pageLinks.length > 0 || relatedPosts.length > 0) && (
+                <div className="mt-10 rounded-3xl border border-border bg-card p-7 md:p-9">
+                  <h2
+                    className="font-display text-xl font-bold tracking-tight md:text-2xl"
+                    style={{ color: "var(--brand-blue)" }}
+                  >
+                    Related reading
+                  </h2>
+                  {relatedPosts.length > 0 && (
+                    <div className="mt-5">
+                      <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                        More on our blog
+                      </p>
+                      <ul className="mt-3 space-y-2">
+                        {relatedPosts.map((p) => (
+                          <li key={p.slug}>
+                            <Link
+                              to="/blog/$slug"
+                              params={{ slug: p.slug }}
+                              className="inline-flex items-center gap-2 font-semibold text-foreground/90 hover:text-[var(--brand-red)]"
+                            >
+                              {p.title}
+                              <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {pageLinks.length > 0 && (
+                    <div className={relatedPosts.length > 0 ? "mt-6 border-t border-border pt-6" : "mt-5"}>
+                      <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                        On this site
+                      </p>
+                      <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+                        {pageLinks.map((link) => (
+                          <li key={link.to}>
+                            <Link
+                              to={link.to}
+                              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand-red)] hover:underline"
+                            >
+                              {link.label}
+                              <ArrowRight className="h-3 w-3" />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
 
               <div className="mt-12 rounded-3xl border border-border bg-[var(--surface)] p-7 md:p-9">
                 <p className="font-display text-xl font-bold">Want this built for your business?</p>
@@ -240,7 +305,7 @@ function BlogPostPage() {
             </h2>
 
             {relatedPosts.length > 0 ? (
-              <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {relatedPosts.map((p) => (
                   <Link
                     key={p.slug}

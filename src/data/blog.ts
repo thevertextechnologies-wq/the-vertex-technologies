@@ -19,6 +19,8 @@ export type BlogBlock = {
   bullets?: string[];
   faqs?: BlogFaq[];
   image?: { src: string; alt: string; caption?: string };
+  /** In-article links to other blog posts */
+  relatedLinks?: { slug: string; label: string }[];
 };
 
 export type BlogPost = {
@@ -33,6 +35,10 @@ export type BlogPost = {
   imageAlt?: string;
   metaTitle?: string;
   metaDescription?: string;
+  /** Other blog slugs to surface in related sections (order preserved) */
+  relatedSlugs?: string[];
+  /** Site pages to cross-link from this article */
+  relatedPageLinks?: { to: string; label: string }[];
   content: BlogBlock[];
 };
 
@@ -52,6 +58,15 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "AI Voice Agents for Healthcare Clinics: 2026 Guide",
     metaDescription:
       "How US clinics deploy AI voice agents that book appointments and cut no-shows — with real costs, HIPAA and TCPA rules, ROI math, and the 90-day rollout plan.",
+    relatedSlugs: ["what-is-agentic-ai", "ai-booking-automation-aesthetics-clinics-case-study"],
+    relatedPageLinks: [
+      { to: "/ai-solutions", label: "AI Voice Agents & solutions" },
+      { to: "/book-a-call", label: "Book a free strategy call" },
+      {
+        to: "/case-studies/dha-lahore-aesthetics-clinic",
+        label: "DHA Lahore aesthetics case study",
+      },
+    ],
     content: aiVoiceAgentsHealthcareContent,
   },
   {
@@ -69,6 +84,12 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "What Is Agentic AI? A Business Owner's Guide 2026",
     metaDescription:
       "Agentic AI explained for business owners: what \"agentic\" really means, where it makes money, why 40% of projects fail, and how to deploy one that works.",
+    relatedSlugs: ["ai-voice-agents-healthcare-clinics", "ai-booking-automation-aesthetics-clinics-case-study"],
+    relatedPageLinks: [
+      { to: "/ai-solutions", label: "AI automation services" },
+      { to: "/book-a-call", label: "Book an automation assessment" },
+      { to: "/services", label: "All services" },
+    ],
     content: whatIsAgenticAiContent,
   },
   {
@@ -86,11 +107,30 @@ export const blogPosts: BlogPost[] = [
     metaTitle: "AI Booking Automation for Aesthetics Clinics",
     metaDescription:
       "See how AI booking automation helped an aesthetics clinic capture after-hours leads, boost walk-ins, and hit zero missed bookings in just 72 hours.",
+    relatedSlugs: ["ai-voice-agents-healthcare-clinics", "what-is-agentic-ai"],
+    relatedPageLinks: [
+      {
+        to: "/case-studies/dha-lahore-aesthetics-clinic",
+        label: "Full DHA Lahore case study",
+      },
+      { to: "/book-a-call", label: "Book a call" },
+      { to: "/ai-solutions", label: "AI solutions" },
+    ],
     content: [
       {
         paras: [
           "Most aesthetics clinics don't lose patients in the treatment room — they lose them at 9 p.m. on a Tuesday, when a prospective client is scanning Instagram, has a question about Botox pricing, and gets no reply. By morning, that lead has usually booked somewhere else. That is the exact problem behind this AI booking automation for aesthetics clinics case study: how The Vertex Technologies rebuilt a clinic's entire booking flow — from first inquiry to confirmed appointment — in 72 hours, eliminating after-hours missed bookings and increasing walk-in traffic within the same week.",
           "Below is exactly what was built, how it works, and why the same 72-hour framework applies to any aesthetics or med spa practice losing revenue outside business hours.",
+        ],
+        relatedLinks: [
+          {
+            slug: "what-is-agentic-ai",
+            label: "New to AI agents? Start with our agentic AI guide",
+          },
+          {
+            slug: "ai-voice-agents-healthcare-clinics",
+            label: "Clinics on the phone: healthcare voice agents guide",
+          },
         ],
       },
       {
@@ -300,7 +340,17 @@ export const blogPosts: BlogPost[] = [
         heading: "Ready to Stop Losing Bookings After Hours?",
         level: 2,
         paras: [
-          "The Vertex Technologies builds custom AI booking automation for aesthetics clinics, med spas, and service businesses that can't afford to miss a lead. Explore our case studies to see more of this kind of work, or reach out to see how a 72-hour build could work for your clinic.",
+          "The Vertex Technologies builds custom AI booking automation for aesthetics clinics, med spas, and service businesses that can't afford to miss a lead.",
+        ],
+        relatedLinks: [
+          {
+            slug: "ai-voice-agents-healthcare-clinics",
+            label: "AI voice agents for healthcare clinics (2026 guide)",
+          },
+          {
+            slug: "what-is-agentic-ai",
+            label: "What is agentic AI? A business owner's guide",
+          },
         ],
       },
     ],
@@ -309,6 +359,27 @@ export const blogPosts: BlogPost[] = [
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+/** Related blog posts for a slug — uses relatedSlugs, then fills with any remaining posts */
+export function getRelatedBlogPosts(currentSlug: string): BlogPost[] {
+  const current = getBlogPost(currentSlug);
+  const others = blogPosts.filter((p) => p.slug !== currentSlug);
+  if (!current?.relatedSlugs?.length) return others;
+
+  const ordered: BlogPost[] = [];
+  const seen = new Set<string>();
+  for (const slug of current.relatedSlugs) {
+    const post = getBlogPost(slug);
+    if (post && post.slug !== currentSlug) {
+      ordered.push(post);
+      seen.add(slug);
+    }
+  }
+  for (const post of others) {
+    if (!seen.has(post.slug)) ordered.push(post);
+  }
+  return ordered;
 }
 
 export function formatBlogDate(iso: string): string {
