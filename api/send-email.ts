@@ -309,9 +309,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    if (raw.includes("invalid_client") || raw.includes("client_secret")) {
+    if (raw.includes("invalid_client") || raw.includes("client_secret") || raw.includes("client was not found")) {
       return res.status(500).json({
-        error: "OAuth client ID/secret mismatch",
+        error: "OAuth client ID/secret mismatch or unknown client ID",
         code: "oauth_client_mismatch",
       });
     }

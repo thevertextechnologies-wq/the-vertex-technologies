@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Calendar, CheckCircle2, Clock, Users, Sparkles } from "lucide-react";
+import { CheckCircle2, Users, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
-import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
+import { Reveal } from "@/components/Reveal";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import CalendlyEmbed from "@/components/CalendlyEmbed";
+import { CALENDLY_BOOKING_URL } from "@/config/scheduling";
 import { buildSeoHead } from "@/seo/metadata";
 
 export const Route = createFileRoute("/book-a-call")({
@@ -16,141 +18,126 @@ export const Route = createFileRoute("/book-a-call")({
   component: BookCallPage,
 });
 
-const slots = ["09:00", "10:30", "13:00", "14:30", "16:00", "17:30"];
-
 function BookCallPage() {
-  const today = new Date();
-  const days = Array.from({ length: 7 }, (_, i) => {
-    const d = new Date(today);
-    d.setDate(today.getDate() + i + 1);
-    return d;
-  });
-
   return (
     <PageLayout>
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 gradient-mesh opacity-60" aria-hidden />
-        <div className="container-x relative pt-16 md:pt-24 pb-20">
+      <section className="relative overflow-hidden bg-[var(--ink)] text-[var(--cream)]">
+        <div className="absolute inset-0 gradient-mesh opacity-35" aria-hidden />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[var(--ink)]" aria-hidden />
+        <div className="container-x relative pt-16 md:pt-24 pb-14 md:pb-16">
           <Reveal>
-            <Breadcrumbs tone="dark" className="mb-5" />
+            <Breadcrumbs tone="light" className="mb-5" />
           </Reveal>
           <Reveal>
-            <span className="pill">
+            <span
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white/90"
+            >
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand-green)]" />
               Book a Call
             </span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h1 className="text-display text-[clamp(2.6rem,7vw,5.2rem)] mt-5 max-w-4xl text-balance">
+            <h1 className="mt-5 max-w-4xl font-display text-[clamp(2.2rem,6vw,4.5rem)] font-extrabold leading-[1.05] tracking-tight text-balance">
               A focused strategy session to plan your growth.
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl">
-              Connect with The Vertex Technologies to explore actionable solutions for
-              growth, automation and scalable systems.
+            <p className="mt-6 text-lg md:text-xl text-white/75 max-w-2xl">
+              Pick a time that works for you — you&apos;ll get a calendar invite with a Google
+              Meet link for our 30-minute call.
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="pb-24">
-        <div className="container-x grid lg:grid-cols-12 gap-10">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <div className="card-tile p-7 md:p-10 bg-card">
-                <div className="flex items-center gap-3">
-                  <Calendar className="h-5 w-5 text-[var(--brand-blue)]" />
-                  <h2 className="font-display text-2xl font-bold">Select a date</h2>
-                </div>
-                <Stagger className="mt-6 grid grid-cols-7 gap-2" stagger={0.04}>
-                  {days.map((d, i) => (
-                    <StaggerItem
-                      key={d.toISOString()}
-                      className={`text-center rounded-xl border p-3 cursor-pointer transition-all hover:bg-muted ${
-                        i === 1
-                          ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--cream)]"
-                          : "border-border"
-                      }`}
-                    >
-                      <p className="text-xs uppercase tracking-wider opacity-75">
-                        {d.toLocaleDateString(undefined, { weekday: "short" })}
+      <section className="relative pb-24 bg-[var(--ink)] text-[var(--cream)]">
+        <div className="absolute inset-0 gradient-mesh opacity-20" aria-hidden />
+        <div className="container-x relative grid lg:grid-cols-12 gap-8 lg:gap-10 lg:items-stretch">
+          <div className="lg:col-span-7 flex flex-col">
+            <Reveal className="h-full w-full">
+              <div className="glass-dark flex h-full flex-col overflow-hidden rounded-3xl">
+                <div
+                  className="shrink-0 border-b border-white/10 px-6 py-5 md:px-8"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, color-mix(in oklab, var(--brand-red) 22%, transparent) 0%, transparent 55%)",
+                  }}
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-red)]">
+                        The Vertex Technologies
                       </p>
-                      <p className="font-display text-2xl font-bold mt-1">
-                        {d.getDate()}
+                      <h2 className="mt-1 font-display text-2xl font-bold md:text-3xl text-white">
+                        Free AI strategy call
+                      </h2>
+                      <p className="mt-2 text-sm text-white/65 md:text-base">
+                        30 minutes · Google Meet · Pick a day and time below
                       </p>
-                    </StaggerItem>
-                  ))}
-                </Stagger>
-
-                <div className="mt-10 flex items-center gap-3">
-                  <Clock className="h-5 w-5 text-[var(--brand-orange)]" />
-                  <h3 className="font-display text-xl font-bold">Available times</h3>
-                </div>
-                <Stagger className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {slots.map((s, i) => (
-                    <StaggerItem
-                      key={s}
-                      className={`rounded-xl border p-3 text-center font-medium cursor-pointer transition-all hover:border-[var(--ink)] ${
-                        i === 1 ? "border-[var(--brand-orange)] bg-[var(--brand-orange-soft)]" : "border-border"
-                      }`}
+                    </div>
+                    <a
+                      href={CALENDLY_BOOKING_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex shrink-0 items-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)]"
                     >
-                      {s}
-                    </StaggerItem>
-                  ))}
-                </Stagger>
-
-                <button className="btn-primary mt-10 w-full justify-center text-base">
-                  Confirm Your Call →
-                </button>
-                <p className="text-xs text-muted-foreground text-center mt-3">
-                  This is a placeholder calendar. Real bookings can be wired to your
-                  scheduling tool of choice.
-                </p>
+                      Open full page ↗
+                    </a>
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col p-4 md:p-5">
+                  <CalendlyEmbed height={560} className="w-full shrink-0" />
+                </div>
               </div>
             </Reveal>
           </div>
 
-          <div className="lg:col-span-5 space-y-5">
-            <InfoCard
-              title="What we cover"
-              icon={<Sparkles className="h-5 w-5" />}
-              color="var(--brand-red)"
-              items={[
-                "Current business challenges",
-                "Opportunities for AI, automation and marketing",
-                "Scalable growth strategies",
-                "Next steps for implementation",
-              ]}
-            />
-            <InfoCard
-              title="Who should book"
-              icon={<Users className="h-5 w-5" />}
-              color="var(--brand-blue)"
-              items={[
-                "Founders and business owners",
-                "Companies ready to scale",
-                "Teams exploring AI and digital transformation",
-              ]}
-            />
-            <InfoCard
-              title="What you gain"
-              icon={<CheckCircle2 className="h-5 w-5" />}
-              color="var(--brand-green)"
-              items={[
-                "Clear insights into your business position",
-                "Identified opportunities and priorities",
-                "Strategic direction tailored to your goals",
-              ]}
-            />
-
-            <Reveal delay={0.1}>
-              <Link
-                to="/contact"
-                className="block text-center text-sm font-semibold underline-grow"
-              >
-                Prefer to send a message? Contact us →
-              </Link>
+          <div className="lg:col-span-5 flex flex-col">
+            <Reveal className="flex h-full w-full flex-col">
+              <div className="glass-dark flex h-full flex-col overflow-hidden rounded-3xl">
+                <InfoSection
+                  title="What we cover"
+                  icon={<Sparkles className="h-5 w-5" />}
+                  color="var(--brand-red)"
+                  items={[
+                    "Current business challenges",
+                    "Opportunities for AI, automation and marketing",
+                    "Scalable growth strategies",
+                    "Next steps for implementation",
+                  ]}
+                />
+                <InfoSection
+                  title="Who should book"
+                  icon={<Users className="h-5 w-5" />}
+                  color="var(--brand-blue)"
+                  items={[
+                    "Founders and business owners",
+                    "Companies ready to scale",
+                    "Teams exploring AI and digital transformation",
+                  ]}
+                  bordered
+                />
+                <InfoSection
+                  title="What you gain"
+                  icon={<CheckCircle2 className="h-5 w-5" />}
+                  color="var(--brand-green)"
+                  items={[
+                    "Clear insights into your business position",
+                    "Identified opportunities and priorities",
+                    "Strategic direction tailored to your goals",
+                  ]}
+                  bordered
+                  className="flex-1"
+                />
+                <div className="shrink-0 border-t border-white/10 px-6 py-4 md:px-8">
+                  <Link
+                    to="/contact"
+                    className="block text-center text-sm font-semibold text-white/80 underline-grow transition-colors hover:text-white"
+                  >
+                    Prefer to send a message? Contact us →
+                  </Link>
+                </div>
+              </div>
             </Reveal>
           </div>
         </div>
@@ -159,41 +146,45 @@ function BookCallPage() {
   );
 }
 
-function InfoCard({
+function InfoSection({
   title,
   icon,
   color,
   items,
+  bordered,
+  className = "",
 }: {
   title: string;
   icon: React.ReactNode;
   color: string;
   items: string[];
+  bordered?: boolean;
+  className?: string;
 }) {
   return (
-    <Reveal>
-      <div className="card-tile p-7 bg-card">
-        <div className="flex items-center gap-3">
-          <span
-            className="h-9 w-9 rounded-lg flex items-center justify-center"
-            style={{ background: `color-mix(in oklab, ${color} 14%, transparent)`, color }}
-          >
-            {icon}
-          </span>
-          <h3 className="font-display text-xl font-bold">{title}</h3>
-        </div>
-        <ul className="mt-5 space-y-2.5 text-sm">
-          {items.map((i) => (
-            <li key={i} className="flex gap-2 items-start">
-              <span
-                className="h-1.5 w-1.5 rounded-full mt-2 shrink-0"
-                style={{ background: color }}
-              />
-              {i}
-            </li>
-          ))}
-        </ul>
+    <div
+      className={`px-6 py-6 md:px-8 md:py-7 ${bordered ? "border-t border-white/10" : ""} ${className}`}
+    >
+      <div className="flex items-center gap-3">
+        <span
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+          style={{ background: `color-mix(in oklab, ${color} 22%, transparent)`, color }}
+        >
+          {icon}
+        </span>
+        <h3 className="font-display text-xl font-bold text-white">{title}</h3>
       </div>
-    </Reveal>
+      <ul className="mt-4 space-y-2.5 text-sm text-white/75">
+        {items.map((i) => (
+          <li key={i} className="flex items-start gap-2">
+            <span
+              className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full"
+              style={{ background: color }}
+            />
+            {i}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
