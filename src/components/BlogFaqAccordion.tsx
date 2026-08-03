@@ -1,3 +1,4 @@
+import { BlogRichText } from "@/components/BlogRichText";
 import {
   Accordion,
   AccordionContent,
@@ -23,7 +24,7 @@ export default function BlogFaqAccordion({ faqs }: BlogFaqAccordionProps) {
             {faq.question}
           </AccordionTrigger>
           <AccordionContent className="pb-5 text-base leading-relaxed text-foreground/80">
-            {faq.answer}
+            <BlogRichText text={faq.answer} />
           </AccordionContent>
         </AccordionItem>
       ))}

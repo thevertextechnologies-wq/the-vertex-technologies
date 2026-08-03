@@ -6,6 +6,7 @@ import CTASection from "@/components/CTASection";
 import { getBlogPost, getRelatedBlogPosts, formatBlogDate } from "@/data/blog";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import BlogFaqAccordion from "@/components/BlogFaqAccordion";
+import { BlogRichText } from "@/components/BlogRichText";
 import { buildSeoHead, SITE_URL, DEFAULT_OG_IMAGE } from "@/seo/metadata";
 
 export const Route = createFileRoute("/blog_/$slug")({
@@ -169,7 +170,7 @@ function BlogPostPage() {
                           key={j}
                           className={`${block.heading ? "mt-4" : ""} text-base leading-relaxed text-foreground/80 md:text-lg [&:not(:first-child)]:mt-4`}
                         >
-                          {para}
+                          <BlogRichText text={para} />
                         </p>
                       ))}
                       {block.bullets && (
@@ -177,7 +178,9 @@ function BlogPostPage() {
                           {block.bullets.map((item) => (
                             <li key={item} className="flex items-start gap-3">
                               <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
-                              <span className="leading-relaxed text-foreground/80">{item}</span>
+                              <span className="leading-relaxed text-foreground/80">
+                                <BlogRichText text={item} />
+                              </span>
                             </li>
                           ))}
                         </ul>

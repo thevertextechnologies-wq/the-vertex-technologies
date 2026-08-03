@@ -5,7 +5,7 @@ import blogVoiceContent2 from "@/assets/Blog Images/ai voice agents for healthca
 export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
   {
     paras: [
-      "How US clinics deploy AI phone agents that book appointments, cut no-shows, and stay on the right side of HIPAA, the TCPA, and state AI disclosure law — plus the cost model, the ROI math, and the failure modes nobody publishes.",
+      "How US clinics deploy AI phone agents that book appointments, cut no-shows, and stay on the right side of HIPAA, the TCPA, and state AI disclosure law — plus the cost model, the ROI math, and the failure modes nobody publishes. If you are comparing voice with broader [AI automation](/ai-solutions) or [agentic AI](/blog/what-is-agentic-ai), this guide is the clinic-specific depth layer.",
       "Operational and commercial guidance. Not legal advice — HIPAA, TCPA and state AI disclosure obligations are fact-specific and change frequently.",
     ],
   },
@@ -27,7 +27,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
   },
   {
     paras: [
-      "Direct answer for the person who searched this: yes, AI voice agents work for clinics in 2026 — but only when they are scoped to a narrow set of high-volume, low-risk call types, wired into the practice management system, governed by a written escalation policy, and covered by a BAA. Deployed that way, a clinic's most common measurable wins are after-hours booking capture, reduced hold-time abandonment, and lower no-show rates from persistent, multi-channel confirmation.",
+      "Direct answer for the person who searched this: yes, AI voice agents work for clinics in 2026 — but only when they are scoped to a narrow set of high-volume, low-risk call types, wired into the practice management system, governed by a written escalation policy, and covered by a BAA. Deployed that way, measurable wins include after-hours booking capture (see our [AI booking automation case study](/blog/ai-booking-automation-aesthetics-clinics-case-study)), reduced hold-time abandonment, and lower no-shows from persistent confirmation.",
     ],
   },
   {
@@ -71,7 +71,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
   },
   {
     paras: [
-      "Only the third tier changes your P&L. If a vendor demo never shows the agent writing a record into a live scheduler, you are being shown tier two with tier-three pricing.",
+      "Only the third tier changes your P&L. If a vendor demo never shows the agent writing a record into a live scheduler, you are being shown tier two with tier-three pricing. For the broader chatbot-vs-agent distinction, read [What is agentic AI?](/blog/what-is-agentic-ai).",
     ],
   },
   {
@@ -106,7 +106,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
     heading: "Leak 2 — The after-hours call",
     level: 3,
     paras: [
-      "A patient who breaks a crown at 9pm or a med spa lead who sees your ad at 11pm has intent that expires overnight. Voicemail converts poorly. An agent that books at 11:14pm converts that intent while it exists.",
+      "A patient who breaks a crown at 9pm or a med spa lead who sees your ad at 11pm has intent that expires overnight. Voicemail converts poorly. An agent that books at 11:14pm converts that intent while it exists — the same after-hours dynamic we document in our [aesthetics booking automation case study](/blog/ai-booking-automation-aesthetics-clinics-case-study) and [DHA Lahore WhatsApp build](/case-studies/dha-lahore-aesthetics-clinic).",
     ],
   },
   {
@@ -121,7 +121,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
     heading: "Leak 4 — The unqualified booking",
     level: 3,
     paras: [
-      "For med spas, aesthetics, and elective dental, a booked slot filled by someone who cannot afford the treatment or is a poor clinical fit is worse than an empty slot. Voice agents can run consistent qualification logic on every call — something a tired front desk on a Friday afternoon cannot.",
+      "For med spas, aesthetics, and elective dental, a booked slot filled by someone who cannot afford the treatment or is a poor clinical fit is worse than an empty slot. Voice agents can run consistent qualification logic on every call — something a tired front desk on a Friday afternoon cannot. Pair voice with messaging automation via [AI solutions](/ai-solutions) when leads arrive on Instagram or WhatsApp, not only by phone.",
     ],
   },
   {
@@ -294,7 +294,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
   {
     heading: "6. Build Paths Compared: Off-the-Shelf vs Platform vs Custom",
     level: 2,
-    paras: ["There are three honest ways to get an AI voice agent onto your clinic's phone line:"],
+    paras: ["There are three honest ways to get an AI voice agent onto your clinic's phone line. Most clinics land on Path A or B with a partner like [The Vertex Technologies](/about) — see [AI solutions](/ai-solutions) and [services](/services) for how we scope builds:"],
     bullets: [
       "Path A: Vertical SaaS — 1–3 weeks, $300–$1,500/mo per location. Best for single-location clinics on a mainstream PMS with standard workflows.",
       "Path B: Platform + Managed Build — 3–8 weeks, $1,500–$8,000 build + $400–$2,500/mo managed. Best for multi-location groups, DSOs, med spa chains, legacy PMS workflows.",
@@ -378,7 +378,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
   },
   {
     paras: [
-      "Conservative rerun: gross benefit nearer $5,200/month, net $4,550. Still a strong return. The metric to actually track: cost per booked-and-kept appointment.",
+      "Conservative rerun: gross benefit nearer $5,200/month, net $4,550. Still a strong return. The metric to actually track: cost per booked-and-kept appointment. Want help modeling your clinic? [Book a strategy call](/book-a-call) or [contact us](/contact).",
     ],
   },
   {
@@ -410,7 +410,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
   },
   {
     paras: [
-      "The underrated win: attribution. An AI voice agent logs every call with structured data — intent, service requested, source, outcome. Wiring the agent into your CRM turns the phone from an attribution black hole into your cleanest data source.",
+      "The underrated win: attribution. An AI voice agent logs every call with structured data — intent, service requested, source, outcome. Wiring the agent into your CRM turns the phone from an attribution black hole into your cleanest data source — especially when combined with [marketing systems](/marketing-systems) and paid search reporting.",
     ],
   },
   {
@@ -522,7 +522,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
     heading: "Scenario B — Med spa / aesthetics practice",
     level: 3,
     paras: [
-      "Inbound agent plus consented outbound speed-to-lead. Structured qualification on every call. Booking into consultation slots with deposit link by SMS. Watch item: TCPA exposure on outbound — get consent architecture reviewed by counsel.",
+      "Inbound agent plus consented outbound speed-to-lead. Structured qualification on every call. Booking into consultation slots with deposit link by SMS. For a deployed messaging + booking stack (not voice-only), read our [72-hour aesthetics booking case study](/blog/ai-booking-automation-aesthetics-clinics-case-study) and the [DHA Lahore case study](/case-studies/dha-lahore-aesthetics-clinic). Watch item: TCPA exposure on outbound — get consent architecture reviewed by counsel.",
     ],
   },
   {
@@ -539,7 +539,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
       "Regulation gets denser — build disclosure as configuration from day one.",
       "Speech-native models compress the STT→LLM→TTS pipeline — ask vendors about PHI handling in audio-in/audio-out architectures.",
       "Outbound becomes the differentiator — recall, reactivation, waitlist fill, care-gap closure.",
-      "Voice and search converge — structured data and booking endpoints become strategic for local SEO.",
+      "Voice and search converge — structured data and booking endpoints become strategic for local SEO. That overlap is why voice agents and [marketing systems](/marketing-systems) increasingly share the same implementation roadmap.",
       "The agency market bifurcates between resellers and implementation partners who own integration and compliance.",
     ],
   },
@@ -686,7 +686,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
       {
         question: "Is this worth it for a small single-location practice?",
         answer:
-          "Often yes — the smallest clinics frequently see the cleanest returns because a solo front desk cannot answer two calls at once, and after-hours volume goes entirely uncaptured. Start narrow: after-hours only, three intents.",
+          "Often yes — the smallest clinics frequently see the cleanest returns because a solo front desk cannot answer two calls at once, and after-hours volume goes entirely uncaptured. Start narrow: after-hours only, three intents. Compare with [AI booking automation on messaging channels](/blog/ai-booking-automation-aesthetics-clinics-case-study) if WhatsApp or web chat is your bigger leak.",
       },
     ],
   },
@@ -695,7 +695,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
     level: 2,
     paras: [
       "The clinics that get value from AI voice agents in 2026 are not the ones with the best models. They are the ones that measured a baseline before they bought, scoped to three intents, got the integration and the BAA right, and put one named person in charge of reviewing transcripts.",
-      "The Vertex Technologies builds and manages AI voice agents, AI chatbots, and connected automation systems for US clinics and service businesses — integrated with your practice management system, governed by a written escalation policy, and measured against a real baseline.",
+      "The Vertex Technologies builds and manages AI voice agents, AI chatbots, and connected automation systems for US clinics and service businesses. [Book a free strategy call](/book-a-call) for a call-flow assessment, or start with [What is agentic AI?](/blog/what-is-agentic-ai) if you are weighing voice against broader agent workflows.",
       "This article is operational and commercial guidance, not legal advice. HIPAA, TCPA, and state AI disclosure obligations are fact-specific and change frequently. Engage qualified healthcare counsel before deploying an AI voice agent that contacts patients.",
     ],
     relatedLinks: [

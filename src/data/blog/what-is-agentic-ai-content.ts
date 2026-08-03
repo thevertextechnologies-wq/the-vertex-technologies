@@ -11,7 +11,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     heading: "TL;DR — The Short Version",
     level: 2,
     paras: [
-      "Agentic AI is software that pursues a goal on its own — it plans a sequence of steps, uses your tools and systems to carry them out, checks whether it worked, and adjusts — instead of waiting for a person to prompt it at every step. A chatbot answers a question. An agent gets the job done.",
+      "Agentic AI is software that pursues a goal on its own — it plans a sequence of steps, uses your tools and systems to carry them out, checks whether it worked, and adjusts — instead of waiting for a person to prompt it at every step. A chatbot answers a question; an agent gets the job done. For a clinic phone-line example, see [AI voice agents for healthcare clinics](/blog/ai-voice-agents-healthcare-clinics).",
     ],
     bullets: [
       "The one-line distinction: a chatbot responds; an agent acts. If it can't take an action in one of your systems — book the appointment, update the CRM, send the invoice, move the ticket — it isn't agentic, no matter what the sales deck says.",
@@ -72,7 +72,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     heading: "2. Chatbot vs Assistant vs Agent: The Distinction That Matters",
     level: 2,
     paras: [
-      "Chatbots answer from scripts or knowledge bases and rarely write to your systems. Assistants respond to prompts and generate content, but you still take the actions. Agentic AI pursues a goal across multiple steps and completes tasks in your stack.",
+      "Chatbots answer from scripts or knowledge bases and rarely write to your systems. Assistants respond to prompts and generate content, but you still take the actions. Agentic AI pursues a goal across multiple steps and completes tasks in your stack — including [AI automation builds](/ai-solutions) we deploy for clinics and service businesses.",
       "The practical test: can it complete a task without a human touching each step? The one-line rule: A chatbot answers. An agent acts.",
     ],
   },
@@ -94,8 +94,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     heading: "4. Agentic AI vs Traditional Automation (RPA, Zapier, Chatbots)",
     level: 2,
     paras: [
-      "Rule-based automation follows a fixed path and breaks when reality deviates — ideal for identical, repetitive tasks. Agentic AI handles variable situations that need a judgement call and adapts when things change.",
-      "Many use cases marketed as \"agentic\" don't actually require an agent. Automate the identical with rules; reserve agents for the variable.",
+      "Rule-based automation follows a fixed path and breaks when reality deviates — ideal for identical, repetitive tasks. Agentic AI handles variable situations that need a judgement call and adapts when things change. Many use cases marketed as \"agentic\" don't actually require an agent — [our services](/services) mix rules, integrations, and agents where each fits.",
     ],
   },
   {
@@ -120,8 +119,11 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
   {
     heading: "6. Where Agentic AI Actually Makes Money for a Small Business",
     level: 2,
+    paras: [
+      "These workflows map directly to [AI solutions](/ai-solutions) we implement — often alongside [growth consulting](/growth-consulting) when the bottleneck is process, not traffic.",
+    ],
     bullets: [
-      "Lead response and qualification — seconds-not-hours reply on web, WhatsApp, and email; score and book genuine fits.",
+      "Lead response and qualification — seconds-not-hours reply on web, WhatsApp, and email; score and book genuine fits (see [booking automation case study](/blog/ai-booking-automation-aesthetics-clinics-case-study)).",
       "Appointment and scheduling — book, reschedule, confirm, and move cancellations into open slots in the same interaction.",
       "Customer support triage — resolve repetitive tickets; escalate with a clean summary.",
       "Back-office data movement — invoices, PO matching, CRM sync — variable work that eats hours.",
@@ -149,7 +151,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     level: 2,
     paras: [
       "Three cost layers: one-time build/integration (often low four figures to five figures for SMB scope), monthly platform/subscription, and variable usage (API and per-action fees). Integration complexity drives build cost more than the AI label.",
-      "Monthly value ≈ hours returned × loaded cost + revenue from faster response + errors prevented. Model conservatively — many organizations report AI payback in years, not weeks, though narrow workflows like lead response can pay back faster when unit economics are clear.",
+      "Monthly value ≈ hours returned × loaded cost + revenue from faster response + errors prevented. Model conservatively — many organizations report AI payback in years, not weeks, though narrow workflows like lead response can pay back faster when unit economics are clear. [Book a call](/book-a-call) to model your workflow, or [contact us](/contact) with your baseline numbers.",
     ],
   },
   {
@@ -187,7 +189,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     heading: "11. How to Deploy Your First Agent: A 60-Day Plan",
     level: 2,
     bullets: [
-      "Week 1 — Pick one repetitive, multi-step, low-stakes workflow; document baseline cost.",
+      "Week 1 — Pick one repetitive, multi-step, low-stakes workflow; document baseline cost. Browse [resources](/resources) for playbooks.",
       "Weeks 2–3 — One-sentence goal, systems list, guardrails, escalation, sign-off.",
       "Weeks 3–6 — Integrate real systems; build at Level 1; test messy cases.",
       "Weeks 6–8 — Shadow run, then supervised live on limited volume.",
@@ -233,9 +235,9 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     heading: "15. Industry Scenarios: Clinic, E-commerce, Service Business",
     level: 2,
     paras: [
-      "Clinic — agent watches phone, web, and messaging; books into live calendar; escalates anything clinical. For HIPAA, TCPA, and voice-specific rollout, see our dedicated healthcare voice agents guide (linked below).",
+      "Clinic — agent watches phone, web, and messaging; books into live calendar; escalates anything clinical. For HIPAA, TCPA, and voice-specific rollout, see our [AI voice agents for healthcare clinics](/blog/ai-voice-agents-healthcare-clinics) guide.",
       "E-commerce — support triage plus speed-to-lead on ad enquiries; keep store, CRM, and fulfilment in sync.",
-      "Local services — instant after-hours response, quote follow-up, CRM hygiene — work that always slips when the team is busy.",
+      "Local services — instant after-hours response, quote follow-up, CRM hygiene — work that always slips when the team is busy. For a real-world aesthetics example, read our [AI booking automation case study](/blog/ai-booking-automation-aesthetics-clinics-case-study).",
     ],
     relatedLinks: [
       {
@@ -281,7 +283,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
       {
         question: "What's the difference between agentic AI and a chatbot?",
         answer:
-          "A chatbot responds to messages and takes no action in your systems. An agent pursues a goal across multiple steps and actually does things — books the appointment, updates the CRM, sends the invoice. The defining difference is action.",
+          "A chatbot responds to messages and takes no action in your systems. An agent pursues a goal across multiple steps and actually does things — books the appointment, updates the CRM, sends the invoice. The defining difference is action. For healthcare voice specifically, see [AI voice agents for clinics](/blog/ai-voice-agents-healthcare-clinics).",
       },
       {
         question: "Why do so many agentic AI projects fail?",
@@ -306,7 +308,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
       {
         question: "What is the best first use case for agentic AI?",
         answer:
-          "Pick one workflow that is repetitive, multi-step, currently resented by staff, and low-stakes enough that an early mistake won't hurt. Lead response, scheduling, and back-office sync are common high-return starts.",
+          "Pick one workflow that is repetitive, multi-step, currently resented by staff, and low-stakes enough that an early mistake won't hurt. Lead response and [AI booking automation](/blog/ai-booking-automation-aesthetics-clinics-case-study) are common starts; clinics on the phone should read [AI voice agents for healthcare](/blog/ai-voice-agents-healthcare-clinics).",
       },
       {
         question: "Do I still need humans if I use AI agents?",
@@ -330,7 +332,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     level: 2,
     paras: [
       "Agentic AI in 2026 pays off for businesses that pick one painful workflow, wire the agent into real systems, measure against a baseline, and keep a human on the wheel while autonomy is earned.",
-      "The Vertex Technologies designs, builds, and manages AI agents and automation for small and mid-sized businesses — scoped to a real workflow, integrated with the tools you already use, and measured against a baseline.",
+      "The Vertex Technologies designs, builds, and manages AI agents and automation for small and mid-sized businesses — scoped to a real workflow, integrated with the tools you already use, and measured against a baseline. [Book an automation assessment](/book-a-call) or explore [AI solutions](/ai-solutions).",
     ],
     bullets: [
       "Book a call for an automation assessment — we'll identify the highest, safest-return workflow and say honestly whether an agent or a simple rule fits.",

@@ -19,7 +19,7 @@ export type BlogBlock = {
   bullets?: string[];
   faqs?: BlogFaq[];
   image?: { src: string; alt: string; caption?: string };
-  /** In-article links to other blog posts */
+  /** In-article links to other blog posts (also supports [text](/path) inside paras and bullets) */
   relatedLinks?: { slug: string; label: string }[];
 };
 
@@ -61,11 +61,15 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["what-is-agentic-ai", "ai-booking-automation-aesthetics-clinics-case-study"],
     relatedPageLinks: [
       { to: "/ai-solutions", label: "AI Voice Agents & solutions" },
+      { to: "/services", label: "All services" },
+      { to: "/marketing-systems", label: "Marketing systems & attribution" },
       { to: "/book-a-call", label: "Book a free strategy call" },
+      { to: "/contact", label: "Contact us" },
       {
         to: "/case-studies/dha-lahore-aesthetics-clinic",
         label: "DHA Lahore aesthetics case study",
       },
+      { to: "/case-studies", label: "Case studies" },
     ],
     content: aiVoiceAgentsHealthcareContent,
   },
@@ -87,8 +91,11 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["ai-voice-agents-healthcare-clinics", "ai-booking-automation-aesthetics-clinics-case-study"],
     relatedPageLinks: [
       { to: "/ai-solutions", label: "AI automation services" },
-      { to: "/book-a-call", label: "Book an automation assessment" },
       { to: "/services", label: "All services" },
+      { to: "/growth-consulting", label: "Growth consulting" },
+      { to: "/book-a-call", label: "Book an automation assessment" },
+      { to: "/contact", label: "Contact us" },
+      { to: "/portfolio", label: "Portfolio" },
     ],
     content: whatIsAgenticAiContent,
   },
@@ -113,14 +120,17 @@ export const blogPosts: BlogPost[] = [
         to: "/case-studies/dha-lahore-aesthetics-clinic",
         label: "Full DHA Lahore case study",
       },
-      { to: "/book-a-call", label: "Book a call" },
+      { to: "/case-studies", label: "All case studies" },
       { to: "/ai-solutions", label: "AI solutions" },
+      { to: "/services", label: "Services" },
+      { to: "/book-a-call", label: "Book a call" },
+      { to: "/contact", label: "Contact" },
     ],
     content: [
       {
         paras: [
-          "Most aesthetics clinics don't lose patients in the treatment room — they lose them at 9 p.m. on a Tuesday, when a prospective client is scanning Instagram, has a question about Botox pricing, and gets no reply. By morning, that lead has usually booked somewhere else. That is the exact problem behind this AI booking automation for aesthetics clinics case study: how The Vertex Technologies rebuilt a clinic's entire booking flow — from first inquiry to confirmed appointment — in 72 hours, eliminating after-hours missed bookings and increasing walk-in traffic within the same week.",
-          "Below is exactly what was built, how it works, and why the same 72-hour framework applies to any aesthetics or med spa practice losing revenue outside business hours.",
+          "Most aesthetics clinics don't lose patients in the treatment room — they lose them at 9 p.m. on a Tuesday, when a prospective client is scanning Instagram, has a question about Botox pricing, and gets no reply. By morning, that lead has usually booked somewhere else. That is the exact problem behind this [AI automation](/ai-solutions) case study: how The Vertex Technologies rebuilt a clinic's entire booking flow — from first inquiry to confirmed appointment — in 72 hours, eliminating after-hours missed bookings and increasing walk-in traffic within the same week.",
+          "Below is exactly what was built, how it works, and why the same 72-hour framework applies to any aesthetics or med spa practice losing revenue outside business hours. Related guides: [AI voice agents for clinics](/blog/ai-voice-agents-healthcare-clinics) and [What is agentic AI?](/blog/what-is-agentic-ai). See the full [DHA Lahore case study](/case-studies/dha-lahore-aesthetics-clinic) on our site.",
         ],
         relatedLinks: [
           {
@@ -158,14 +168,14 @@ export const blogPosts: BlogPost[] = [
       },
       {
         paras: [
-          "None of this was a staffing problem — it was a systems problem. The fix wasn't hiring a night-shift receptionist; it was building a workflow that never sleeps.",
+          "None of this was a staffing problem — it was a systems problem. The fix wasn't hiring a night-shift receptionist; it was building a workflow that never sleeps. If your clinic also handles high phone volume, pair this with our [healthcare voice agents guide](/blog/ai-voice-agents-healthcare-clinics).",
         ],
       },
       {
         heading: "What We Built in 72 Hours: The AI Booking Automation Workflow",
         level: 2,
         paras: [
-          "The Vertex Technologies scoped, built, and deployed the full system in three days by focusing on four connected pieces rather than one standalone tool.",
+          "The Vertex Technologies scoped, built, and deployed the full system in three days by focusing on four connected pieces rather than one standalone tool. This is [agentic AI](/blog/what-is-agentic-ai) in practice: multiple steps, real tools, measured outcome — not a chatbot script.",
         ],
         image: {
           src: blogBookingImg1,
@@ -198,7 +208,7 @@ export const blogPosts: BlogPost[] = [
         heading: "4. Every Channel Feeding One System",
         level: 3,
         paras: [
-          "Website chat, WhatsApp, Instagram, and phone inquiries were routed into a single automation backbone so no lead sits in a separate inbox that nobody checks after hours. This is the piece that directly drove the walk-in increase — leads that would have gone cold overnight were captured, qualified, and booked before the clinic even opened.",
+          "Website chat, WhatsApp, Instagram, and phone inquiries were routed into a single automation backbone so no lead sits in a separate inbox that nobody checks after hours. This is the piece that directly drove the walk-in increase — leads that would have gone cold overnight were captured, qualified, and booked before the clinic even opened. See the live [DHA Lahore aesthetics deployment](/case-studies/dha-lahore-aesthetics-clinic) for a related WhatsApp AI build.",
         ],
       },
       {
@@ -251,7 +261,7 @@ export const blogPosts: BlogPost[] = [
         heading: "Why Aesthetics and Med Spa Clinics Specifically Need This",
         level: 2,
         paras: [
-          "Aesthetics clinics run on impulse-adjacent, high-consideration purchases. A patient deciding on lip filler or a laser package is often comparing three clinics in the same evening. Whichever one replies first — accurately, and with a bookable slot — usually wins the appointment. AI booking automation for aesthetics clinics closes that gap by treating every hour as business hours, without adding headcount.",
+          "Aesthetics clinics run on impulse-adjacent, high-consideration purchases. A patient deciding on lip filler or a laser package is often comparing three clinics in the same evening. Whichever one replies first — accurately, and with a bookable slot — usually wins the appointment. [AI booking automation](/blog/ai-booking-automation-aesthetics-clinics-case-study) closes that gap by treating every hour as business hours, without adding headcount.",
           "It also solves a second, quieter problem: walk-in capacity. Clinics rarely know in real time which slots are open for same-day visitors. By surfacing live availability directly to anyone messaging in, the same system that stops after-hours leads from going cold also fills empty same-day slots that would otherwise sit unused.",
         ],
       },
@@ -262,7 +272,7 @@ export const blogPosts: BlogPost[] = [
           {
             question: "How long does it take to set up AI booking automation for an aesthetics clinic?",
             answer:
-              "A focused build — AI messaging, calendar sync, and reminders — can go live in as little as 72 hours, as in this case study. More complex builds involving deposit collection or EMR integration typically take one to two weeks.",
+              "A focused build — AI messaging, calendar sync, and reminders — can go live in as little as 72 hours, as in this case study. More complex builds involving deposit collection or EMR integration typically take one to two weeks. [Contact us](/contact) to scope yours.",
           },
           {
             question: "Will an AI receptionist replace my front-desk staff?",
@@ -277,7 +287,7 @@ export const blogPosts: BlogPost[] = [
           {
             question: "What's the biggest driver of ROI — fewer no-shows or more after-hours bookings?",
             answer:
-              "Both matter, but for most clinics the after-hours capture has the bigger immediate impact, since it turns previously lost leads into booked revenue rather than just protecting revenue that was already scheduled.",
+              "Both matter, but for most clinics the after-hours capture has the bigger immediate impact, since it turns previously lost leads into booked revenue rather than just protecting revenue that was already scheduled. Phone-heavy clinics should also review [AI voice agents for healthcare](/blog/ai-voice-agents-healthcare-clinics).",
           },
           {
             question: "How much does AI booking automation cost for a clinic?",
@@ -340,7 +350,7 @@ export const blogPosts: BlogPost[] = [
         heading: "Ready to Stop Losing Bookings After Hours?",
         level: 2,
         paras: [
-          "The Vertex Technologies builds custom AI booking automation for aesthetics clinics, med spas, and service businesses that can't afford to miss a lead.",
+          "The Vertex Technologies builds custom AI booking automation for aesthetics clinics, med spas, and service businesses that can't afford to miss a lead. [Book a call](/book-a-call), explore [services](/services), or read more [case studies](/case-studies).",
         ],
         relatedLinks: [
           {
