@@ -23,6 +23,7 @@ import { Route as AiSolutionsRouteImport } from './routes/ai-solutions'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesDhaLahoreAestheticsClinicRouteImport } from './routes/case-studies_.dha-lahore-aesthetics-clinic'
+import { Route as CaseStudiesAiReceptionAestheticClinicRouteImport } from './routes/case-studies_.ai-reception-aesthetic-clinic'
 import { Route as BlogSlugRouteImport } from './routes/blog_.$slug'
 
 const TheVertexInstituteRoute = TheVertexInstituteRouteImport.update({
@@ -96,6 +97,12 @@ const CaseStudiesDhaLahoreAestheticsClinicRoute =
     path: '/case-studies/dha-lahore-aesthetics-clinic',
     getParentRoute: () => rootRouteImport,
   } as any)
+const CaseStudiesAiReceptionAestheticClinicRoute =
+  CaseStudiesAiReceptionAestheticClinicRouteImport.update({
+    id: '/case-studies_/ai-reception-aesthetic-clinic',
+    path: '/case-studies/ai-reception-aesthetic-clinic',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog_/$slug',
   path: '/blog/$slug',
@@ -117,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/the-vertex-institute': typeof TheVertexInstituteRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/case-studies/ai-reception-aesthetic-clinic': typeof CaseStudiesAiReceptionAestheticClinicRoute
   '/case-studies/dha-lahore-aesthetics-clinic': typeof CaseStudiesDhaLahoreAestheticsClinicRoute
 }
 export interface FileRoutesByTo {
@@ -134,6 +142,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/the-vertex-institute': typeof TheVertexInstituteRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/case-studies/ai-reception-aesthetic-clinic': typeof CaseStudiesAiReceptionAestheticClinicRoute
   '/case-studies/dha-lahore-aesthetics-clinic': typeof CaseStudiesDhaLahoreAestheticsClinicRoute
 }
 export interface FileRoutesById {
@@ -152,6 +161,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/the-vertex-institute': typeof TheVertexInstituteRoute
   '/blog_/$slug': typeof BlogSlugRoute
+  '/case-studies_/ai-reception-aesthetic-clinic': typeof CaseStudiesAiReceptionAestheticClinicRoute
   '/case-studies_/dha-lahore-aesthetics-clinic': typeof CaseStudiesDhaLahoreAestheticsClinicRoute
 }
 export interface FileRouteTypes {
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/the-vertex-institute'
     | '/blog/$slug'
+    | '/case-studies/ai-reception-aesthetic-clinic'
     | '/case-studies/dha-lahore-aesthetics-clinic'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/the-vertex-institute'
     | '/blog/$slug'
+    | '/case-studies/ai-reception-aesthetic-clinic'
     | '/case-studies/dha-lahore-aesthetics-clinic'
   id:
     | '__root__'
@@ -205,6 +217,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/the-vertex-institute'
     | '/blog_/$slug'
+    | '/case-studies_/ai-reception-aesthetic-clinic'
     | '/case-studies_/dha-lahore-aesthetics-clinic'
   fileRoutesById: FileRoutesById
 }
@@ -223,6 +236,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   TheVertexInstituteRoute: typeof TheVertexInstituteRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  CaseStudiesAiReceptionAestheticClinicRoute: typeof CaseStudiesAiReceptionAestheticClinicRoute
   CaseStudiesDhaLahoreAestheticsClinicRoute: typeof CaseStudiesDhaLahoreAestheticsClinicRoute
 }
 
@@ -326,6 +340,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CaseStudiesDhaLahoreAestheticsClinicRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies_/ai-reception-aesthetic-clinic': {
+      id: '/case-studies_/ai-reception-aesthetic-clinic'
+      path: '/case-studies/ai-reception-aesthetic-clinic'
+      fullPath: '/case-studies/ai-reception-aesthetic-clinic'
+      preLoaderRoute: typeof CaseStudiesAiReceptionAestheticClinicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog_/$slug': {
       id: '/blog_/$slug'
       path: '/blog/$slug'
@@ -351,6 +372,8 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   TheVertexInstituteRoute: TheVertexInstituteRoute,
   BlogSlugRoute: BlogSlugRoute,
+  CaseStudiesAiReceptionAestheticClinicRoute:
+    CaseStudiesAiReceptionAestheticClinicRoute,
   CaseStudiesDhaLahoreAestheticsClinicRoute:
     CaseStudiesDhaLahoreAestheticsClinicRoute,
 }

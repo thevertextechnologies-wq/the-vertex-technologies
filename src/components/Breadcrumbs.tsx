@@ -9,6 +9,8 @@ const SEGMENT_LABELS: Record<string, string> = {
   "marketing-systems": "Marketing Systems",
   "growth-consulting": "Growth Consulting",
   "case-studies": "Case Studies",
+  "ai-reception-aesthetic-clinic": "AI Reception for Aesthetic Clinic",
+  "dha-lahore-aesthetics-clinic": "DHA Lahore Aesthetics Clinic",
   portfolio: "Portfolio",
   resources: "Resources",
   "the-vertex-institute": "The Vertex Institute",

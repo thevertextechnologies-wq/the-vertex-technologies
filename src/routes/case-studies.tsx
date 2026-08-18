@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight, Clock } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBanner from "@/components/PageBanner";
 import bannerCases from "@/assets/banner-cases.jpg";
+import featuredRadiance from "@/assets/Case Studies Featured Image/Radiance Fearured image.webp";
 import featuredWhatsappAi from "@/assets/Case Studies Featured Image/the-vertex-technologies-agentic-ai-whatsapp-automation.webp";
 import { Reveal, Stagger, StaggerItem } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -21,17 +22,29 @@ export const Route = createFileRoute("/case-studies")({
 });
 
 const featured = {
+  to: "/case-studies/ai-reception-aesthetic-clinic",
+  image: featuredRadiance,
+  industry: "Aesthetic Medicine · Austin, TX",
+  title: "AI Voice + WhatsApp Reception and Speed-Booking for a Multi-Location Med Spa",
+  excerpt:
+    "Radiance Aesthetics Group replaced staff-dependent, spreadsheet intake with an always-on agentic reception layer across inbound voice and WhatsApp — immediate response, structured intake, and calendar-assisted booking.",
+  stats: [
+    { v: "24/7", label: "First response", color: "var(--brand-red)" },
+    { v: "Voice+", label: "WhatsApp intake", color: "var(--brand-blue)" },
+    { v: "3", label: "Austin locations", color: "var(--brand-green)" },
+  ],
+};
+
+const published = {
   to: "/case-studies/dha-lahore-aesthetics-clinic",
   image: featuredWhatsappAi,
-  tags: ["AI Automation", "WhatsApp AI Agent"],
-  industry: "Aesthetics & Medical Spa",
-  title: "How a DHA Lahore Aesthetics Clinic Got More Walk-ins & Zero After-Hours Missed Bookings in 72 Hours",
-  excerpt:
-    "A leading DHA Lahore aesthetics clinic was losing patients to slow WhatsApp replies. We designed and deployed a fully automated WhatsApp AI Agent in 72 hours — handling bookings, FAQs, location sharing and follow-ups around the clock.",
+  tag: "WhatsApp AI Agent",
+  color: "var(--brand-blue)",
+  title: "DHA Lahore aesthetics clinic: more walk-ins in 72 hours",
+  body: "A DHA Lahore aesthetics clinic was losing patients to slow WhatsApp replies. We deployed a fully automated WhatsApp AI Agent in 72 hours — bookings, FAQs, location sharing and follow-ups around the clock.",
   stats: [
-    { v: "72h", label: "Go-live", color: "var(--brand-blue)" },
-    { v: "24/7", label: "Auto responses", color: "var(--brand-red)" },
-    { v: "<60s", label: "Response time", color: "var(--brand-green)" },
+    { k: "Go-live", v: "72h" },
+    { k: "Response", v: "<60s" },
   ],
 };
 
@@ -161,6 +174,47 @@ function CaseStudiesPage() {
           </div>
 
           <Stagger className="grid md:grid-cols-2 gap-6">
+            <StaggerItem className="md:col-span-2">
+              <Link
+                to={published.to}
+                className="group card-tile overflow-hidden bg-card grid sm:grid-cols-2 h-full"
+              >
+                <div className="relative aspect-[16/10] sm:aspect-auto min-h-[220px] bg-black">
+                  <img
+                    src={published.image}
+                    alt={published.title}
+                    className="absolute inset-0 h-full w-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-8 md:p-10 flex flex-col justify-center">
+                  <span
+                    className="text-xs font-semibold uppercase tracking-[0.16em]"
+                    style={{ color: published.color }}
+                  >
+                    {published.tag}
+                  </span>
+                  <h3 className="mt-3 font-display text-2xl md:text-3xl font-bold leading-tight">
+                    {published.title}
+                  </h3>
+                  <p className="mt-4 text-muted-foreground leading-relaxed">{published.body}</p>
+                  <div className="mt-6 flex gap-3 flex-wrap">
+                    {published.stats.map((s) => (
+                      <div key={s.k} className="rounded-xl border border-border px-4 py-2">
+                        <p className="text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+                          {s.k}
+                        </p>
+                        <p className="font-display font-bold">{s.v}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <span className="mt-6 inline-flex items-center gap-2 font-bold text-[var(--brand-red)]">
+                    Read full case study
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </div>
+              </Link>
+            </StaggerItem>
             {cases.map((c) => (
               <StaggerItem
                 key={c.title}

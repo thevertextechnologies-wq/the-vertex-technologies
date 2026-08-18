@@ -273,6 +273,70 @@ const blogPostJsonLd = [
 
 const caseStudyUrl = `${SITE}/case-studies/dha-lahore-aesthetics-clinic`;
 
+const radianceCaseStudyUrl = `${SITE}/case-studies/ai-reception-aesthetic-clinic`;
+
+const radianceFaqs = [
+  [
+    "Does the AI replace front-desk staff?",
+    "No. It handles the repeatable first interaction and data entry so staff can focus on patients in the clinic. Complex and sensitive cases are escalated to a human.",
+  ],
+  [
+    "Is the system HIPAA-compliant?",
+    "The system is designed around minimum-necessary data handling. It is not a diagnostic or medical decision-making system. Compliance and BAA status must be verified against the production environment before any such claim is made.",
+  ],
+  [
+    "What happens if the AI can't handle a request?",
+    "It escalates to staff with context — medical questions, complaints, and complex treatment questions always route to a human.",
+  ],
+  [
+    "What channels does it cover?",
+    "Inbound voice and WhatsApp, with confirmations and reminders via WhatsApp where configured.",
+  ],
+  [
+    "What does the AI do with missing information?",
+    "It records the gap explicitly as Not provided / needs staff follow-up rather than guessing.",
+  ],
+];
+
+const radianceCaseStudyJsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "AI Voice + WhatsApp Reception and Speed-Booking Automation",
+    description:
+      "How a multi-location Austin aesthetic clinic replaced slow, manual lead intake with an always-on AI reception and speed-booking system across voice and WhatsApp.",
+    image: OG_IMAGE,
+    datePublished: "2026-08-18",
+    dateModified: "2026-08-18",
+    author: { "@type": "Organization", name: "The Vertex Technologies" },
+    publisher: PUBLISHER,
+    mainEntityOfPage: { "@type": "WebPage", "@id": radianceCaseStudyUrl },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${SITE}/case-studies` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "AI Reception for Aesthetic Clinic",
+        item: radianceCaseStudyUrl,
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: radianceFaqs.map(([q, a]) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  },
+];
+
 const caseStudyJsonLd = [
   {
     "@context": "https://schema.org",
@@ -359,6 +423,16 @@ const routes = [
     url: "https://www.thevertextechnologies.com/case-studies/dha-lahore-aesthetics-clinic",
     type: "article",
     jsonLd: caseStudyJsonLd,
+  },
+  {
+    path: "/case-studies/ai-reception-aesthetic-clinic",
+    title:
+      "AI Voice + WhatsApp Reception for a U.S. Aesthetic Clinic — Case Study | The Vertex Technologies",
+    description:
+      "How a multi-location Austin aesthetic clinic replaced slow, manual lead intake with an always-on AI reception and speed-booking system across voice and WhatsApp.",
+    url: "https://www.thevertextechnologies.com/case-studies/ai-reception-aesthetic-clinic",
+    type: "article",
+    jsonLd: radianceCaseStudyJsonLd,
   },
   {
     path: "/portfolio",

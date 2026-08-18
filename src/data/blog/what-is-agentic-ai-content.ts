@@ -237,7 +237,7 @@ export const whatIsAgenticAiContent: BlogBlock[] = [
     paras: [
       "Clinic — agent watches phone, web, and messaging; books into live calendar; escalates anything clinical. For HIPAA, TCPA, and voice-specific rollout, see our [AI voice agents for healthcare clinics](/blog/ai-voice-agents-healthcare-clinics) guide.",
       "E-commerce — support triage plus speed-to-lead on ad enquiries; keep store, CRM, and fulfilment in sync.",
-      "Local services — instant after-hours response, quote follow-up, CRM hygiene — work that always slips when the team is busy. For a real-world aesthetics example, read our [AI booking automation case study](/blog/ai-booking-automation-aesthetics-clinics-case-study).",
+      "Local services — instant after-hours response, quote follow-up, CRM hygiene — work that always slips when the team is busy. For a real-world aesthetics example, read our [AI booking automation case study](/blog/ai-booking-automation-aesthetics-clinics-case-study) and the [Radiance Austin voice + WhatsApp reception case study](/case-studies/ai-reception-aesthetic-clinic).",
     ],
     relatedLinks: [
       {

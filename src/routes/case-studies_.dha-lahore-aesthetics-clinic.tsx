@@ -362,6 +362,19 @@ function CaseStudyDetailPage() {
                 </div>
 
                 {/* CTAs */}
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.14em] text-white/45">
+                    Related
+                  </p>
+                  <Link
+                    to="/case-studies/ai-reception-aesthetic-clinic"
+                    className="mt-3 inline-flex items-center gap-2 font-semibold text-[var(--brand-red)] hover:underline"
+                  >
+                    AI Voice + WhatsApp reception — Radiance Aesthetics Group
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+
                 <div className="flex flex-wrap gap-3">
                   <Link
                     to="/contact"

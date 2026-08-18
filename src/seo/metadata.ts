@@ -118,6 +118,13 @@ export const ROUTE_META: Record<string, SeoMeta> = {
       "Case study: how The Vertex Technologies deployed a WhatsApp AI Agent in 72 hours for a DHA Lahore aesthetics clinic — more walk-ins, zero after-hours missed bookings.",
     url: `${SITE_URL}/case-studies/dha-lahore-aesthetics-clinic`,
   },
+  "/case-studies/ai-reception-aesthetic-clinic": {
+    title:
+      "AI Voice + WhatsApp Reception for a U.S. Aesthetic Clinic — Case Study | The Vertex Technologies",
+    description:
+      "How a multi-location Austin aesthetic clinic replaced slow, manual lead intake with an always-on AI reception and speed-booking system across voice and WhatsApp.",
+    url: `${SITE_URL}/case-studies/ai-reception-aesthetic-clinic`,
+  },
   "/portfolio": {
     title: "AI & Automation Portfolio | The Vertex Technologies",
     description:

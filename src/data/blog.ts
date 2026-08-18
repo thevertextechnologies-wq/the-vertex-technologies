@@ -66,6 +66,10 @@ export const blogPosts: BlogPost[] = [
       { to: "/book-a-call", label: "Book a free strategy call" },
       { to: "/contact", label: "Contact us" },
       {
+        to: "/case-studies/ai-reception-aesthetic-clinic",
+        label: "Radiance AI reception case study",
+      },
+      {
         to: "/case-studies/dha-lahore-aesthetics-clinic",
         label: "DHA Lahore aesthetics case study",
       },
@@ -95,6 +99,7 @@ export const blogPosts: BlogPost[] = [
       { to: "/growth-consulting", label: "Growth consulting" },
       { to: "/book-a-call", label: "Book an automation assessment" },
       { to: "/contact", label: "Contact us" },
+      { to: "/case-studies/ai-reception-aesthetic-clinic", label: "Radiance AI reception case study" },
       { to: "/portfolio", label: "Portfolio" },
     ],
     content: whatIsAgenticAiContent,
@@ -117,6 +122,10 @@ export const blogPosts: BlogPost[] = [
     relatedSlugs: ["ai-voice-agents-healthcare-clinics", "what-is-agentic-ai"],
     relatedPageLinks: [
       {
+        to: "/case-studies/ai-reception-aesthetic-clinic",
+        label: "Radiance AI reception case study",
+      },
+      {
         to: "/case-studies/dha-lahore-aesthetics-clinic",
         label: "Full DHA Lahore case study",
       },
@@ -130,7 +139,7 @@ export const blogPosts: BlogPost[] = [
       {
         paras: [
           "Most aesthetics clinics don't lose patients in the treatment room — they lose them at 9 p.m. on a Tuesday, when a prospective client is scanning Instagram, has a question about Botox pricing, and gets no reply. By morning, that lead has usually booked somewhere else. That is the exact problem behind this [AI automation](/ai-solutions) case study: how The Vertex Technologies rebuilt a clinic's entire booking flow — from first inquiry to confirmed appointment — in 72 hours, eliminating after-hours missed bookings and increasing walk-in traffic within the same week.",
-          "Below is exactly what was built, how it works, and why the same 72-hour framework applies to any aesthetics or med spa practice losing revenue outside business hours. Related guides: [AI voice agents for clinics](/blog/ai-voice-agents-healthcare-clinics) and [What is agentic AI?](/blog/what-is-agentic-ai). See the full [DHA Lahore case study](/case-studies/dha-lahore-aesthetics-clinic) on our site.",
+          "Below is exactly what was built, how it works, and why the same 72-hour framework applies to any aesthetics or med spa practice losing revenue outside business hours. Related guides: [AI voice agents for clinics](/blog/ai-voice-agents-healthcare-clinics) and [What is agentic AI?](/blog/what-is-agentic-ai). See the [Radiance Austin AI reception case study](/case-studies/ai-reception-aesthetic-clinic) and the [DHA Lahore case study](/case-studies/dha-lahore-aesthetics-clinic).",
         ],
         relatedLinks: [
           {

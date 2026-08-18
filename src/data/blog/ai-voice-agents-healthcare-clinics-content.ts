@@ -522,7 +522,7 @@ export const aiVoiceAgentsHealthcareContent: BlogBlock[] = [
     heading: "Scenario B — Med spa / aesthetics practice",
     level: 3,
     paras: [
-      "Inbound agent plus consented outbound speed-to-lead. Structured qualification on every call. Booking into consultation slots with deposit link by SMS. For a deployed messaging + booking stack (not voice-only), read our [72-hour aesthetics booking case study](/blog/ai-booking-automation-aesthetics-clinics-case-study) and the [DHA Lahore case study](/case-studies/dha-lahore-aesthetics-clinic). Watch item: TCPA exposure on outbound — get consent architecture reviewed by counsel.",
+      "Inbound agent plus consented outbound speed-to-lead. Structured qualification on every call. Booking into consultation slots with deposit link by SMS. For a deployed messaging + booking stack (not voice-only), read our [72-hour aesthetics booking case study](/blog/ai-booking-automation-aesthetics-clinics-case-study), the [Radiance Austin AI reception case study](/case-studies/ai-reception-aesthetic-clinic), and the [DHA Lahore case study](/case-studies/dha-lahore-aesthetics-clinic). Watch item: TCPA exposure on outbound — get consent architecture reviewed by counsel.",
     ],
   },
   {
