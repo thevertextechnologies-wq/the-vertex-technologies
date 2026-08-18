@@ -270,7 +270,7 @@ function ArchitectureFlow({ steps, color }: { steps: string[]; color: string }) 
     <div className="flex flex-wrap items-center gap-x-1.5 gap-y-2">
       {steps.map((step, i) => (
         <span key={step} className="inline-flex items-center gap-1.5">
-          <span className="rounded-lg border border-white/40 bg-white/35 px-2.5 py-1 text-xs font-medium backdrop-blur-md">
+          <span className="glass-chip rounded-lg px-2.5 py-1 text-xs font-medium text-foreground">
             {step}
           </span>
           {i < steps.length - 1 && (
@@ -304,7 +304,7 @@ function AISolutionsPage() {
           <div className="mt-12 space-y-6">
             {aiServices.map((s) => (
               <Reveal key={s.title}>
-                <article className="rounded-3xl border border-white/40 bg-white/45 p-6 sm:p-8 lg:p-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_18px_50px_-28px_rgba(26,31,41,0.28)] backdrop-blur-xl">
+                <article className="glass-card rounded-3xl p-6 sm:p-8 lg:p-10">
                   <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
                     <div className="lg:col-span-5">
                       <div
@@ -318,14 +318,15 @@ function AISolutionsPage() {
                         {s.tagline}
                       </p>
                       <p className="mt-4 text-muted-foreground leading-relaxed">{s.body}</p>
-                      <div
-                        className="mt-6 rounded-2xl border border-white/35 bg-white/30 px-5 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] backdrop-blur-xl"
-                        style={{ borderLeftWidth: 4, borderLeftColor: s.color }}
-                      >
+                      <div className="glass-chip relative mt-6 overflow-hidden rounded-2xl px-5 py-4 pl-6">
+                        <span
+                          className="absolute left-0 top-3 bottom-3 w-1 rounded-full"
+                          style={{ background: s.color }}
+                        />
                         <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-muted-foreground">
                           Business outcome
                         </p>
-                        <p className="mt-1.5 text-sm leading-relaxed">{s.outcome}</p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-foreground">{s.outcome}</p>
                       </div>
                       <Link
                         to={s.href}
@@ -346,7 +347,7 @@ function AISolutionsPage() {
                           {s.capabilities.map((c) => (
                             <li
                               key={c}
-                              className="inline-flex items-center gap-1.5 rounded-full border border-white/40 bg-white/35 px-3 py-1.5 text-sm backdrop-blur-md"
+                              className="glass-chip inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm text-foreground"
                             >
                               <CheckCircle2
                                 className="h-3.5 w-3.5 shrink-0"
@@ -375,7 +376,7 @@ function AISolutionsPage() {
                           {s.integrations.map((tool) => (
                             <li
                               key={tool}
-                              className="rounded-full border border-white/40 bg-white/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] backdrop-blur-md"
+                              className="glass-chip rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-foreground"
                             >
                               {tool}
                             </li>
