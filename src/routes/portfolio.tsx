@@ -12,11 +12,7 @@ import logoCustomBoxesCanada from "@/assets/projects/customboxescanada.jpeg";
 import logoEnlivenSkinCare from "@/assets/projects/enlivenskincare.jpeg";
 import logoNeedCustomPackaging from "@/assets/projects/needcustompackaging.jpeg";
 import logoPremiumPackagingAmerica from "@/assets/projects/premiumpackagingamerica.jpg";
-import logoEfone from "@/assets/projects/efone.jpeg";
-import logoOneVision from "@/assets/projects/onevision.jpeg";
-import logoLazzat from "@/assets/projects/lazzat.jpeg";
 import logoDrWarisAnwar from "@/assets/projects/dr-waris-anwar-aesthetics.jpeg";
-import logoTransVision from "@/assets/projects/transvision.jpeg";
 import logoSonicAccountants from "@/assets/projects/sonicaccountants.jpeg";
 import logoEliteHorizon from "@/assets/projects/elitehorizontourism.jpeg";
 import logoTodsAndTeens from "@/assets/projects/todsandteens.jpeg";
@@ -42,11 +38,7 @@ const projects = [
   { title: "Enliven SkinCare",              category: "Marketing Systems",   color: "var(--brand-blue)",   logo: logoEnlivenSkinCare,       url: "http://enlivenskincare.pk/" },
   { title: "Need Custom Packaging",         category: "Digital Marketing",   color: "var(--brand-red)",    logo: logoNeedCustomPackaging,   url: "https://www.needcustompackaging.com/" },
   { title: "Premium Packaging America",     category: "Digital Marketing",   color: "var(--brand-orange)", logo: logoPremiumPackagingAmerica, url: "https://premiumpackagingamerica.com/" },
-  { title: "Efone",                         category: "AI Solutions",        color: "var(--brand-red)",    logo: logoEfone,                 url: "https://efone.app/" },
-  { title: "OneVision",                     category: "AI Solutions",        color: "var(--brand-green)",  logo: logoOneVision,             url: "https://onevision.io/" },
-  { title: "Lazzat",                        category: "Marketing Systems",   color: "var(--brand-orange)", logo: logoLazzat,                url: "https://lazzat.ca/" },
   { title: "Aesthetics by Dr Waris Anwar",  category: "Digital Marketing",   color: "var(--brand-blue)",   logo: logoDrWarisAnwar,          url: "https://aesthetics.com.pk/" },
-  { title: "TransVision Immigration",       category: "Growth Consulting",   color: "var(--brand-green)",  logo: logoTransVision,           url: "https://www.transvisionimmigration.com/" },
   { title: "Sonic Accountants",             category: "AI Solutions",        color: "var(--brand-red)",    logo: logoSonicAccountants,      url: "https://www.sonicaccountants.com/" },
   { title: "Elite Horizon Tourism",         category: "Marketing Systems",   color: "var(--brand-blue)",   logo: logoEliteHorizon,          url: "https://elitehorizontourism.com/" },
   { title: "Tods & Teens",                  category: "Digital Marketing",   color: "var(--brand-orange)", logo: logoTodsAndTeens,          url: "https://www.todsnteens.com/" },
@@ -214,5 +206,3 @@ function PortfolioPage() {
     </PageLayout>
   );
 }
-
-
